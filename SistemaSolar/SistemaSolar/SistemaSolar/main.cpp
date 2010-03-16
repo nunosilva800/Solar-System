@@ -2,10 +2,17 @@
 
 #include <math.h>
 
-float cameraxx = 1000.0;
-float camerayy = 0.0;
-float camerazz = 200.0;
-float rotate = 0.0;
+float PI = 3.14159265f;
+
+float height = 2.0f;
+float x = 0.0f;
+float z = 0.0f;
+float y = 0.0f;
+int mouseButton = 0;
+
+float camX = 1000.0f, camY = 0.0f, camZ = 500;
+float camlookX = 900.0f, camlookY = 0.0f, camlookZ = 0.0f;
+float alpha = 0, beta = 0, r = 1000;
 
 void changeSize(int w, int h) {
 
@@ -31,16 +38,7 @@ void changeSize(int w, int h) {
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void renderScene(void) {
-
-	glClearColor(0.0f,0.0f,0.0f,0.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glLoadIdentity();
-	gluLookAt(cameraxx,camerayy,camerazz, 
-		      1000.0,0.0,0.0,
-			  0.0f,1.0f,0.0f);	
-
+void planetas(){
 	//sol
 	glColor3f(1,1,0);
 	glutSolidSphere(696,32,32);
@@ -56,34 +54,114 @@ void renderScene(void) {
 	glTranslatef(10,0,0);
 	glColor3f(0,0,1);
 	glutSolidSphere(3.1855,32,32);
+}
+void renderScene(void) {
+
+	glClearColor(0.0f,0.0f,0.0f,0.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glLoadIdentity();
+	gluLookAt(camX,camY,camZ, 
+			camlookX,camlookY,camlookZ,
+			  0.0f,1.0f,0.0f);	
+	
+	glPushMatrix();
+	planetas();
+	glPopMatrix();
+
 	// End of frame
 	glutSwapBuffers();
 
 }
 
-void keys(unsigned char tecla, int x, int y){
+void processKeys(unsigned char tecla, int x, int y){
 	switch(tecla){
-		case 'w': camerayy+=100;
-			break;
-		case 's': camerayy-=100;
-			break;
-		case 'a': cameraxx-=100;
-			break;
-		case 'd': cameraxx+=100;
-			break;
 		case 27 : exit(0);
 	}
+	glutPostRedisplay();
 }
-
-void skeys(int tecla, int x, int y){
-	switch(tecla){
-		case GLUT_KEY_UP: camerazz-=100; break;
-		case GLUT_KEY_DOWN: camerazz+=100; break;
+void processSpecialKeys(int key, int xx, int yy) 
+{
+	switch(key) {
+		case GLUT_KEY_UP: 
+			if(beta < (89*PI/180)){
+				beta+=0.03;
+				camZ = r * cos(beta) * cos(alpha);
+				camX = r * cos(beta) * sin(alpha);
+				camY = r * sin(beta);
+			}
+			break;
+		case GLUT_KEY_DOWN:
+			if(beta > -(89*PI/180)){
+				beta-=0.03;
+				camZ = r * cos(beta) * cos(alpha);
+				camX = r * cos(beta) * sin(alpha);
+				camY = r * sin(beta);
+			}
+			break;
+		case GLUT_KEY_LEFT:
+			alpha-=0.03;
+			camZ = r * cos(beta) * cos(alpha);
+			camX = r * cos(beta) * sin(alpha);
+			break;
+		case GLUT_KEY_RIGHT:
+			alpha+=0.03;
+			camZ = r * cos(beta) * cos(alpha);
+			camX = r * cos(beta) * sin(alpha);
+			break;
 	}
+	glutPostRedisplay();
 }
 
-void mouse(int botão, int estado, int x, int y){}
+void fmouse(int button, int state, int xx, int yy) 
+{
+	switch(button){
+		case GLUT_LEFT_BUTTON:
+			mouseButton=0;
+			x=xx; y=yy;
+			break;
+		case GLUT_MIDDLE_BUTTON:
+			mouseButton=1;
+			y=yy;
+			break;
+		case GLUT_RIGHT_BUTTON:
+			mouseButton=2;
+			x=xx; y=yy;
+			break;
+	}	
+}
 
+//TODO: prender o rato ao ecra e nao o mexer.
+void fmotion(int xx, int yy)
+{
+	switch(mouseButton){
+		case 0:
+			if(beta < (89*PI/180) && beta > -(89*PI/180)){
+				alpha+=((x-xx)/100);
+				beta-=((y-yy)/100);
+				camZ = r * cos(beta) * cos(alpha);
+				camX = r * cos(beta) * sin(alpha);
+				camY = r * sin(beta);
+				
+			}else{
+				if(beta < 0) beta = -(89*PI/180);
+				else beta = (89*PI/180);
+			};
+			break;
+		case 1:
+			r+=(y-yy)/10;
+			camZ = r * cos(beta) * cos(alpha);
+			camX = r * cos(beta) * sin(alpha);
+			camY = r * sin(beta);
+			break;
+		case 2: 
+			camlookX += ((x-xx))/10;
+			camlookZ += ((y-yy))/10;
+			break;
+	}
+	x=xx;y=yy;
+	glutPostRedisplay();
+}
 
 void menu(int id_op){}
 
@@ -105,13 +183,13 @@ void main(int argc, char **argv) {
 		
 // registo de funções 
 	glutDisplayFunc(renderScene);
-	glutIdleFunc(renderScene);
-	
+	//glutIdleFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
-	glutKeyboardFunc(keys);
-	glutSpecialFunc(skeys);
-	glutMouseFunc(mouse);
+	glutKeyboardFunc(processKeys);
+	glutSpecialFunc(processSpecialKeys);
+	glutMotionFunc(fmotion);
+	glutMouseFunc(fmouse);
 
 	gerarMenu();
 
