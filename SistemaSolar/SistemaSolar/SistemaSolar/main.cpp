@@ -195,6 +195,13 @@ void renderScene(void) {
 			  0.0f,1.0f,0.0f);	
 	
 	glPushMatrix();
+	glTranslated(camlookX,camlookY,camlookZ);
+	glColor3f(1,1,1);
+	glutSolidSphere(1,10,10);
+
+	glPopMatrix();
+
+	glPushMatrix();
 	planetas();
 	glPopMatrix();
 
@@ -246,15 +253,7 @@ void fmouse(int button, int state, int xx, int yy)
 {
 	switch(button){
 		case GLUT_LEFT_BUTTON:
-			mouseButton=0;
-			x=xx; y=yy;
-			break;
-		case GLUT_MIDDLE_BUTTON:
-			mouseButton=1;
-			y=yy;
-			break;
-		case GLUT_RIGHT_BUTTON:
-			mouseButton=2;
+			mouseButton=glutGetModifiers();
 			x=xx; y=yy;
 			break;
 	}	
@@ -264,7 +263,17 @@ void fmouse(int button, int state, int xx, int yy)
 void fmotion(int xx, int yy)
 {
 	switch(mouseButton){
-		case 0:
+		case GLUT_ACTIVE_ALT://muda lookat
+			camlookX -= ((x-xx))*10;
+			camlookZ -= ((y-yy))*10;
+			break;
+		case GLUT_ACTIVE_CTRL://aproxima / afasta
+			r+=(y-yy)*10;
+			camZ = r * cos(beta) * cos(alpha);
+			camX = r * cos(beta) * sin(alpha);
+			camY = r * sin(beta);
+			break;
+		default:
 			if(beta < (89*PI/180) && beta > -(89*PI/180)){
 				alpha+=((x-xx)/100);
 				beta-=((y-yy)/100);
@@ -276,17 +285,6 @@ void fmotion(int xx, int yy)
 				if(beta < 0) beta = -(89*PI/180);
 				else beta = (89*PI/180);
 			};
-			break;
-		case 1:
-			r+=(y-yy)/10;
-			camZ = r * cos(beta) * cos(alpha);
-			camX = r * cos(beta) * sin(alpha);
-			camY = r * sin(beta);
-			break;
-		case 2: 
-			camlookX += ((x-xx))/10;
-			camlookZ += ((y-yy))/10;
-			break;
 	}
 	x=xx;y=yy;
 	glutPostRedisplay();
