@@ -1,6 +1,8 @@
-#include <GL/glut.h>
+#include <glut.h>
 
 #include <math.h>
+
+GLfloat rot=0.0;
 
 float PI = 3.14159265f;
 
@@ -38,43 +40,117 @@ void changeSize(int w, int h) {
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void planetas(){
-	//sol
+void rotacao()
+{
+	rot+=0.1;
+	glutPostRedisplay();
+	glRotated(rot,0.0,1.0,0.0);
+}
+
+void desenharSol()
+{
+	glPushMatrix();
 	glColor3f(1,1,0);
-	glutSolidSphere(696,32,32);
-	//mercurio
+	rotacao();
+	glutWireSphere(696,32,32);
+	glPopMatrix();
+}
+
+void desenharMercurio()
+{
+	glPushMatrix();
 	glTranslatef(1000,0,0);
 	glColor3f(0.5,0.5,0.5);
-	glutSolidSphere(1.2195,32,32);
-	//venus
-	glTranslatef(10,0,0);
-	glColor3f(0.6,0.5,0.1);
-	glutSolidSphere(3.0259,32,32);
-	//terra
-	glTranslatef(10,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere(3.1855,32,32);
-	//planeta marte
-	glTranslatef(30,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere((6.780/2),32,32);
-	//planeta jupiter
-	glTranslatef(150,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere((139.822/2),32,32);
-	//planeta saturno
-	glTranslatef(300,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere((116.464/2),32,32);
-	//planeta urano
-	glTranslatef(120,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere((50.724/2),32,32);
-	//planeta spock
-	glTranslatef(80,0,0);
-	glColor3f(0,0,1);
-	glutSolidSphere((49.244/2),32,32);
+	rotacao();
+	glutWireSphere(1.2195,32,32);
+	glPopMatrix();
+}
 
+void desenharVenus()
+{
+	glPushMatrix();
+	glTranslatef(1100,0,0);
+	glColor3f(0.6,0.5,0.1);
+	rotacao();
+	glutWireSphere(3.0259,32,32);
+	glPopMatrix();
+}
+
+void desenharTera()
+{
+	glPushMatrix();
+	glTranslatef(1200,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere(3.1855,32,32);
+	glPopMatrix();
+}
+void desenharMarte()
+{
+	glPushMatrix();
+	glTranslatef(1300,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere((6.780/2),32,32);
+	glPopMatrix();
+}
+void desenharJupiter()
+{
+	glPushMatrix();
+	glTranslatef(2000,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere((139.822/2),32,32);
+	glPopMatrix();
+}
+void desenharSaturno()
+{
+	glPushMatrix();
+	glTranslatef(2300,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere((116.464/2),32,32);
+	glPopMatrix();
+}
+void desenharUrano()
+{
+	glPushMatrix();
+	glTranslatef(2800,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere((50.724/2),32,32);
+	glPopMatrix();
+}
+
+void desenharNeptuno()
+{
+	glPushMatrix();
+	glTranslatef(3200,0,0);
+	glColor3f(0,0,1);
+	rotacao();
+	glutWireSphere((49.244/2),32,32);
+	glPopMatrix();
+}
+
+void planetas(){
+	//sol
+	desenharSol();
+	//mercurio
+	desenharMercurio();
+	//venus
+	desenharVenus();
+	//terra
+	desenharTera();
+	//planeta marte
+	desenharMarte();
+	//planeta jupiter
+	desenharJupiter();
+	//planeta saturno
+	desenharSaturno();
+	//planeta urano
+	desenharUrano();
+	//planeta spock
+	desenharNeptuno();
 }
 void renderScene(void) {
 
