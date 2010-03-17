@@ -75,7 +75,6 @@ void desenharTerra()
 }
 
 
-
 void desenharMarte()
 {
 	glPushMatrix();
