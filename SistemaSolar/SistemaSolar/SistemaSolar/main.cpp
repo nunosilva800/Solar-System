@@ -54,6 +54,30 @@ void planetas(){
 	glTranslatef(10,0,0);
 	glColor3f(0,0,1);
 	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
+	//planeta spock
+	glTranslatef(10,0,0);
+	glColor3f(0,0,1);
+	glutSolidSphere(3.1855,32,32);
 }
 void renderScene(void) {
 
