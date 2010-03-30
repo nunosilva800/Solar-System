@@ -20,11 +20,12 @@ float height = 2.0f;
 float x = 0.0f;
 float z = 0.0f;
 float y = 0.0f;
-int mouseButton = 0;
+int mouseBtn = 0;
+int mouseMod = 0;
 
-float camX = 1000.0f, camY = 0.0f, camZ = 500;
+float camX = 900.0f, camY = 0.0f, camZ = 900;
 float camlookX = 900.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 0, beta = 0, r = 1000;
+float alpha = 45, beta = 0, r = 1200;
 
 void changeSize(int w, int h) {
 
@@ -253,25 +254,29 @@ void fmouse(int button, int state, int xx, int yy)
 {
 	switch(button){
 		case GLUT_LEFT_BUTTON:
-			mouseButton=glutGetModifiers();
+			mouseBtn=1;
+			mouseMod=glutGetModifiers();
 			x=xx; y=yy;
 			break;
+		default :
+			mouseBtn = 0;
 	}	
 }
 
 //TODO: prender o rato ao ecra e nao o mexer.
 void fmotion(int xx, int yy)
 {
-	switch(mouseButton){
+	if(mouseBtn!=1) return ;
+	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
 			camlookX -= ((x-xx))*10;
 			camlookZ -= ((y-yy))*10;
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			r+=(y-yy)*10;
-			camZ = r * cos(beta) * cos(alpha);
-			camX = r * cos(beta) * sin(alpha);
-			camY = r * sin(beta);
+			camZ = camlookZ +( r * cos(beta) * cos(alpha));
+			camX = camlookX +( r * cos(beta) * sin(alpha));
+			camY = camlookY +( r * sin(beta));
 			break;
 		default:
 			if(beta < (89*PI/180) && beta > -(89*PI/180)){
