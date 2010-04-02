@@ -28,4 +28,9 @@ extern float scale;
 
 void planetas();
 void createcircle (int k, int r, int h);
-void draw_Orbita(float raio, float angle);
+void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
+void rotacao(GLfloat rotacao,float tilt);
+
+#define orbitalTiltJupiter		1.308
+
+#define axisTiltJupiter		3.12
