@@ -84,7 +84,7 @@ void desenharLua()
 	glColor3f(1,1,1);//branco
 	rotLua+=0.34;
 	rotacao(rotLua);
-	glutWireSphere((3.4742/2),32,32);
+	glutWireSphere(raioLua,32,32);
 	
 }
 
@@ -122,7 +122,7 @@ void desenharJupiter()
 	glColor3f(1,1,0);//amarelo
 	rotJupiter+=0.87;
 	rotacao(rotJupiter);
-	glutWireSphere((139.822/2),32,32);
+	glutWireSphere(raioJupiter,32,32);
 	glPopMatrix();
 	draw_Orbita(2000,90);
 }
@@ -133,7 +133,7 @@ void desenharSaturno()
 	glColor3f(1,0,1);//rosa
 	rotSaturno+=0.65;
 	rotacao(rotSaturno);
-	glutWireSphere((116.464/2),32,32);
+	glutWireSphere(raioSaturno,32,32);
 	glPopMatrix();
 	draw_Orbita(2300,90);
 }
@@ -144,7 +144,7 @@ void desenharUrano()
 	glColor3f(0.8,0.1,0.4);//roxo
 	rotUrano+=0.543;
 	rotacao(rotUrano);
-	glutWireSphere((50.724/2),32,32);
+	glutWireSphere(raioUrano,32,32);
 	glPopMatrix();
 	draw_Orbita(2800,90);
 }
@@ -156,7 +156,7 @@ void desenharNeptuno()
 	rotNeptuno+=1.23;
 	glTranslatef(3200*cos(0.0)*sin(time),3200*sin(0.0),3200*cos(0.0)*cos(time));
 	rotacao(rotNeptuno);
-	glutWireSphere((49.244/2),32,32);
+	glutWireSphere(raioNeptuno,32,32);
 	glPopMatrix();
 	draw_Orbita(3200,90);
 }

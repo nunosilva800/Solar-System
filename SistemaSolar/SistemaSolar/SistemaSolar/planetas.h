@@ -12,19 +12,18 @@
 #define distSolNeptuno = 4497070;//milhares de km
 #define distTerraLua = 384.403;//milhares de km
 
-/*
+
 double raioSol=
 double raioMercurio=
 double raioVenus=
 double raioTerra=
 double raioMarte=
-double raioJupiter=
-double raioSaturno=
-double raioUrano=
-double raioNeptuno=
-double raioPlutao=
-double raioLua=
-*/
+double raioJupiter=139.822/2
+double raioSaturno=116.464/2;
+double raioUrano=50.724/2;
+double raioNeptuno=49.244/2;
+double raioLua=3.4742/2;
+
 
 void planetas();
 void createcircle (int k, int r, int h);
