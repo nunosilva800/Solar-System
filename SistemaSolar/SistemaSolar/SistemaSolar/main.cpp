@@ -15,6 +15,8 @@ GLfloat rotNeptuno=0.0;
 
 float PI = 3.14159265f;
 
+float time =0;
+
 float height = 2.0f;
 float x = 0.0f;
 float z = 0.0f;
@@ -198,9 +200,10 @@ void desenharUrano()
 void desenharNeptuno()
 {
 	glPushMatrix();
-	glTranslatef(3200,0,0);
 	glColor3f(0.12,0.432,0.123);
 	rotNeptuno+=1.23;
+	glRotatef(90,0,0,1);
+	glTranslatef(3200*sin(0.0),3200*cos(0.0)*sin(time),3200*cos(0.0)*cos(time));
 	rotacao(rotNeptuno);
 	glutWireSphere((49.244/2),32,32);
 	glPopMatrix();
@@ -208,6 +211,7 @@ void desenharNeptuno()
 }
 
 void planetas(){
+	time +=0.005;
 	//sol
 	desenharSol();
 	//mercurio
