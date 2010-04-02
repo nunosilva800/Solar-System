@@ -3,20 +3,21 @@
 #include <math.h>
 #include "planetas.h"
 
-GLfloat rotSol=0.0;
-GLfloat rotMercurio=0.0;
-GLfloat rotVenus=0.0;
-GLfloat rotTerra=0.0;
-GLfloat rotLua=0.0;
-GLfloat rotMarte=0.0;
-GLfloat rotJupiter=0.0;
-GLfloat rotSaturno=0.0;
-GLfloat rotUrano=0.0;
-GLfloat rotNeptuno=0.0;
+//velocidades de rotação em dias
+GLfloat rotSol = 0;
+GLfloat rotMercurio = 0;
+GLfloat rotVenus = 0;
+GLfloat rotTerra = 0;
+GLfloat rotLua = 0;
+GLfloat rotMarte = 0;
+GLfloat rotJupiter = 0;
+GLfloat rotSaturno = 0;
+GLfloat rotUrano = 0;
+GLfloat rotNeptuno = 0;
 
 float scale = 1;
 
-float time =0;
+float time = 0;
 
 void rotacao(GLfloat rotacao,float tilt)
 {
@@ -61,7 +62,7 @@ void desenharSol()
 {
 	glPushMatrix();
 	glColor3f(1,1,0);
-	rotSol+=1;
+	rotSol+=25.38;
 	rotacao(rotSol,0.0);
 	glutWireSphere(raioSol*(1/scale),32,32);
 	glPopMatrix();
@@ -72,7 +73,7 @@ void desenharMercurio()
 	glPushMatrix();
 	glTranslatef(1000*cos(0.0)*sin(time*0.2),1000*sin(0.0),1000*cos(0.0)*cos(time*0.2));
 	glColor3f(0.5,0.5,0.5);//cinza
-	rotMercurio+=0.2;
+	rotMercurio += 58.646;
 	rotacao(rotMercurio,0.0);
 	glutWireSphere(raioMercurio,32,32);
 	glPopMatrix();
@@ -84,7 +85,7 @@ void desenharVenus()
 	glPushMatrix();
 	glTranslatef(1100*cos(0.0)*sin(time*0.6),1100*sin(0.0),1100*cos(0.0)*cos(time*0.6));
 	glColor3f(0.6,0.5,0.1);//castanho
-	rotVenus-=0.4;
+	rotVenus += -243.0185;
 	rotacao(rotVenus,0.0);
 	glutWireSphere(raioVenus,32,32);
 	glPopMatrix();
@@ -96,7 +97,7 @@ void desenharLua()
 	draw_Orbita(25,90,0.0,0.0);
 	glTranslatef(25,0,0);
 	glColor3f(1,1,1);//branco
-	rotLua+=0.34;
+	rotLua += 27.321582;
 	rotacao(rotLua,0.0);
 	glutWireSphere(raioLua,32,32);
 	
@@ -107,12 +108,10 @@ void desenharTerra()
 	glPushMatrix();
 	glTranslatef(1200*cos(0.0)*sin(time),1200*sin(0.0),1200*cos(0.0)*cos(time));
 	glColor3f(0,0,1);//azul
-	rotTerra+=0.34;
+	rotTerra += 1;
 	rotacao(rotTerra,0.0);
 	glutWireSphere(raioTerra,32,32);
-	glPushMatrix();
 	desenharLua();
-	glPopMatrix();
 	glPopMatrix();
 	glColor3f(0,0,1);//azul
 	draw_Orbita(1200,90,0.0,0.0);
@@ -123,7 +122,7 @@ void desenharMarte()
 	glPushMatrix();
 	glTranslatef(1300*cos(0.0)*sin(time),1300*sin(0.0),1300*cos(0.0)*cos(time));
 	glColor3f(1,0,0);//vermelho
-	rotMarte += 0.6;
+	rotMarte += 1.025957;
 	rotacao(rotMarte,0.0);
 	glutWireSphere(raioMarte,32,32);
 	glPopMatrix();
@@ -135,7 +134,7 @@ void desenharJupiter()
 	glRotatef(orbitalTiltJupiter,0.0,0.0,1.0);
 	glTranslatef(2000*cos(0.0)*sin(time),2000*sin(0.0),2000*cos(0.0)*cos(time));
 	glColor3f(1,1,0);//amarelo
-	rotJupiter+=0.87;
+	rotJupiter += 0.413541667;
 	rotacao(rotJupiter,axisTiltJupiter);
 	glutWireSphere(raioJupiter,32,32);
 	glPopMatrix();
@@ -146,7 +145,7 @@ void desenharSaturno()
 	glPushMatrix();
 	glTranslatef(2300*cos(0.0)*sin(time),2300*sin(0.0),2300*cos(0.0)*cos(time));
 	glColor3f(1,0,1);//rosa
-	rotSaturno+=0.65;
+	rotSaturno += 0.440416667;
 	rotacao(rotSaturno,0.0);
 	glutWireSphere(raioSaturno,32,32);
 	glPushMatrix();
@@ -162,7 +161,7 @@ void desenharUrano()
 	glPushMatrix();
 	glTranslatef(2800*cos(0.0)*sin(time),2800*sin(0.0),2800*cos(0.0)*cos(time));
 	glColor3f(0.8,0.1,0.4);//roxo
-	rotUrano+=0.543;
+	rotUrano += -0.71833;
 	rotacao(rotUrano,0.0);
 	glutWireSphere(raioUrano,32,32);
 	glPopMatrix();
@@ -173,7 +172,7 @@ void desenharNeptuno()
 {
 	glPushMatrix();
 	glColor3f(0.12,0.432,0.123);//verde
-	rotNeptuno+=1.23;
+	rotNeptuno += 0.6713;
 	glTranslatef(3200*cos(0.0)*sin(time),3200*sin(0.0),3200*cos(0.0)*cos(time));
 	rotacao(rotNeptuno,0.0);
 	glutWireSphere(raioNeptuno,32,32);

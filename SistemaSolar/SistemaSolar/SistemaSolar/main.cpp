@@ -12,9 +12,11 @@ float y = 0.0f;
 int mouseBtn = 0;
 int mouseMod = 0;
 
-float camX = 900.0f, camY = 0.0f, camZ = 900;
-float camlookX = 900.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 45, beta = 0, r = 1200;
+float camX = 4500.0f, camY = 0.0f, camZ = 4500;
+float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
+float alpha = 45, beta = 0, r = 5000;
+
+bool axes = false;
 
 void changeSize(int w, int h) {
 
@@ -61,7 +63,7 @@ void renderScene(void) {
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
 	
-	draw_Axes();
+	if(axes) draw_Axes();
 	
 	//desenhar ponto para onde a camera olha
 	glPushMatrix();
@@ -72,7 +74,6 @@ void renderScene(void) {
 
 	glScalef(scale,scale,scale);
 	planetas();
-	
 
 	// End of frame
 	glutSwapBuffers();
@@ -84,6 +85,7 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 27 : exit(0);
 		case '+' : scale+=0.1; break;
 		case '-' : scale-=0.1; break;
+		case 'a' : axes?axes=false:axes=true; break;
 	}
 	glutPostRedisplay();
 }
