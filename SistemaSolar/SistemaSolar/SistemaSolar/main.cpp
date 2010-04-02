@@ -13,8 +13,6 @@ GLfloat rotSaturno=0.0;
 GLfloat rotUrano=0.0;
 GLfloat rotNeptuno=0.0;
 
-float time=0;
-
 float PI = 3.14159265f;
 
 float height = 2.0f;
@@ -52,6 +50,41 @@ void changeSize(int w, int h) {
 	glMatrixMode(GL_MODELVIEW);
 }
 
+void draw_Axes (void)
+{ 
+    glPushMatrix ();
+	   glLineWidth (2.0);
+
+       glBegin (GL_LINES);
+          glColor3f (1,0,0);  glVertex3f (0,0,0);  glVertex3f (5000,0,0);    // X red.
+          glColor3f (0,1,0);  glVertex3f (0,0,0);  glVertex3f (0,5000,0);    // Y green.
+          glColor3f (0,0,1);  glVertex3f (0,0,0);  glVertex3f (0,0,5000);    // Z blue.
+       glEnd();
+
+   glPopMatrix ();
+}
+
+void draw_Orbita(float raio, float angle){
+	glPushMatrix();
+	glRotatef(angle,1,0,0);
+
+	float xx=0;
+	float yy=0;
+	glBegin(GL_LINES);
+	for (int i = 0; i < 180; i++)
+	{
+		xx = raio * cos((float)i) - raio;
+		yy = raio * sin((float)i) + raio;
+		glVertex3f(xx + raio,yy - raio,0);
+		xx = raio * cos(i + 0.1) - raio;
+		yy = raio * sin(i + 0.1) + raio;
+		glVertex3f(xx + raio,yy - raio,0);
+	}
+	glEnd();
+
+	glPopMatrix();	
+}
+
 void rotacao(GLfloat rotacao)
 {
 	glRotated(rotacao,0.0,1.0,0.0);
@@ -72,102 +105,109 @@ void desenharSol()
 void desenharMercurio()
 {
 	glPushMatrix();
-	glTranslatef(1000*sin(0.2),1000*cos(0.2)*sin(time*2),1000*cos(0.2)*cos(time*2));
+	glTranslatef(1000,0,0);
 	glColor3f(0.5,0.5,0.5);
 	rotMercurio+=0.2;
 	rotacao(rotMercurio);
 	glutWireSphere(1.2195,32,32);
 	glPopMatrix();
+	draw_Orbita(1000,90);
 }
 
 void desenharVenus()
 {
 	glPushMatrix();
-	glTranslatef(1100*sin(0.2),1100*cos(0.2)*sin(time*0.9),1100*cos(0.2)*cos(time*0.9));
+	glTranslatef(1100,0,0);
 	glColor3f(0.6,0.5,0.1);
 	rotVenus+=0.4;
 	rotacao(rotVenus);
 	glutWireSphere(3.0259,32,32);
 	glPopMatrix();
+	draw_Orbita(1100,90);
 }
 
 void desenharLua()
 {
+	draw_Orbita(25,90);
 	glTranslatef(25,0,0);
 	glColor3f(1,1,1);
 	rotLua+=0.34;
 	rotacao(rotLua);
 	glutWireSphere((3.4742/2),32,32);
+	
 }
 
 void desenharTerra()
 {
 	glPushMatrix();
-	glTranslatef(1200*sin(0.2),1200*cos(0.2)*sin(time),1200*cos(0.2)*cos(time));
+	glTranslatef(1200,0,0);
 	glColor3f(0,0,1);
 	rotTerra+=0.34;
 	rotacao(rotTerra);
 	glutWireSphere(3.1855,32,32);
 	desenharLua();
 	glPopMatrix();
+	draw_Orbita(1200,90);
 }
-
-
 
 void desenharMarte()
 {
 	glPushMatrix();
-	glTranslatef(1300*sin(0.2),1300*cos(0.2)*sin(time*1.5),1300*cos(0.2)*cos(time*1.5));
+	glTranslatef(1300,0,0);
 	glColor3f(0,0,1);
 	rotMarte += 0.6;
 	rotacao(rotMarte);
 	glutWireSphere((6.780/2),32,32);
 	glPopMatrix();
+	draw_Orbita(1300,90);
 }
 void desenharJupiter()
 {
 	glPushMatrix();
-	glTranslatef(2000*sin(0.2),2000*cos(0.2)*sin(time*2),2000*cos(0.2)*cos(time*2));
+	glTranslatef(2000,0,0);
 	glColor3f(0,0,1);
 	rotJupiter+=0.87;
 	rotacao(rotJupiter);
 	glutWireSphere((139.822/2),32,32);
 	glPopMatrix();
+	draw_Orbita(2000,90);
 }
 void desenharSaturno()
 {
 	glPushMatrix();
-	glTranslatef(2300*sin(0.2),2300*cos(0.2)*sin(time*2.3),2300*cos(0.2)*cos(time*2.3));
+	glTranslatef(2300,0,0);
 	glColor3f(0.48,0.48,0.48);
 	rotSaturno+=0.65;
 	rotacao(rotSaturno);
 	glutWireSphere((116.464/2),32,32);
 	glPopMatrix();
+	draw_Orbita(2300,90);
 }
 void desenharUrano()
 {
 	glPushMatrix();
-	glTranslatef(2800*sin(0.2),2800*cos(0.2)*sin(time*3.2),2800*cos(0.2)*cos(time*3.2));
+	glTranslatef(2800,0,0);
 	glColor3f(0.8,0.1,0.4);
 	rotUrano+=0.543;
 	rotacao(rotUrano);
 	glutWireSphere((50.724/2),32,32);
 	glPopMatrix();
+	draw_Orbita(2800,90);
 }
 
 void desenharNeptuno()
 {
 	glPushMatrix();
-	glTranslatef(3200*sin(0.2),3200*cos(0.2)*sin(time*4),3200*cos(0.2)*cos(time*4));
+	glTranslatef(3200,0,0);
 	glColor3f(0.12,0.432,0.123);
 	rotNeptuno+=1.23;
 	rotacao(rotNeptuno);
 	glutWireSphere((49.244/2),32,32);
 	glPopMatrix();
+	draw_Orbita(3200,90);
 }
 
 void planetas(){
-	time+=0.002;
 	//sol
 	desenharSol();
 	//mercurio
@@ -187,6 +227,7 @@ void planetas(){
 	//planeta spock
 	desenharNeptuno();
 }
+
 void renderScene(void) {
 
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -196,12 +237,12 @@ void renderScene(void) {
 	gluLookAt(camX,camY,camZ, 
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
+	draw_Axes();
 	
 	glPushMatrix();
 	glTranslated(camlookX,camlookY,camlookZ);
 	glColor3f(1,1,1);
 	glutSolidSphere(1,10,10);
-
 	glPopMatrix();
 
 	glPushMatrix();
@@ -281,17 +322,11 @@ void fmotion(int xx, int yy)
 			camY = camlookY +( r * sin(beta));
 			break;
 		default:
-			if(beta < (89*PI/180) && beta > -(89*PI/180)){
-				alpha+=((x-xx)/100);
-				beta-=((y-yy)/100);
-				camZ = r * cos(beta) * cos(alpha);
-				camX = r * cos(beta) * sin(alpha);
-				camY = r * sin(beta);
-				
-			}else{
-				if(beta < 0) beta = -(89*PI/180);
-				else beta = (89*PI/180);
-			};
+			alpha+=((x-xx)/100);
+			beta-=((y-yy)/100);
+			camZ = r * cos(beta) * cos(alpha);
+			camX = r * cos(beta) * sin(alpha);
+			camY = r * sin(beta);
 	}
 	x=xx;y=yy;
 	glutPostRedisplay();
