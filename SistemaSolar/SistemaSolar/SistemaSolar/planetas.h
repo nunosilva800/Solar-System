@@ -22,7 +22,9 @@
 #define raioUrano		50.724/2
 #define raioNeptuno		49.244/2
 #define raioLua			3.4742/2
-#define scale			1
+
+
+extern float scale;
 
 void planetas();
 void createcircle (int k, int r, int h);

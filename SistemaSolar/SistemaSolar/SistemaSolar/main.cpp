@@ -70,7 +70,9 @@ void renderScene(void) {
 	glutSolidSphere(1,10,10);
 	glPopMatrix();
 
+	glScalef(scale,scale,scale);
 	planetas();
+	
 
 	// End of frame
 	glutSwapBuffers();
@@ -80,6 +82,8 @@ void renderScene(void) {
 void processKeys(unsigned char tecla, int x, int y){
 	switch(tecla){
 		case 27 : exit(0);
+		case '+' : scale+=0.1; break;
+		case '-' : scale-=0.1; break;
 	}
 	glutPostRedisplay();
 }

@@ -14,6 +14,7 @@ GLfloat rotSaturno=0.0;
 GLfloat rotUrano=0.0;
 GLfloat rotNeptuno=0.0;
 
+float scale = 1;
 
 float time =0;
 
