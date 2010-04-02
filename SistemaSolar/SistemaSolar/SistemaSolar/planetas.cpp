@@ -14,6 +14,7 @@ GLfloat rotSaturno=0.0;
 GLfloat rotUrano=0.0;
 GLfloat rotNeptuno=0.0;
 
+
 float time =0;
 
 void rotacao(GLfloat rotacao)
