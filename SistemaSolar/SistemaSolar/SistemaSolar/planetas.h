@@ -28,3 +28,4 @@ double raioLua=
 
 void planetas();
 void createcircle (int k, int r, int h);
+void draw_Orbita(float raio, float angle);
