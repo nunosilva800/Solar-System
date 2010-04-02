@@ -45,6 +45,13 @@ void draw_Orbita(float raio, float angle){
 	glPopMatrix();	
 }
 
+void desenharAnel(float raio1, float raio2){
+glColor3f(1,0,0);
+glutSolidTorus(raio1,raio2,360,150);
+
+}
+
+
 void desenharSol()
 {
 	glPushMatrix();
@@ -136,6 +143,11 @@ void desenharSaturno()
 	rotSaturno+=0.65;
 	rotacao(rotSaturno);
 	glutWireSphere(raioSaturno,32,32);
+	glPushMatrix();
+	glRotatef(90.0,1.0,0.0,0.0);
+	glScalef(1,1,0.1);
+	desenharAnel(43,150);
+	glPopMatrix();
 	glPopMatrix();
 	draw_Orbita(2300,90);
 }
