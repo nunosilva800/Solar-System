@@ -107,7 +107,8 @@ void desenharSol()
 void desenharMercurio()
 {
 	glPushMatrix();
-	glTranslatef(1000,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(1000*sin(0.0),1000*cos(0.0)*sin(time*0.2),1000*cos(0.0)*cos(time*0.2));
 	glColor3f(0.5,0.5,0.5);
 	rotMercurio+=0.2;
 	rotacao(rotMercurio);
@@ -119,7 +120,8 @@ void desenharMercurio()
 void desenharVenus()
 {
 	glPushMatrix();
-	glTranslatef(1100,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(1100*sin(0.0),1100*cos(0.0)*sin(time*0.6),1100*cos(0.0)*cos(time*0.6));
 	glColor3f(0.6,0.5,0.1);
 	rotVenus+=0.4;
 	rotacao(rotVenus);
@@ -142,7 +144,8 @@ void desenharLua()
 void desenharTerra()
 {
 	glPushMatrix();
-	glTranslatef(1200,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(1200*sin(0.0),1200*cos(0.0)*sin(time),1200*cos(0.0)*cos(time));
 	glColor3f(0,0,1);
 	rotTerra+=0.34;
 	rotacao(rotTerra);
@@ -155,7 +158,8 @@ void desenharTerra()
 void desenharMarte()
 {
 	glPushMatrix();
-	glTranslatef(1300,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(1300*sin(0.0),1300*cos(0.0)*sin(time),1300*cos(0.0)*cos(time));
 	glColor3f(0,0,1);
 	rotMarte += 0.6;
 	rotacao(rotMarte);
@@ -166,7 +170,8 @@ void desenharMarte()
 void desenharJupiter()
 {
 	glPushMatrix();
-	glTranslatef(2000,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(2000*sin(0.0),2000*cos(0.0)*sin(time),2000*cos(0.0)*cos(time));
 	glColor3f(0,0,1);
 	rotJupiter+=0.87;
 	rotacao(rotJupiter);
@@ -177,7 +182,8 @@ void desenharJupiter()
 void desenharSaturno()
 {
 	glPushMatrix();
-	glTranslatef(2300,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(2300*sin(0.0),2300*cos(0.0)*sin(time),2300*cos(0.0)*cos(time));
 	glColor3f(0.48,0.48,0.48);
 	rotSaturno+=0.65;
 	rotacao(rotSaturno);
@@ -188,7 +194,8 @@ void desenharSaturno()
 void desenharUrano()
 {
 	glPushMatrix();
-	glTranslatef(2800,0,0);
+	glRotatef(90,0,0,1);
+	glTranslatef(2800*sin(0.0),2800*cos(0.0)*sin(time),2800*cos(0.0)*cos(time));
 	glColor3f(0.8,0.1,0.4);
 	rotUrano+=0.543;
 	rotacao(rotUrano);
