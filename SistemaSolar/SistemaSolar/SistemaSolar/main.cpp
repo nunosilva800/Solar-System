@@ -60,17 +60,17 @@ void renderScene(void) {
 	gluLookAt(camX,camY,camZ, 
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
+	
 	draw_Axes();
 	
+	//desenhar ponto para onde a camera olha
 	glPushMatrix();
 	glTranslated(camlookX,camlookY,camlookZ);
 	glColor3f(1,1,1);
 	glutSolidSphere(1,10,10);
 	glPopMatrix();
 
-	glPushMatrix();
 	planetas();
-	glPopMatrix();
 
 	// End of frame
 	glutSwapBuffers();
