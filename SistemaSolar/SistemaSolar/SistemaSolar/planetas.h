@@ -12,16 +12,16 @@
 #define distSolNeptuno = 4497070;//milhares de km
 #define distTerraLua = 384.403;//milhares de km
 
-
-double raioSol=
-double raioMercurio=
-double raioVenus=
-double raioTerra=
-double raioMarte=
+double raioSol=696;
+double raioMercurio=1.2195;
+double raioVenus=3.0259;
+double raioTerra=3.1855;
+double raioMarte=(6.780/2);
 double raioJupiter=139.822/2
 double raioSaturno=116.464/2;
 double raioUrano=50.724/2;
 double raioNeptuno=49.244/2;
+
 double raioLua=3.4742/2;
 
 
