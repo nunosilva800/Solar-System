@@ -75,12 +75,12 @@ void draw_Orbita(float raio, float angle){
 	glBegin(GL_LINES);
 	for (int i = 0; i < 180; i++)
 	{
-		xx = raio * cos((float)i) - raio;
-		yy = raio * sin((float)i) + raio;
-		glVertex3f(xx + raio,yy - raio,0);
-		xx = raio * cos(i + 0.1) - raio;
-		yy = raio * sin(i + 0.1) + raio;
-		glVertex3f(xx + raio,yy - raio,0);
+		xx = raio * cos((float)i);
+		yy = raio * sin((float)i);
+		glVertex3f(xx,yy,0);
+		xx = raio * cos(i + 0.1);
+		yy = raio * sin(i + 0.1);
+		glVertex3f(xx,yy,0);
 	}
 	glEnd();
 
