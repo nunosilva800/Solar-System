@@ -12,7 +12,7 @@
 #define distSolNeptuno	4497070	 / 127.42
 #define distTerraLua	384.403	 / 127.42
 
-//medida em Terras
+//medida em Terras - planetas * 10
 #define raioSol			109
 #define raioMercurio	0.3829 * 10
 #define raioVenus		0.9499 * 10
@@ -24,19 +24,17 @@
 #define raioNeptuno		3.883 * 10
 #define raioLua			0.273 * 10
 
-/*
-#define raioSol			695.5
-#define raioMercurio	1.2195
-#define raioVenus		3.0259
-#define raioTerra		3.1855
-#define raioMarte		(6.780/2)
-#define raioJupiter		139.822/2
-#define raioSaturno		116.464/2
-#define raioUrano		50.724/2
-#define raioNeptuno		49.244/2
-#define raioLua			3.4742/2
+//km/s
+#define velMercurio		47.87
+#define velVenus		35.02
+#define velTerra		29.783
+#define velMarte		24.077
+#define velJupiter		13.07
+#define velSaturno		9.69
+#define velUrano		6.81
+#define velNeptuno		5.43
+#define velLua			1.022
 
-*/
 
 extern float scale;
 extern bool orbitas;
