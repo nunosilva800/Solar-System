@@ -1,18 +1,31 @@
 #include <GL/glut.h>
 
 
+//medida em Terras * 10
+#define distSolMercurio	58910	 / 127.42
+#define distSolVenus	108200	 / 127.42
+#define distSolTerra	149597.870 / 127.42
+#define distSolMarte	227940	 / 127.42
+#define distSolJupiter	778330	 / 127.42
+#define distSolSaturno	1426980	 / 127.42
+#define distSolUrano	2870990	 / 127.42
+#define distSolNeptuno	4497070	 / 127.42
+#define distTerraLua	384.403	 / 127.42
+
+//medida em Terras
+#define raioSol			109
+#define raioMercurio	0.3829 * 10
+#define raioVenus		0.9499 * 10
+#define raioTerra		1 * 10
+#define raioMarte		0.533 * 10
+#define raioJupiter		11.209 * 10
+#define raioSaturno		9.4492 * 10
+#define raioUrano		4.007 * 10
+#define raioNeptuno		3.883 * 10
+#define raioLua			0.273 * 10
+
 /*
-#define distSolMercurio = 57910;//milhares de km
-#define distSolVenus = 108200;//milhares de km
-#define distSolTerra = 149597.870;//milhares de km
-#define distSolMarte = 227940;//milhares de km
-#define distSolJupiter = 778330;//milhares de km
-#define distSolSaturno = 1426980;//milhares de km
-#define distSolUrano = 2870990;//milhares de km
-#define distSolNeptuno = 4497070;//milhares de km
-#define distTerraLua = 384.403;//milhares de km
-*/
-#define raioSol			696
+#define raioSol			695.5
 #define raioMercurio	1.2195
 #define raioVenus		3.0259
 #define raioTerra		3.1855
@@ -23,8 +36,10 @@
 #define raioNeptuno		49.244/2
 #define raioLua			3.4742/2
 
+*/
 
 extern float scale;
+extern bool orbitas;
 
 void planetas();
 void createcircle (int k, int r, int h);

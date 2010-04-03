@@ -12,7 +12,7 @@ float y = 0.0f;
 int mouseBtn = 0;
 int mouseMod = 0;
 
-float camX = 4500.0f, camY = 0.0f, camZ = 4500;
+float camX = 4500.0f, camY = 5000.0f, camZ = 4500;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
 float alpha = 45, beta = 0, r = 5000;
 
@@ -36,7 +36,7 @@ void changeSize(int w, int h) {
     glViewport(0, 0, w, h);
 
 	// Set the correct perspective
-	gluPerspective(45,ratio,10,100000);
+	gluPerspective(45,ratio,10,1000000);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -86,6 +86,7 @@ void processKeys(unsigned char tecla, int x, int y){
 		case '+' : scale+=0.1; break;
 		case '-' : scale-=0.1; break;
 		case 'a' : axes?axes=false:axes=true; break;
+		case 'o' : orbitas?orbitas=false:orbitas=true; break;
 	}
 	glutPostRedisplay();
 }
@@ -145,7 +146,7 @@ void fmotion(int xx, int yy)
 			camlookZ -= ((y-yy))*10;
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
-			r+=(y-yy)*10;
+			r+=(y-yy)*100;
 			camZ = camlookZ +( r * cos(beta) * cos(alpha));
 			camX = camlookX +( r * cos(beta) * sin(alpha));
 			camY = camlookY +( r * sin(beta));
@@ -176,7 +177,7 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(640,640);
+	glutInitWindowSize(860,640);
 	glutCreateWindow("SistemaSolar@CG@DI-UM");
 		
 // registo de funções 
