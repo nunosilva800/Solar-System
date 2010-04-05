@@ -15,6 +15,7 @@ float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
 float alpha = 45, beta = 0, r = 5000;
 
 bool axes = false;
+int MouseBtnState;
 
 void changeSize(int w, int h) {
 
@@ -73,6 +74,10 @@ void renderScene(void) {
 
 	planetas();
 
+	if(MouseBtnState == GLUT_UP){
+		glutSetCursor( GLUT_CURSOR_LEFT_ARROW );
+		MouseBtnState = GLUT_DOWN;
+	}
 	// End of frame
 	glutSwapBuffers();
 
@@ -137,10 +142,11 @@ void fmouse(int button, int state, int xx, int yy)
 			break;
 		default :
 			mouseBtn = 0;
-	}	
+	}
+	MouseBtnState = state;
+	glutSetCursor   ( GLUT_CURSOR_NONE );
 }
 
-//TODO: prender o rato ao ecra e nao o mexer.
 void fmotion(int xx, int yy)
 {
 	if(mouseBtn!=1) return ;
@@ -163,6 +169,9 @@ void fmotion(int xx, int yy)
 			camY = r * sin(beta);
 	}
 	x=xx;y=yy;
+
+	if(x < 10 || x > 850 || y < 10 || y > 630) glutWarpPointer ( 430, 320);
+
 	glutPostRedisplay();
 }
 
@@ -206,4 +215,3 @@ void main(int argc, char **argv) {
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 }
-
