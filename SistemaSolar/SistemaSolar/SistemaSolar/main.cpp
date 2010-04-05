@@ -83,8 +83,10 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 27 : exit(0);
 		case '+' : scale++; break;
 		case '-' : scale--; break;
+		/* interfere com a cintura de asteroides
 		case '.' : distFactor+=0.1; break;
 		case ',' : distFactor-=0.1; break;
+		*/
 		case 't' : timeFactor*=2; break;
 		case 'g' : timeFactor/=2; break;
 		case 'a' : axes?axes=false:axes=true; break;
@@ -148,7 +150,7 @@ void fmotion(int xx, int yy)
 			camlookZ -= ((y-yy))*10;
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
-			r+=(y-yy)*100;
+			r+=(y-yy)*10;
 			camZ = camlookZ +( r * cos(beta) * cos(alpha));
 			camX = camlookX +( r * cos(beta) * sin(alpha));
 			camY = camlookY +( r * sin(beta));

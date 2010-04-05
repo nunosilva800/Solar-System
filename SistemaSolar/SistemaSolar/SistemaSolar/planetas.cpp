@@ -61,8 +61,8 @@ void desenharAnel(float raio1, float raio2){
 void desenharSol()
 {
 	glPushMatrix();
-	glColor3f(1,1,0);
-	rotSol+=25.38;
+	glColor3f(1,1,0);//amarelo
+	rotSol += velRSol;
 	rotacao(rotSol,0.0);
 	glutWireSphere(scale*raioSol*(1/scale),32,32);
 	glPopMatrix();
@@ -73,7 +73,7 @@ void desenharMercurio()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolMercurio*sin(velMercurio*time), 0, distFactor*distSolMercurio*cos(velMercurio*time));
 	glColor3f(0.5,0.5,0.5);//cinza
-	rotMercurio += 58.646;
+	rotMercurio += velRMercurio;
 	rotacao(rotMercurio,0.0);
 	glutWireSphere(scale*raioMercurio,32,32);
 	glPopMatrix();
@@ -85,7 +85,7 @@ void desenharVenus()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolVenus*sin(velVenus*time), 0, distFactor*distSolVenus*cos(velVenus*time));
 	glColor3f(0.6,0.5,0.1);//castanho
-	rotVenus += -243.0185;
+	rotVenus += velRVenus;
 	rotacao(rotVenus,0.0);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
@@ -95,9 +95,10 @@ void desenharVenus()
 void desenharLua()
 {
 	if(orbitas)draw_orbita(distFactor*distTerraLua,90,0.0,0.0);
-	glTranslatef(distFactor*distTerraLua*sin(velLua*time), 0, distFactor*distTerraLua*10*sin(velLua*time));
+	//a distancia entre a terra e lua aqui é afectada pelo 'scale'
+	glTranslatef(distFactor*scale*distTerraLua*sin(velLua*time), 0, distFactor*scale*distTerraLua*10*sin(velLua*time));
 	glColor3f(1,1,1);//branco
-	rotLua += 27.321582;
+	rotLua += velRLua;
 	rotacao(rotLua,0.0);
 	glutWireSphere(scale*raioLua,32,32);
 	
@@ -108,7 +109,7 @@ void desenharTerra()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolTerra*sin(velTerra*time), 0, distFactor*distSolTerra*cos(velTerra*time));
 	glColor3f(0,0,1);//azul
-	rotTerra += 1;
+	rotTerra += velRTerra;
 	rotacao(rotTerra,0.0);
 	glutWireSphere(scale*raioTerra,32,32);
 	desenharLua();
@@ -122,7 +123,7 @@ void desenharMarte()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolMarte*sin(velMarte*time), 0, distFactor*distSolMarte*cos(velMarte*time));
 	glColor3f(1,0,0);//vermelho
-	rotMarte += 1.025957;
+	rotMarte += velRMarte;
 	rotacao(rotMarte,0.0);
 	glutWireSphere(scale*raioMarte,32,32);
 	glPopMatrix();
@@ -134,7 +135,7 @@ void desenharJupiter()
 	glRotatef(orbitalTiltJupiter,0.0,0.0,1.0);
 	glTranslatef(distFactor*distSolJupiter*sin(velJupiter*time), 0, distFactor*distSolJupiter*cos(velJupiter*time));
 	glColor3f(1,1,0);//amarelo
-	rotJupiter += 0.413541667;
+	rotJupiter += velRJupiter;
 	rotacao(rotJupiter,axisTiltJupiter);
 	glutWireSphere(scale*raioJupiter,32,32);
 	glPopMatrix();
@@ -145,7 +146,7 @@ void desenharSaturno()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolSaturno*sin(velSaturno*time), 0, distFactor*distSolSaturno*cos(velSaturno*time));
 	glColor3f(1,0,1);//rosa
-	rotSaturno += 0.440416667;
+	rotSaturno += velRSaturno;
 	rotacao(rotSaturno,0.0);
 	glutWireSphere(scale*raioSaturno,32,32);
 	glPushMatrix();
@@ -161,7 +162,7 @@ void desenharUrano()
 	glPushMatrix();
 	glTranslatef(distFactor*distSolUrano*sin(velUrano*time), 0, distFactor*distSolUrano*cos(velUrano*time));
 	glColor3f(0.8,0.1,0.4);//roxo
-	rotUrano += -0.71833;
+	rotUrano += velRUrano;
 	rotacao(rotUrano,0.0);
 	glutWireSphere(scale*raioUrano,32,32);
 	glPopMatrix();
@@ -172,7 +173,7 @@ void desenharNeptuno()
 {
 	glPushMatrix();
 	glColor3f(0.12,0.432,0.123);//verde
-	rotNeptuno += 0.6713;
+	rotNeptuno += velRNeptuno;
 	glTranslatef(distFactor*distSolNeptuno*sin(velNeptuno*time), 0, distFactor*distSolNeptuno*cos(velNeptuno*time));
 	rotacao(rotNeptuno,0.0);
 	glutWireSphere(scale*raioNeptuno,32,32);

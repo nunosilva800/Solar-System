@@ -29,7 +29,7 @@
 #define raioNeptuno		3.883 
 #define raioLua			0.273 
 
-//km/s
+//velocidade translação - km/s
 #define velMercurio		47.87
 #define velVenus		35.02
 #define velTerra		29.783
@@ -40,6 +40,17 @@
 #define velNeptuno		5.43
 #define velLua			1.022
 
+//velocidade rotação - dias
+#define velRSol			25.38
+#define velRMercurio	58.646
+#define velRVenus		-243.0185
+#define velRTerra		1
+#define velRMarte		1.025957
+#define velRJupiter		0.413541667
+#define velRSaturno		0.440416667
+#define velRUrano		-0.71833
+#define velRNeptuno		0.6713
+#define velRLua			27.321582
 
 extern float scale;
 extern bool orbitas;
