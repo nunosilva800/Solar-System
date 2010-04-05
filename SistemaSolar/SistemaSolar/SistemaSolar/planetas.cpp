@@ -18,6 +18,9 @@ float distFactor = 1.0;
 float time = 0;
 float timeFactor = 0.0001;
 
+GLuint cintura;
+
+
 void rotacao(GLfloat rotacao,float tilt)
 {
 	glRotatef(tilt,0.0,0.0,1.0);
@@ -181,20 +184,25 @@ void desenharCintura(){
 	int i=0;
 	float dist, ang, x, z;
 	
+	cintura = glGenLists( 1 );
+	glNewList( cintura, GL_COMPILE );
+	
 	srand(30);
-
 	glColor3f(0.5,0.5,0.2);
 	glBegin(GL_POINTS);
-	for(i=0; i<10000; i++){
+	//existem 700,000 a 1.7 milhoens... mas para simplificar...
+	for(i=0; i<100000; i++){
 		dist = rand();
-		ang = rand();
+		ang = rand() / 3.1415;
 		x = cos(ang) * (dist + distSolMarte*1.2);
 		z = sin(ang) * (dist + distSolMarte*1.2);
-		if(fabs(x) < distSolJupiter && fabs(z) < distSolJupiter)
+		if(sqrt(x*x+z*z) < distSolJupiter*0.8)
 			glVertex3f(x, 0, z);
+		else i--;
 	}
 	glEnd();
-	
+
+	glEndList();
 }
 
 void planetas(){
@@ -208,5 +216,7 @@ void planetas(){
 	desenharSaturno();
 	desenharUrano();
 	desenharNeptuno();
-	desenharCintura();
+
+	glCallList(cintura);
+
 }

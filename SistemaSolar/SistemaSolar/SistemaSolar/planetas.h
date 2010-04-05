@@ -50,6 +50,7 @@ void planetas();
 void createcircle (int k, int r, int h);
 void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
 void rotacao(GLfloat rotacao,float tilt);
+void desenharCintura();
 
 #define orbitalTiltJupiter		1.308
 

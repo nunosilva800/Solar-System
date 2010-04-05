@@ -194,6 +194,9 @@ void main(int argc, char **argv) {
 
 	gerarMenu();
 
+//preparação de display lists
+	desenharCintura();
+
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
