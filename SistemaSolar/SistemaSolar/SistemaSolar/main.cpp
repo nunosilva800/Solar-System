@@ -1,6 +1,4 @@
-#include <GL/glut.h>
 
-#include <math.h>
 #include "planetas.h"
 
 float PI = 3.14159265f;
@@ -67,12 +65,12 @@ void renderScene(void) {
 	
 	//desenhar ponto para onde a camera olha
 	glPushMatrix();
-	glTranslated(camlookX,camlookY,camlookZ);
 	glColor3f(1,1,1);
-	glutSolidSphere(1,10,10);
+	glBegin(GL_POINTS);
+		glVertex3f(camlookX,camlookY,camlookZ);
+	glEnd();
 	glPopMatrix();
 
-	glScalef(scale,scale,scale);
 	planetas();
 
 	// End of frame
@@ -83,8 +81,12 @@ void renderScene(void) {
 void processKeys(unsigned char tecla, int x, int y){
 	switch(tecla){
 		case 27 : exit(0);
-		case '+' : scale+=0.1; break;
-		case '-' : scale-=0.1; break;
+		case '+' : scale++; break;
+		case '-' : scale--; break;
+		case '.' : distFactor+=0.1; break;
+		case ',' : distFactor-=0.1; break;
+		case 't' : timeFactor*=2; break;
+		case 'g' : timeFactor/=2; break;
 		case 'a' : axes?axes=false:axes=true; break;
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;
 	}
