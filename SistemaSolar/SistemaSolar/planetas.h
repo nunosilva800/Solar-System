@@ -28,7 +28,9 @@
 #define raioJupiter		11.209
 #define raioSaturno		9.4492
 #define raioUrano		4.007 
-#define raioNeptuno		3.883 
+#define raioNeptuno		3.883
+
+//Raios Luas
 #define raioLua			0.273 
 
 //velocidade translação - dias
@@ -52,7 +54,35 @@
 #define velRSaturno		0.440416667
 #define velRUrano		-0.71833
 #define velRNeptuno		0.6713
+
+//velocidade rotação Luas - dias
 #define velRLua			27.321582
+	//Marte
+#define velRFobos		1.90
+#define velRDeimos		2.20
+	//Júpiter
+#define velRIo			1.77
+#define velREuropa		3.55
+#define velRGanimedes	7.16
+#define velRCalisto		16.69
+	//Saturno
+#define velRMimas		0.94
+#define velREncelado	1.37
+#define velRTetis		1.89
+#define velRDione		2.73
+#define velRReia		4.52
+#define velRTita		15.95
+#define velRJapeto		79.32
+	//Urano
+#define velRMiranda		1.41
+#define velRAriel		2.52
+#define velRUmbriel		4.41
+#define velRTitania		8.71
+#define velROberon		13.46
+	//Neptuno
+#define velRProteu		1.12
+#define velRTritao		5.88
+
 
 //inclinaçao das orbitas
 #define orbitalTiltMercurio		7.004
