@@ -61,7 +61,7 @@
 //velocidade rotação - dias
 #define velRSol			25.38
 #define velRMercurio	58.646
-#define velRVenus		-243.0185
+#define velRVenus		243.0185
 #define velRTerra		1
 #define velRMarte		1.025957
 #define velRJupiter		0.413541667
@@ -100,7 +100,7 @@
 
 //inclinaçao das orbitas
 #define orbitalTiltMercurio		7.004
-#define orbitalTiltVenus		177.3
+#define orbitalTiltVenus		3.394
 #define orbitalTiltTerra		0
 #define orbitalTiltLua			23.25 //NOT SURE
 #define orbitalTiltMarte		1.850
@@ -112,7 +112,7 @@
 //inclinaçao dos eixos
 #define axisTiltSol				7.25
 #define axisTiltMercurio		-0.1
-#define axisTiltVenus			3.394
+#define axisTiltVenus			177.3
 #define axisTiltTerra			23.5
 #define axisTiltLua				1.5424	
 #define axisTiltMarte			25.19
