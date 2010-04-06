@@ -21,6 +21,15 @@ GLfloat angSaturno = 0;
 GLfloat angUrano = 0;
 GLfloat angNeptuno = 0;
 
+GLfloat angRotMercurio = 0;
+GLfloat angRotVenus = 0;
+GLfloat angRotTerra = 0;
+GLfloat angRotMarte = 0;
+GLfloat angRotJupiter = 0;
+GLfloat angRotSaturno = 0;
+GLfloat angRotUrano = 0;
+GLfloat angRotNeptuno = 0;
+
 float scale = 10;
 bool orbitas = true;
 float distFactor = 0.1;
@@ -195,7 +204,10 @@ void desenharNeptuno()
 {
 	glPushMatrix();
 	glColor3f(0.12,0.432,0.123);//verde
-	rotNeptuno += velRNeptuno;
+
+	angRotNeptuno += 6.28318531/velRMercurio;
+
+	rotNeptuno += angRotNeptuno;
 	glRotatef(orbitalTiltNeptuno,0.0,0.0,1.0);
 	angNeptuno+= 6.28318531/velNeptuno;
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
