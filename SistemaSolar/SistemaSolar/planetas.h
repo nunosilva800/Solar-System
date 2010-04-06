@@ -74,10 +74,6 @@
 #define axisTiltUrano		20
 #define axisTiltNeptuno		20
 
-
-
-
-
 extern float scale;
 extern bool orbitas;
 extern float distFactor;
