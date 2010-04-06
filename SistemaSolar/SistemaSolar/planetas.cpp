@@ -14,7 +14,7 @@ GLfloat rotNeptuno = 0;
 
 float scale = 10;
 bool orbitas = true;
-float distFactor = 1.0;
+float distFactor = 0.1;
 float time = 0;
 float timeFactor = 0.0001;
 
@@ -64,7 +64,7 @@ void desenharSol()
 	glColor3f(1,1,0);//amarelo
 	rotSol += velRSol;
 	rotacao(rotSol,0.0);
-	glutWireSphere(scale*raioSol*(1/scale),32,32);
+	glutWireSphere((float)raioSol,32,32);
 	glPopMatrix();
 }
 
@@ -202,9 +202,9 @@ void desenharCintura(){
 	for(i=0; i<100000; i++){
 		dist = rand();
 		ang = rand() / 3.1415;
-		x = cos(ang) * (dist + distSolMarte*1.2);
-		z = sin(ang) * (dist + distSolMarte*1.2);
-		if(sqrt(x*x+z*z) < distSolJupiter*0.8)
+		x = cos(ang) * (dist + distSolMarte*1.2*distFactor);
+		z = sin(ang) * (dist + distSolMarte*1.2*distFactor);
+		if(sqrt(x*x+z*z) < distSolJupiter*0.7*distFactor)
 			glVertex3f(x, 0, z);
 		else i--;
 	}
@@ -225,6 +225,6 @@ void planetas(){
 	desenharUrano();
 	desenharNeptuno();
 
-	glCallList(cintura);
+	//glCallList(cintura);
 
 }

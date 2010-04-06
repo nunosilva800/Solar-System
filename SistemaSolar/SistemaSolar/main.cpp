@@ -74,10 +74,10 @@ void renderScene(void) {
 
 	planetas();
 
-	if(MouseBtnState == GLUT_UP){
+	/*if(MouseBtnState == GLUT_UP){
 		glutSetCursor( GLUT_CURSOR_LEFT_ARROW );
 		MouseBtnState = GLUT_DOWN;
-	}
+	}*/
 	// End of frame
 	glutSwapBuffers();
 
@@ -143,8 +143,8 @@ void fmouse(int button, int state, int xx, int yy)
 		default :
 			mouseBtn = 0;
 	}
-	MouseBtnState = state;
-	glutSetCursor   ( GLUT_CURSOR_NONE );
+	/*MouseBtnState = state;
+	glutSetCursor   ( GLUT_CURSOR_NONE );*/
 }
 
 void fmotion(int xx, int yy)
@@ -170,7 +170,7 @@ void fmotion(int xx, int yy)
 	}
 	x=xx;y=yy;
 
-	if(x < 10 || x > 850 || y < 10 || y > 630) glutWarpPointer ( 430, 320);
+	//if(x < 10 || x > 850 || y < 10 || y > 630) glutWarpPointer ( 430, 320);
 
 	glutPostRedisplay();
 }

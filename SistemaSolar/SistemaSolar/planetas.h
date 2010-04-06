@@ -5,17 +5,19 @@
 
 #include <GL/glut.h>
 
+//diametro em KM
+#define diametroTerra 12742
 
-//medida em Terras
-#define distSolMercurio	58910	 / 127.42
-#define distSolVenus	108200	 / 127.42
-#define distSolTerra	149597.870 / 127.42
-#define distSolMarte	227940	 / 127.42 
-#define distSolJupiter	778330	 / 127.42
-#define distSolSaturno	1426980	 / 127.42
-#define distSolUrano	2870990	 / 127.42
-#define distSolNeptuno	4497070	 / 127.42
-#define distTerraLua	384.403	 / 127.42
+//medida em Terras		 milhoes
+#define distSolMercurio	58000000	/ diametroTerra
+#define distSolVenus	108000000	/ diametroTerra
+#define distSolTerra	149600000	/ diametroTerra
+#define distSolMarte	227940000	/ diametroTerra
+#define distSolJupiter	778330000	/ diametroTerra
+#define distSolSaturno	1426980000	/ diametroTerra
+#define distSolUrano	2870990000	/ diametroTerra
+#define distSolNeptuno	4497070000	/ diametroTerra
+#define distTerraLua	384403		/ diametroTerra
 
 //medida em Terras (raio da terra)
 #define raioSol			109
