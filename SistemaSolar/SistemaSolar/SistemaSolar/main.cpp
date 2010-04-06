@@ -80,7 +80,6 @@ void renderScene(void) {
 	}
 	// End of frame
 	glutSwapBuffers();
-
 }
 
 void processKeys(unsigned char tecla, int x, int y){
