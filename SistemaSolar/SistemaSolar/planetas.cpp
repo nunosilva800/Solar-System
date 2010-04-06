@@ -197,7 +197,7 @@ void desenharNeptuno()
 	glColor3f(0.12,0.432,0.123);//verde
 	rotNeptuno += velRNeptuno;
 	glRotatef(orbitalTiltNeptuno,0.0,0.0,1.0);
-	angNeptuno+= 6.28318531/angNeptuno;
+	angNeptuno+= 6.28318531/velNeptuno;
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
 	rotacao(rotNeptuno,axisTiltNeptuno);
 	glutWireSphere(scale*raioNeptuno,32,32);
