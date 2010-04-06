@@ -63,6 +63,22 @@ void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
 void rotacao(GLfloat rotacao,float tilt);
 void desenharCintura();
 
+#define orbitalTiltMercurio		20
+#define orbitalTiltVenus		20
+#define orbitalTiltTerra		20
+#define orbitalTiltLua			20
+#define orbitalTiltMarte		20
 #define orbitalTiltJupiter		1.308
+#define orbitalTiltSaturno		20
+#define orbitalTiltUrano		20
+#define orbitalTiltNeptuno		20
 
+#define axisTiltMercurio		20
+#define axisTiltVenus		20
+#define axisTiltTerra		20
+#define axisTiltLua			20	
+#define axisTiltMarte		20
 #define axisTiltJupiter		3.12
+#define axisTiltSaturno		20
+#define axisTiltUrano		20
+#define axisTiltNeptuno		20
