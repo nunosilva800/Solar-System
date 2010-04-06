@@ -175,6 +175,7 @@ void fmotion(int xx, int yy)
 	glutPostRedisplay();
 }
 
+
 void menu(int id_op){}
 
 void gerarMenu(){

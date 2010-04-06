@@ -104,10 +104,11 @@ void desenharVenus()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltVenus,0.0,0.0,1.0);
+	//glTranslatef(distFactor*distSolVenus*sin(-velVenus*time), 0, distFactor*distSolVenus*cos(-velVenus*time));
 	angVenus+= 6.28318531/velVenus;
-	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
+	glTranslatef(distFactor*distSolVenus*sin(-angVenus), 0, distFactor*distSolVenus*cos(-angVenus));
 	glColor3f(0.6,0.5,0.1);//castanho
-	rotVenus += velRVenus;
+	rotVenus -= velRVenus;
 	rotacao(rotVenus,axisTiltVenus);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
@@ -118,7 +119,8 @@ void desenharLua()
 {
 	if(orbitas)draw_orbita(distTerraLua,90,0.0,0.0);
 	//a distancia entre a terra e lua aqui é afectada pelo 'scale'
-	glTranslatef(scale*distTerraLua*sin(velLua*time), 0, scale*distTerraLua*10*sin(velLua*time));
+	glTranslatef(distTerraLua*sin(velLua),0,distTerraLua*cos(velLua));
+	//glTranslatef(0.2*(cos(2.0 * 3.14 * a*13 / 100)),(0.2*sin(2.0 * 3.14 * a*13 / 100)), 0);
 	glColor3f(1,1,1);//branco
 	rotLua += velRLua;
 	rotacao(rotLua,0.0);

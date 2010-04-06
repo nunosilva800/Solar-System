@@ -42,7 +42,7 @@
 #define velSaturno		10759
 #define velUrano		30685
 #define velNeptuno		60190
-#define velLua			27
+//#define velLua			27
 
 /*
 //velocidade translação 1 / ( velPlaneta / velTerra )
@@ -55,9 +55,9 @@
 #define velJupiter		4333
 #define velSaturno		0.03397
 #define velUrano		0.01191
-#define velNeptuno		0.00607
+#define velNeptuno		0.00607*/
 #define velLua			13.537
-*/
+
 //velocidade rotação - dias
 #define velRSol			25.38
 #define velRMercurio	58.646
