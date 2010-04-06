@@ -83,6 +83,7 @@ void desenharMercurio()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltMercurio,0.0,0.0,1.0);
+
 	angMercurio += (2*PI)/velMercurio;
 	glTranslatef(distFactor*distSolMercurio*sin(angMercurio), 0, distFactor*distSolMercurio*cos(angMercurio));
 	
@@ -103,7 +104,7 @@ void desenharVenus()
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
 	
 	glColor3f(0.6,0.5,0.1);//castanho
-	angRotVenus += (2*PI)/velRVenus;
+	angRotVenus += 10*((2*PI)/velRVenus);
 	rotacao(angRotVenus,axisTiltVenus);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
@@ -131,7 +132,7 @@ void desenharTerra()
 	glTranslatef(distFactor*distSolTerra*sin(angTerra), 0, distFactor*distSolTerra*cos(angTerra));
 	
 	glColor3f(0,0,1);//azul
-	angRotTerra = (2*PI)/velRTerra;
+	angRotTerra += (2*PI)/velRTerra;
 	rotacao(angRotTerra,axisTiltTerra);
 	glutWireSphere(scale*raioTerra,32,32);
 	desenharLua();
@@ -149,7 +150,7 @@ void desenharMarte()
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
 	
 	glColor3f(1,0,0);//vermelho
-	angRotMarte = (2*PI)/velRMarte;
+	angRotMarte += (2*PI)/velRMarte;
 	rotacao(angRotMarte,axisTiltMarte);
 	glutWireSphere(scale*raioMarte,32,32);
 	glPopMatrix();
@@ -160,11 +161,11 @@ void desenharJupiter()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltJupiter,0.0,0.0,1.0);
-	angJupiter += (2*PI)/velJupiter;
+	angJupiter += 6.28318531/velJupiter;
 	glTranslatef(distFactor*distSolJupiter*sin(angJupiter), 0, distFactor*distSolJupiter*cos(angJupiter));
 	glColor3f(1,1,0);//amarelo
 	
-	angRotJupiter = (2*PI)/velRJupiter;
+	angRotJupiter += (2*PI)/velRJupiter;
 	rotacao(angRotJupiter,axisTiltJupiter);
 	glutWireSphere(scale*raioJupiter,32,32);
 	glPopMatrix();
@@ -179,7 +180,7 @@ void desenharSaturno()
 	glTranslatef(distFactor*distSolSaturno*sin(angSaturno), 0, distFactor*distSolSaturno*cos(angSaturno));
 	
 	glColor3f(1,0,1);//rosa
-	angRotSaturno = (2*PI)/velRSaturno;
+	angRotSaturno += (2*PI)/velRSaturno;
 	rotacao(angRotSaturno,axisTiltSaturno);
 	glutWireSphere(scale*raioSaturno,32,32);
 	
@@ -200,7 +201,7 @@ void desenharUrano()
 	glTranslatef(distFactor*distSolUrano*sin(angUrano), 0, distFactor*distSolUrano*cos(angUrano));
 	
 	glColor3f(0.8,0.1,0.4);//roxo
-	angRotUrano = (2*PI)/velRUrano;
+	angRotUrano += (2*PI)/velRUrano;
 	rotacao(angRotUrano,axisTiltUrano);
 	glutWireSphere(scale*raioUrano,32,32);
 	glPopMatrix();
