@@ -104,7 +104,7 @@ void desenharVenus()
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
 	
 	glColor3f(0.6,0.5,0.1);//castanho
-	angRotVenus += 10*((2*PI)/velRVenus);
+	angRotVenus += (2*PI)/velRVenus;
 	rotacao(angRotVenus,axisTiltVenus);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
