@@ -33,7 +33,7 @@
 //Raios Luas
 #define raioLua			0.273 
 
-//velocidade translação - dias
+/*velocidade translação - dias
 #define velMercurio		87.969
 #define velVenus		224.701
 #define velTerra		365.5
@@ -43,6 +43,18 @@
 #define velUrano		30685
 #define velNeptuno		60190
 #define velLua			27
+*/
+
+//velocidade translação 1 / ( velPlaneta / velTerra )
+#define velMercurio		4.1549
+#define velVenus		1.6266
+#define velTerra		1
+#define velMarte		0.532
+#define velJupiter		0.08425
+#define velSaturno		0.03397
+#define velUrano		0.01191
+#define velNeptuno		0.00607
+#define velLua			13.537
 
 //velocidade rotação - dias
 #define velRSol			25.38

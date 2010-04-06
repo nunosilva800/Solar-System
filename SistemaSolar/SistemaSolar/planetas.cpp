@@ -16,7 +16,7 @@ float scale = 10;
 bool orbitas = true;
 float distFactor = 0.1;
 float time = 0;
-float timeFactor = 0.0001;
+float timeFactor = 0.01;
 
 GLuint cintura;
 
@@ -64,7 +64,7 @@ void desenharSol()
 	glColor3f(1,1,0);//amarelo
 	rotSol += velRSol;
 	rotacao(rotSol,0.0);
-	glutWireSphere((float)raioSol,32,32);
+	glutWireSphere(raioSol,32,32);
 	glPopMatrix();
 }
 
