@@ -1,8 +1,6 @@
 
 #include "planetas.h"
 
-float PI = 3.14159265f;
-
 float height = 2.0f;
 float x = 0.0f;
 float z = 0.0f;

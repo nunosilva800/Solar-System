@@ -122,6 +122,8 @@
 #define axisTiltUrano			97.86
 #define axisTiltNeptuno			29.6
 
+#define PI 3,14159265
+
 extern float scale;
 extern bool orbitas;
 extern float distFactor;
