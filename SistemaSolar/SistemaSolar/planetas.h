@@ -55,26 +55,27 @@
 #define velRLua			27.321582
 
 //inclinaçao das orbitas
-#define orbitalTiltMercurio		20
-#define orbitalTiltVenus		20
-#define orbitalTiltTerra		20
-#define orbitalTiltLua			20
-#define orbitalTiltMarte		20
+#define orbitalTiltMercurio		7.004
+#define orbitalTiltVenus		177.3
+#define orbitalTiltTerra		0
+#define orbitalTiltLua			23.25 //NOT SURE
+#define orbitalTiltMarte		1.850
 #define orbitalTiltJupiter		1.308
-#define orbitalTiltSaturno		20
-#define orbitalTiltUrano		20
-#define orbitalTiltNeptuno		20
+#define orbitalTiltSaturno		2.488
+#define orbitalTiltUrano		0.774
+#define orbitalTiltNeptuno		1.774
 
 //inclinaçao dos eixos
-#define axisTiltMercurio		20
-#define axisTiltVenus		20
-#define axisTiltTerra		20
-#define axisTiltLua			20	
-#define axisTiltMarte		20
-#define axisTiltJupiter		3.12
-#define axisTiltSaturno		20
-#define axisTiltUrano		20
-#define axisTiltNeptuno		20
+#define axisTiltSol				7.25
+#define axisTiltMercurio		-0.1
+#define axisTiltVenus			3.394
+#define axisTiltTerra			23.5
+#define axisTiltLua				1.5424	
+#define axisTiltMarte			25.19
+#define axisTiltJupiter			3.12
+#define axisTiltSaturno			26.73
+#define axisTiltUrano			97.86
+#define axisTiltNeptuno			29.6
 
 extern float scale;
 extern bool orbitas;
