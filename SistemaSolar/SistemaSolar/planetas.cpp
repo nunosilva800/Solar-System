@@ -96,9 +96,9 @@ void desenharVenus()
 
 void desenharLua()
 {
-	if(orbitas)draw_orbita(distFactor*distTerraLua,90,0.0,0.0);
+	if(orbitas)draw_orbita(distTerraLua,90,0.0,0.0);
 	//a distancia entre a terra e lua aqui é afectada pelo 'scale'
-	glTranslatef(distFactor*scale*distTerraLua*sin(velLua*time), 0, distFactor*scale*distTerraLua*10*sin(velLua*time));
+	glTranslatef(scale*distTerraLua*sin(velLua*time), 0, scale*distTerraLua*10*sin(velLua*time));
 	glColor3f(1,1,1);//branco
 	rotLua += velRLua;
 	rotacao(rotLua,0.0);

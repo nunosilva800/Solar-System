@@ -156,7 +156,7 @@ void fmotion(int xx, int yy)
 			camlookZ -= ((y-yy))*10;
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
-			r+=(y-yy)*10;
+			r+=(y-yy)*100;
 			camZ = camlookZ +( r * cos(beta) * cos(alpha));
 			camX = camlookX +( r * cos(beta) * sin(alpha));
 			camY = camlookY +( r * sin(beta));
