@@ -71,43 +71,31 @@ void desenharSol()
 void desenharMercurio()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltMercurio,0.0,0.0,1.0);
 	glTranslatef(1000*cos(0.0)*sin(time*0.2),1000*sin(0.0),1000*cos(0.0)*cos(time*0.2));
-=======
 	glTranslatef(distFactor*distSolMercurio*sin(velMercurio*time), 0, distFactor*distSolMercurio*cos(velMercurio*time));
->>>>>>> .r46
 	glColor3f(0.5,0.5,0.5);//cinza
 	rotMercurio += velRMercurio;
 	rotacao(rotMercurio,axisTiltMercurio);
 	glutWireSphere(scale*raioMercurio,32,32);
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(1000,90,0.0,orbitalTiltMercurio);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolMercurio,90,0.0,0.0);
->>>>>>> .r46
 }
 
 void desenharVenus()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltVenus,0.0,0.0,1.0);
 	glTranslatef(1100*cos(0.0)*sin(time*0.6),1100*sin(0.0),1100*cos(0.0)*cos(time*0.6));
-=======
 	glTranslatef(distFactor*distSolVenus*sin(velVenus*time), 0, distFactor*distSolVenus*cos(velVenus*time));
->>>>>>> .r46
 	glColor3f(0.6,0.5,0.1);//castanho
 	rotVenus += velRVenus;
 	rotacao(rotVenus,axisTiltVenus);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(1100,90,0.0,orbitalTiltVenus);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolVenus,90,0.0,0.0);
->>>>>>> .r46
 }
 
 void desenharLua()
@@ -125,12 +113,9 @@ void desenharLua()
 void desenharTerra()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltTerra,0.0,0.0,1.0);
 	glTranslatef(1200*cos(0.0)*sin(time),1200*sin(0.0),1200*cos(0.0)*cos(time));
-=======
 	glTranslatef(distFactor*distSolTerra*sin(velTerra*time), 0, distFactor*distSolTerra*cos(velTerra*time));
->>>>>>> .r46
 	glColor3f(0,0,1);//azul
 	rotTerra += velRTerra;
 	rotacao(rotTerra,axisTiltTerra);
@@ -138,32 +123,23 @@ void desenharTerra()
 	desenharLua();
 	glPopMatrix();
 	glColor3f(0,0,1);//azul
-<<<<<<< .mine
 	draw_Orbita(1200,90,0.0,orbitalTiltTerra);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolTerra,90,0.0,0.0);
->>>>>>> .r46
 }
 
 void desenharMarte()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltMarte,0.0,0.0,1.0);
 	glTranslatef(1300*cos(0.0)*sin(time),1300*sin(0.0),1300*cos(0.0)*cos(time));
-=======
 	glTranslatef(distFactor*distSolMarte*sin(velMarte*time), 0, distFactor*distSolMarte*cos(velMarte*time));
->>>>>>> .r46
 	glColor3f(1,0,0);//vermelho
 	rotMarte += velRMarte;
 	rotacao(rotMarte,axisTiltMarte);
 	glutWireSphere(scale*raioMarte,32,32);
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(1300,90,0.0,orbitalTiltMarte);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolMarte,90,0.0,0.0);
->>>>>>> .r46
 }
 void desenharJupiter()
 {
@@ -180,12 +156,9 @@ void desenharJupiter()
 void desenharSaturno()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltSaturno,0.0,0.0,1.0);
 	glTranslatef(2300*cos(0.0)*sin(time),2300*sin(0.0),2300*cos(0.0)*cos(time));
-=======
 	glTranslatef(distFactor*distSolSaturno*sin(velSaturno*time), 0, distFactor*distSolSaturno*cos(velSaturno*time));
->>>>>>> .r46
 	glColor3f(1,0,1);//rosa
 	rotSaturno += velRSaturno;
 	rotacao(rotSaturno,axisTiltSaturno);
@@ -199,53 +172,38 @@ void desenharSaturno()
 	
 	glPopMatrix();
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(2300,90,0.0,orbitalTiltSaturno);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolSaturno,90,0.0,0.0);
->>>>>>> .r46
 }
 void desenharUrano()
 {
 	glPushMatrix();
-<<<<<<< .mine
 	glRotatef(orbitalTiltUrano,0.0,0.0,1.0);
 	glTranslatef(2800*cos(0.0)*sin(time),2800*sin(0.0),2800*cos(0.0)*cos(time));
-=======
 	glTranslatef(distFactor*distSolUrano*sin(velUrano*time), 0, distFactor*distSolUrano*cos(velUrano*time));
->>>>>>> .r46
 	glColor3f(0.8,0.1,0.4);//roxo
 	rotUrano += velRUrano;
 	rotacao(rotUrano,axisTiltUrano);
 	glutWireSphere(scale*raioUrano,32,32);
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(2800,90,0.0,orbitalTiltUrano);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolUrano,90,0.0,0.0);
->>>>>>> .r46
 }
 
 void desenharNeptuno()
 {
 	glPushMatrix();
 	glColor3f(0.12,0.432,0.123);//verde
-<<<<<<< .mine
 	rotNeptuno+=1.23;
 	glRotatef(orbitalTiltNeptuno,0.0,0.0,1.0);
 	glTranslatef(3200*cos(0.0)*sin(time),3200*sin(0.0),3200*cos(0.0)*cos(time));
-=======
 	rotNeptuno += velRNeptuno;
 	glTranslatef(distFactor*distSolNeptuno*sin(velNeptuno*time), 0, distFactor*distSolNeptuno*cos(velNeptuno*time));
->>>>>>> .r46
 	rotacao(rotNeptuno,axisTiltNeptuno);
 	glutWireSphere(scale*raioNeptuno,32,32);
 	glPopMatrix();
-<<<<<<< .mine
 	draw_Orbita(3200,90,0.0,orbitalTiltNeptuno);
-=======
 	if(orbitas)draw_orbita(distFactor*distSolNeptuno,90,0.0,0.0);
->>>>>>> .r46
 }
 
 void desenharCintura(){
