@@ -157,8 +157,6 @@ void desenharFobos()
 	glTranslatef(distFactor*scale*distMarteFobos*sin(velRFobos), 0, distFactor*scale*distMarteFobos*cos(velRFobos));
 
 	glColor3f(1,1,1);//branco
-	rotLua += velRFobos*timeFactor;
-	rotacao(rotLua,0.0);
 	glutWireSphere(scale*raioFobos,32,32);
 
 	glPopMatrix();

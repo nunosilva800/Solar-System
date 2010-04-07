@@ -80,7 +80,7 @@ void renderScene(void) {
 	glEnd();	
 	
 	strcpy(s,"+ - aumenta o tamanho dos planetas e satelites");
-    writeString(10000000,10000000,0, (void *)font, s);
+    writeString(9999,9999,0, (void *)font, s);
 
 	planetas();
 

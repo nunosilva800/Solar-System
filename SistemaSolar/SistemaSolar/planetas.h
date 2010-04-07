@@ -25,7 +25,6 @@
 #define raioSol			695.5
 #define raioMercurio	2.4395
 #define raioVenus		6.052
-#define raioTerra		6.378 
 #define raioMarte		3.396
 #define raioJupiter		71.492
 #define raioSaturno		60.268
