@@ -4,6 +4,7 @@
 
 GLfloat rotDemios = 0;
 
+
 GLfloat angMercurio = 0;
 GLfloat angVenus = 0;
 GLfloat angTerra = 0;
