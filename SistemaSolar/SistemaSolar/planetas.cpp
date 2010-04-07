@@ -30,7 +30,7 @@ float distFactor = 0.1;
 float timeFactor = 0.05;
 
 GLuint cintura;
-
+GLuint estrelas;
 
 void rotacao(GLfloat rotacao,float tilt)
 {
@@ -254,6 +254,30 @@ void desenharCintura(){
 	glEndList();
 }
 
+
+void desenharEstrelas()
+{
+	float x, y, z, elevation, alt;
+	srand(30);
+	estrelas = glGenLists( 2 );
+	glNewList ( estrelas, GL_COMPILE );
+
+	glBegin ( GL_POINTS );
+	for ( int i = 0; i < MAX_STARS; i++ ){
+	   elevation  = rand ( );
+	   alt    = rand ( );
+
+        y = STAR_RADIUS * sin ( elevation );
+        x = STAR_RADIUS * cos ( elevation ) * cos ( alt );
+        z = STAR_RADIUS * cos ( elevation ) * sin ( alt );
+
+        glColor3f(1,1,1);
+		glVertex3f ( x, y, z );
+	}
+	glEnd ( );
+	glEndList ( );
+}
+
 void planetas(){
 	desenharSol();
 	desenharMercurio();
@@ -267,4 +291,5 @@ void planetas(){
 
 	if(drawCintura)	glCallList(cintura);
 
+	glCallList(estrelas);
 }

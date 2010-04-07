@@ -123,6 +123,9 @@
 
 #define PI 3.14159265
 
+#define MAX_STARS 			10000
+#define STAR_RADIUS 		150000
+
 extern float scale;
 extern bool orbitas;
 extern bool drawCintura;
@@ -134,3 +137,4 @@ void createcircle (int k, int r, int h);
 void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
 void rotacao(GLfloat rotacao,float tilt);
 void desenharCintura();
+void desenharEstrelas();

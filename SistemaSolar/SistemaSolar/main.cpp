@@ -48,16 +48,18 @@ void draw_Axes (void)
     glEnd();
 }
 
+
 void renderScene(void) {
 
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
 	gluLookAt(camX,camY,camZ, 
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
-	
+
 	if(axes) draw_Axes();
 	
 	//desenhar ponto para onde a camera olha
@@ -208,6 +210,7 @@ void main(int argc, char **argv) {
 
 //preparação de display lists
 	desenharCintura();
+	desenharEstrelas();
 
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
