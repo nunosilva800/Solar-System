@@ -90,8 +90,8 @@ void processKeys(unsigned char tecla, int x, int y){
 		case '.' : distFactor+=0.1; break;
 		case ',' : distFactor-=0.1; break;
 		*/
-		case 't' : timeFactor*=2; break;
-		case 'g' : timeFactor/=2; break;
+		case 't' : timeFactor+=0.1; break;
+		case 'g' : timeFactor-=0.1; break;
 		case 'a' : axes?axes=false:axes=true; break;
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;
 	}
