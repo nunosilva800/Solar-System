@@ -27,7 +27,7 @@ float scale = 100;
 bool orbitas = true;
 bool drawCintura = true;
 float distFactor = 0.1;
-float timeFactor = 1;
+float timeFactor = 0.05;
 
 GLuint cintura;
 
@@ -123,11 +123,16 @@ void desenharTerra()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltTerra,0.0,0.0,1.0);
-	angTerra += (2*PI)/velTerra*timeFactor;
+	angTerra += ((2*PI)/velTerra)*timeFactor;
 	glTranslatef(distFactor*distSolTerra*sin(angTerra), 0, distFactor*distSolTerra*cos(angTerra));
 	
 	glColor3f(0,0,1);//azul
-	angRotTerra += (2*PI)/velRTerra*timeFactor;
+	//angRotTerra += ((0.25*360)/velRTerra)*timeFactor;
+	angRotTerra += (360/velRTerra)*timeFactor;
+
+	//experiencia
+	printf("angTransTerra: %f      angRotTerra: %f\n",(angTerra*(180/PI)),angRotTerra/360);
+	
 	rotacao(angRotTerra,axisTiltTerra);
 	glutWireSphere(scale*raioTerra,32,32);
 	desenharLua();
@@ -141,7 +146,7 @@ void desenharMarte()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltMarte,0.0,0.0,1.0);
-	angMarte+= (2*PI)/velMarte*timeFactor;
+	angMarte+= ((2*PI)/velMarte)*timeFactor;
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
 	
 	glColor3f(1,0,0);//vermelho
