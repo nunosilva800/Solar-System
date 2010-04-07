@@ -1,4 +1,4 @@
-
+#include <string.h>
 #include "planetas.h"
 
 float height = 2.0f;
@@ -14,6 +14,9 @@ float alpha = 45, beta = 45, r = 5000;
 
 bool axes = false;
 int MouseBtnState;
+
+int font=(int)GLUT_BITMAP_8_BY_13;
+char s[100];
 
 void changeSize(int w, int h) {
 
@@ -37,6 +40,14 @@ void changeSize(int w, int h) {
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void writeString(float x, float y,float z, void *font, char *s)
+{
+    unsigned int c;
+    glRasterPos3f(x,y,z);                // set position to start drawing fonts
+    for (c=0; c < strlen(s); c++)
+       glutBitmapCharacter(font, s[c] ); // draw the character to the screen
 }
 
 void draw_Axes (void)
@@ -66,8 +77,10 @@ void renderScene(void) {
 	glColor3f(1,1,1);
 	glBegin(GL_POINTS);
 		glVertex3f(camlookX,camlookY,camlookZ);
-	glEnd();
+	glEnd();	
 	
+	strcpy(s,"+ - aumenta o tamanho dos planetas e satelites");
+    writeString(10000000,10000000,0, (void *)font, s);
 
 	planetas();
 

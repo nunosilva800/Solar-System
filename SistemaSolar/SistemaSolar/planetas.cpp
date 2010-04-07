@@ -74,10 +74,8 @@ void desenharSol()
 {
 	glPushMatrix();
 	glColor3f(1,1,0);//amarelo
-
-	rotSol += velRSol*timeFactor;
-	rotacao(scalesol*rotSol,0.0);
-
+	angRotSol += (360/velRSol)*timeFactor;
+	rotacao(angRotSol,0.0);
 	glutWireSphere(raioSol,32,32);
 	glPopMatrix();
 }
