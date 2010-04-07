@@ -2,11 +2,8 @@
 
 //falta isto!
 
-<<<<<<< .mine
 GLfloat rotDemios = 0;
 
-=======
->>>>>>> .r80
 GLfloat angMercurio = 0;
 GLfloat angVenus = 0;
 GLfloat angTerra = 0;
@@ -31,12 +28,10 @@ GLfloat angRotLua = 0;
 float scale = 50;
 float scalesol = scale*0.5;
 bool orbitas = true;
-<<<<<<< .mine
-float distFactor = 1;
-=======
+
 bool drawCintura = true;
 float distFactor = 0.1;
->>>>>>> .r80
+
 float timeFactor = 0.05;
 
 GLuint cintura;
@@ -78,13 +73,10 @@ void desenharSol()
 {
 	glPushMatrix();
 	glColor3f(1,1,0);//amarelo
-<<<<<<< .mine
+
 	rotSol += velRSol*timeFactor;
 	rotacao(scalesol*rotSol,0.0);
-=======
-	angRotSol += (360/velRSol)*timeFactor;
-	rotacao(angRotSol,0.0);
->>>>>>> .r80
+
 	glutWireSphere(raioSol,32,32);
 	glPopMatrix();
 }
