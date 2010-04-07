@@ -68,7 +68,7 @@ void desenharSol()
 {
 	glPushMatrix();
 	glColor3f(1,1,0);//amarelo
-	angRotSol += (2*PI)/velRSol*timeFactor;
+	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
 	glutWireSphere(raioSol,32,32);
 	glPopMatrix();
@@ -79,11 +79,11 @@ void desenharMercurio()
 	glPushMatrix();
 	glRotatef(orbitalTiltMercurio,0.0,0.0,1.0);
 
-	angMercurio += (2*PI)/velMercurio*timeFactor;
+	angMercurio += ((2*PI)/velMercurio)*timeFactor;
 	glTranslatef(distFactor*distSolMercurio*sin(angMercurio), 0, distFactor*distSolMercurio*cos(angMercurio));
 	
 	glColor3f(0.5,0.5,0.5);//cinza
-	angRotMercurio += (2*PI)/velRMercurio*timeFactor;
+	angRotMercurio += (360/velRMercurio)*timeFactor;
 	rotacao(angRotMercurio,axisTiltMercurio);
 	glutWireSphere(scale*raioMercurio,32,32);
 	glPopMatrix();
@@ -95,11 +95,11 @@ void desenharVenus()
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltVenus,0.0,0.0,1.0);
-	angVenus += (2*PI)/velVenus*timeFactor;
+	angVenus += ((2*PI)/velVenus)*timeFactor;
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
 	
 	glColor3f(0.6,0.5,0.1);//castanho
-	angRotVenus += (2*PI)/velRVenus*timeFactor;
+	angRotVenus += (360/velRVenus)*timeFactor;
 	rotacao(angRotVenus,axisTiltVenus);
 	glutWireSphere(scale*raioVenus,32,32);
 	glPopMatrix();
@@ -109,11 +109,11 @@ void desenharVenus()
 void desenharLua()
 {
 	if(orbitas)draw_orbita(distFactor*scale*distTerraLua,90,0.0,0.0);
-	angLua += (2*PI)/velLua*timeFactor;
+	angLua += ((2*PI)/velLua)*timeFactor;
 	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
 
 	glColor3f(1,1,1);//branco
-	angRotLua += (2*PI)/velRLua*timeFactor;
+	angRotLua += (360/velRLua)*timeFactor;
 	rotacao(angRotLua,0.0);
 	glutWireSphere(scale*raioLua,32,32);
 	
@@ -183,8 +183,6 @@ void desenharSaturno()
 	angRotSaturno += (360/velRSaturno)*timeFactor;
 	rotacao(angRotSaturno,axisTiltSaturno);
 	glutWireSphere(scale*raioSaturno,32,32);
-	
-	printf("angTransTerra: %f      angRotTerra: %f\n",(angSaturno*(180/PI)),angRotSaturno/360);
 
 	glPushMatrix();
 	glRotatef(90.0,1.0,0.0,0.0);
