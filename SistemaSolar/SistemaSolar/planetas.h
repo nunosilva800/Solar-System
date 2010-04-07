@@ -124,7 +124,7 @@
 #define PI 3.14159265
 
 #define MAX_STARS 			10000
-#define STAR_RADIUS 		150000
+#define STAR_RADIUS 		300000
 
 extern float scale;
 extern bool orbitas;
