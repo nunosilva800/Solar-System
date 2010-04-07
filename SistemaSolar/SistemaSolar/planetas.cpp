@@ -116,13 +116,15 @@ void desenharLua()
 {
 	glPushMatrix();
 	if(orbitas)draw_orbita(distFactor*scale*distTerraLua,90,0.0,0.0);
-	angLua += ((2*PI)/velLua)*timeFactor;
+	
+	angLua += (((2*PI)/velLua)-((360/velRTerra)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
-
+	
 	glColor3f(1,1,1);//branco
 	angRotLua += (360/velRLua)*timeFactor;
 	rotacao(angRotLua,0.0);
 	glutWireSphere(scale*raioLua,32,32);
+	
 	glPopMatrix();
 }
 
