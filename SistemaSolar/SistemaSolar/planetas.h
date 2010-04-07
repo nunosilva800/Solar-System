@@ -6,32 +6,61 @@
 #include <GL/glut.h>
 
 //diametro em KM
-#define diametroTerra 12742
+#define diametroTerra 12.742
+#define raioTerra	6.371
 
-//medida em Terras		 milhoes
-#define distSolMercurio	58000000	/ diametroTerra
-#define distSolVenus	108000000	/ diametroTerra
-#define distSolTerra	149600000	/ diametroTerra
-#define distSolMarte	227940000	/ diametroTerra
-#define distSolJupiter	778330000	/ diametroTerra
-#define distSolSaturno	1426980000	/ diametroTerra
-#define distSolUrano	2870990000	/ diametroTerra
-#define distSolNeptuno	4497070000	/ diametroTerra
-#define distTerraLua	384403		/ diametroTerra
+//Distancia ao sol		KM
+#define distSolMercurio	58000
+#define distSolVenus	108000
+#define distSolTerra	149600
+#define distSolMarte	227940
+#define distSolJupiter	778330
+#define distSolSaturno	1426980
+#define distSolUrano	2870990
+#define distSolNeptuno	4497070
+#define distTerraLua	384.403
 
-//medida em Terras (raio da terra)
-#define raioSol			109
-#define raioMercurio	0.3829
-#define raioVenus		0.9499
-#define raioTerra		1 
-#define raioMarte		0.533
-#define raioJupiter		11.209
-#define raioSaturno		9.4492
-#define raioUrano		4.007 
-#define raioNeptuno		3.883
 
-//Raios Luas
-#define raioLua			0.273 
+//Raios Planetas		KM
+#define raioSol			695.5
+#define raioMercurio	2.4395
+#define raioVenus		6.052
+#define raioTerra		6.378 
+#define raioMarte		3.396
+#define raioJupiter		71.492
+#define raioSaturno		60.268
+#define raioUrano		25.559 
+#define raioNeptuno		24.764
+
+//Distancia planeta<->luas		KM
+#define distTerraLua			384.403
+	//Marte
+#define distMarteFobos			9.337
+#define distMarteDeimos			23.460
+	//Jupiter
+#define distJupiterIo			422.000
+#define distJupiterEuropa		670.000
+#define distJupiterGanymede		1070
+#define distJupiterCalisto		1880
+	//Saturno
+#define distSaturnoRhea			527
+#define distSaturnoTitan		1222
+#define distSaturnoIapetus		3560
+
+//Raios Luas			KM
+#define raioLua			1.73710
+	//Marte
+#define raioFobos		0.0111
+#define raioDeimos		0.0062
+	//Jupiter
+#define raioIo			1.8213
+#define raioEuropa		1.569
+#define raioGanymede	2.6341
+#define raioCalisto		2.4103
+	//Saturno
+#define raioRhea		0.764
+#define raioTitan		2.5762
+#define raioIapetus		0.7356
 
 //velocidade translação - dias
 #define velMercurio		87.969
