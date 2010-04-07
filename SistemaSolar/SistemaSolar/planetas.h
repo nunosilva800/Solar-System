@@ -9,7 +9,7 @@
 #define diametroTerra 12.742
 #define raioTerra	6.371
 
-//Distancia ao sol		KM
+//Distancia ao sol		KM(x1000)
 #define distSolMercurio	58000
 #define distSolVenus	108000
 #define distSolTerra	149600
@@ -21,7 +21,7 @@
 #define distTerraLua	384.403
 
 
-//Raios Planetas		KM
+//Raios Planetas		KM(x1000)
 #define raioSol			695.5
 #define raioMercurio	2.4395
 #define raioVenus		6.052
@@ -152,7 +152,7 @@
 #define PI 3.14159265
 
 #define MAX_STARS 			10000
-#define STAR_RADIUS 		300000
+#define STAR_RADIUS 		2000000
 
 extern float scale;
 extern bool orbitas;

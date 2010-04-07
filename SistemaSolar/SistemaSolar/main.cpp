@@ -8,9 +8,9 @@ float y = 0.0f;
 int mouseBtn = 0;
 int mouseMod = 0;
 
-float camX = 4500.0f, camY = 5000.0f, camZ = 4500;
+float camX = 0, camY = 0, camZ = 0;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 45, beta = 45, r = 5000;
+float alpha = 45, beta = 45, r = 50000;
 
 bool axes = false;
 int MouseBtnState;
@@ -84,10 +84,6 @@ void renderScene(void) {
 
 	planetas();
 
-	/*if(MouseBtnState == GLUT_UP){
-		glutSetCursor( GLUT_CURSOR_LEFT_ARROW );
-		MouseBtnState = GLUT_DOWN;
-	}*/
 	// End of frame
 	glutSwapBuffers();
 
@@ -100,7 +96,7 @@ void processKeys(unsigned char tecla, int x, int y){
 		case '-' : scale--; break;
 
 		case '.' : distFactor+=0.01; desenharCintura(); break;
-		case ',' : distFactor-=0.01; desenharCintura(); break;
+		case ',' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura(); break;
 		
 		case 't' : timeFactor+=0.01; break;
 		case 'g' : timeFactor-=0.01; break;
@@ -158,8 +154,7 @@ void fmouse(int button, int state, int xx, int yy)
 		default :
 			mouseBtn = 0;
 	}
-	/*MouseBtnState = state;
-	glutSetCursor   ( GLUT_CURSOR_NONE );*/
+	glutSetCursor   ( GLUT_CURSOR_LEFT_ARROW );
 }
 
 void fmotion(int xx, int yy)
@@ -172,20 +167,25 @@ void fmotion(int xx, int yy)
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			r-=(y-yy)*100;
+			if(r > 2000000) r = 1500000;
+			if(r < 2000) r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 		default:
-			alpha+=((x-xx));
-			beta-=((y-yy));
+			alpha+=((x-xx)*0.3);
+			beta-=((y-yy)*0.3);
+			if(beta > 89) beta = 89;
+			if(beta < -89) beta = -89;
 			camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
 			camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
 			camY = r * sin(beta*(PI/180));			
 	}
 	x=xx;y=yy;
 
-	//if(x < 10 || x > 850 || y < 10 || y > 630) glutWarpPointer ( 430, 320);
+	if(x < 0 || x > 790 || y < 0 || y > 590) glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+	else glutSetCursor( GLUT_CURSOR_NONE );
 
 	glutPostRedisplay();
 }
@@ -206,7 +206,7 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(860,640);
+	glutInitWindowSize(800,600);
 	glutCreateWindow("SistemaSolar@CG@DI-UM");
 		
 // registo de funções 
