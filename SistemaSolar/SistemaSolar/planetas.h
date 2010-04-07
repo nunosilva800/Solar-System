@@ -125,6 +125,7 @@
 
 extern float scale;
 extern bool orbitas;
+extern bool drawCintura;
 extern float distFactor;
 extern float timeFactor;
 

@@ -1,9 +1,6 @@
 #include "planetas.h"
 
 //falta isto!
-GLfloat rotSol = 0;
-GLfloat rotLua = 0;
-
 
 GLfloat angMercurio = 0;
 GLfloat angVenus = 0;
@@ -13,7 +10,9 @@ GLfloat angJupiter = 0;
 GLfloat angSaturno = 0;
 GLfloat angUrano = 0;
 GLfloat angNeptuno = 0;
+GLfloat angLua = 0;
 
+GLfloat angRotSol = 0;
 GLfloat angRotMercurio = 0;
 GLfloat angRotVenus = 0;
 GLfloat angRotTerra = 0;
@@ -22,9 +21,11 @@ GLfloat angRotJupiter = 0;
 GLfloat angRotSaturno = 0;
 GLfloat angRotUrano = 0;
 GLfloat angRotNeptuno = 0;
+GLfloat angRotLua = 0;
 
 float scale = 100;
 bool orbitas = true;
+bool drawCintura = true;
 float distFactor = 0.1;
 float timeFactor = 1;
 
@@ -63,17 +64,12 @@ void draw_orbita(float raio, float angleX,float angleY, float angleZ){
 	glPopMatrix();	
 }
 
-void desenharAnel(float raio1, float raio2){
-	glColor3f(1,0,0);
-	glutSolidTorus(raio1,raio2,360,150);
-}
-
 void desenharSol()
 {
 	glPushMatrix();
 	glColor3f(1,1,0);//amarelo
-	rotSol += velRSol*timeFactor;
-	rotacao(rotSol,0.0);
+	angRotSol += (2*PI)/velRSol*timeFactor;
+	rotacao(angRotSol,0.0);
 	glutWireSphere(raioSol,32,32);
 	glPopMatrix();
 }
@@ -113,11 +109,12 @@ void desenharVenus()
 void desenharLua()
 {
 	if(orbitas)draw_orbita(distFactor*scale*distTerraLua,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distTerraLua*sin(velLua), 0, distFactor*scale*distTerraLua*cos(velLua));
+	angLua += (2*PI)/velLua*timeFactor;
+	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
 
 	glColor3f(1,1,1);//branco
-	rotLua += velRLua*timeFactor;
-	rotacao(rotLua,0.0);
+	angRotLua += (2*PI)/velRLua*timeFactor;
+	rotacao(angRotLua,0.0);
 	glutWireSphere(scale*raioLua,32,32);
 	
 }
@@ -185,7 +182,9 @@ void desenharSaturno()
 	glPushMatrix();
 	glRotatef(90.0,1.0,0.0,0.0);
 	glScalef(1,1,0.1);
-	desenharAnel(43,150);
+	
+	glColor3f(1,0,0);
+	glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
 	glPopMatrix();
 	glPopMatrix();
 	
@@ -224,6 +223,8 @@ void desenharNeptuno()
 }
 
 void desenharCintura(){
+	if(!drawCintura) return;
+
 	int i=0;
 	float dist, ang, x, z;
 	
@@ -259,6 +260,6 @@ void planetas(){
 	desenharUrano();
 	desenharNeptuno();
 
-	//glCallList(cintura);
+	if(drawCintura)	glCallList(cintura);
 
 }

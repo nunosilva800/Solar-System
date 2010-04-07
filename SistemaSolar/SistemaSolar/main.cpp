@@ -86,14 +86,19 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 27 : exit(0);
 		case '+' : scale++; break;
 		case '-' : scale--; break;
-		/* interfere com a cintura de asteroides
-		case '.' : distFactor+=0.1; break;
-		case ',' : distFactor-=0.1; break;
-		*/
+
+		case '.' : distFactor+=0.01; desenharCintura(); break;
+		case ',' : distFactor-=0.01; desenharCintura(); break;
+		
 		case 't' : timeFactor+=0.1; break;
 		case 'g' : timeFactor-=0.1; break;
 		case 'a' : axes?axes=false:axes=true; break;
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;
+		case 'c' : if(drawCintura){
+					drawCintura=false;
+				   }else{ drawCintura=true; desenharCintura();
+				   }
+			break;
 	}
 	glutPostRedisplay();
 }
