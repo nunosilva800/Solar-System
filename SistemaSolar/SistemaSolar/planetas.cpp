@@ -23,7 +23,7 @@ GLfloat angRotUrano = 0;
 GLfloat angRotNeptuno = 0;
 GLfloat angRotLua = 0;
 
-float scale = 100;
+float scale = 50;
 bool orbitas = true;
 bool drawCintura = true;
 float distFactor = 0.1;
