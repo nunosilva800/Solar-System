@@ -203,43 +203,43 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\jupiter.bmp"
+				RelativePath="..\Resource\jupiter.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\lua.bmp"
+				RelativePath="..\Resource\lua.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\marte.bmp"
+				RelativePath="..\Resource\marte.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\mercurio.bmp"
+				RelativePath="..\Resource\mercurio.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\neptuno.bmp"
+				RelativePath="..\Resource\neptuno.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\saturno.bmp"
+				RelativePath="..\Resource\saturno.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\sol.bmp"
+				RelativePath="..\Resource\sol.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\terra.bmp"
+				RelativePath="..\Resource\terra.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\urano.bmp"
+				RelativePath="..\Resource\urano.bmp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\..\..\..\..\..\..\toolkits\texturas_bmp\venus.bmp"
+				RelativePath="..\Resource\venus.bmp"
 				>
 			</File>
 		</Filter>
