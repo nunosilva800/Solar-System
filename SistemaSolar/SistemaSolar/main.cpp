@@ -15,10 +15,12 @@ int mouseMod = 0;
 
 float camX = 0, camY = 0, camZ = 0;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 45, beta = 45, r = 100000;
+float alpha = 200, beta = 25, r = 30000;
 
 bool axes = false;
 bool fullscreen = false;
+bool luz = true;
+
 int MouseBtnState;
 int window;
 int winX = 800;
@@ -118,7 +120,15 @@ void renderScene(void) {
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-	
+	if(luz){
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+	}else{
+		glDisable(GL_LIGHTING);
+		glDisable(GL_LIGHT0);
+	}
+
+
 	if(axes) draw_Axes();
 	
 	/*desenhar ponto para onde a camera olha
@@ -162,6 +172,7 @@ void infotabScene(void){
     writeString(menuX, menuY-=0.2,0, (void *) fontText, "----------------------------");
 
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "a : Ligar/desligar eixos");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "l : Ligar/desligar efeitos luz");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "f : Ligar/desligar modo ecra inteiro");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "o : Ligar/desligar orbitas");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "c : Ligar/desligar cintura de asteroides");
@@ -189,6 +200,7 @@ void processKeys(unsigned char tecla, int x, int y){
 		
 		case 't' : timeFactor+=0.01; break;
 		case 'g' : timeFactor-=0.01; break;
+		case 'l' : luz?luz=false:luz=true; break;
 		case 'a' : axes?axes=false:axes=true; break;
 		case 'f' : if(fullscreen){
 					fullscreen=false;
@@ -285,8 +297,8 @@ void fmotion(int xx, int yy)
 	if(mouseBtn!=1) return ;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
-			camlookX -= ((x-xx))*100;
-			camlookZ -= ((y-yy))*100;
+			camlookX -= (x-xx)*100;
+			camlookZ -= (y-yy)*100;
 			alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
 			beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
 			r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
@@ -322,7 +334,7 @@ void fmotion(int xx, int yy)
 void menu(int id_op){
 	switch (id_op){
 		case 1 : {
-			alpha = 45, beta = 45, r = 100000;
+			alpha = 200, beta = 25, r = 30000;
 			camlookX = camlookY = camlookZ = 0;
 			break;
 				 }
@@ -391,9 +403,6 @@ void main(int argc, char **argv) {
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glShadeModel(GL_SMOOTH);
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
 
 //iniciar coordenadas da camera
 	camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));

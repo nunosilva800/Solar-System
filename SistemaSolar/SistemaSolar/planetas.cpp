@@ -55,7 +55,6 @@ GLuint cintura;
 GLuint cintura3;
 GLuint estrelas;
 
-GLfloat corLuz[4] = {1,1,1,0};
 
 void rotacao(GLfloat rotacao,float tilt)
 {
