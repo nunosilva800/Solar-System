@@ -435,7 +435,7 @@ void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
 	
 	//glColor3f(0.12,0.432,0.123);//verde
-	angRotNeptuno = (360/velRNeptuno)*timeFactor;
+	angRotNeptuno += (360/velRNeptuno)*timeFactor;
 	rotacao(angRotNeptuno,axisTiltNeptuno);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
