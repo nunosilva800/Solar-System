@@ -370,16 +370,16 @@ void main(int argc, char **argv) {
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
 	for(i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
-	texture[0]= LoadBitmap("C:/Toolkits/texturas_bmp/sol.bmp");
-	texture[1]= LoadBitmap("C:/Toolkits/texturas_bmp/mercurio.bmp");
-	texture[2]= LoadBitmap("C:/Toolkits/texturas_bmp/venus.bmp");
-	texture[3]= LoadBitmap("C:/Toolkits/texturas_bmp/terra.bmp");
-	texture[4]= LoadBitmap("C:/Toolkits/texturas_bmp/marte.bmp");
-	texture[5]= LoadBitmap("C:/Toolkits/texturas_bmp/jupiter.bmp");
-	texture[6]= LoadBitmap("C:/Toolkits/texturas_bmp/saturno.bmp");
-	texture[7]= LoadBitmap("C:/Toolkits/texturas_bmp/urano.bmp");
-	texture[8]= LoadBitmap("C:/Toolkits/texturas_bmp/neptuno.bmp");
-	texture[9]= LoadBitmap("C:/Toolkits/texturas_bmp/lua.bmp");
+	texture[0]= LoadBitmap("Resource/sol.bmp");
+	texture[1]= LoadBitmap("Resource/mercurio.bmp");
+	texture[2]= LoadBitmap("Resource/venus.bmp");
+	texture[3]= LoadBitmap("Resource/terra.bmp");
+	texture[4]= LoadBitmap("Resource/marte.bmp");
+	texture[5]= LoadBitmap("Resource/jupiter.bmp");
+	texture[6]= LoadBitmap("Resource/saturno.bmp");
+	texture[7]= LoadBitmap("Resource/urano.bmp");
+	texture[8]= LoadBitmap("Resource/neptuno.bmp");
+	texture[9]= LoadBitmap("Resource/lua.bmp");
 	//printf("textura objective not loaded\n"); 	
 
 // registo de funções 

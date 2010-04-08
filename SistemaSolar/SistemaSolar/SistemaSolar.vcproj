@@ -202,6 +202,46 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\Resource\jupiter.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\lua.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\marte.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\mercurio.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\neptuno.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\saturno.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\sol.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\terra.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\urano.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\venus.bmp"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
