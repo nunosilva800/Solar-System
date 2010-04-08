@@ -1,8 +1,6 @@
 #include "planetas.h"
 #include "texturas.h"
 
-//falta isto!
-
 GLfloat rotDemios = 0;
 
 
