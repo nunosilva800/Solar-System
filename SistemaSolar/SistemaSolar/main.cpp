@@ -114,30 +114,29 @@ void processSpecialKeys(int key, int xx, int yy)
 {
 	switch(key) {
 		case GLUT_KEY_UP: 
-			if(beta < 88){
+			if(beta < 89){
 				beta++;
-				camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
-				camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
-				camY = r * sin(beta*(PI/180));
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+				camY = camlookY +( r * sin(beta*(PI/180)));
 			}
 			break;
 		case GLUT_KEY_DOWN:
-			if(beta > -88){
+			if(beta > -89){
 				beta--;
-				camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
-				camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
-				camY = r * sin(beta*(PI/180));
-			}
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+				camY = camlookY +( r * sin(beta*(PI/180)));			}
 			break;
 		case GLUT_KEY_LEFT:
 			alpha--;
-			camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
-			camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			break;
 		case GLUT_KEY_RIGHT:
 			alpha++;
-			camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
-			camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			break;
 	}
 	glutPostRedisplay();
@@ -164,6 +163,10 @@ void fmotion(int xx, int yy)
 		case GLUT_ACTIVE_ALT://muda lookat
 			camlookX -= ((x-xx))*10;
 			camlookZ -= ((y-yy))*10;
+			alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
+			beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
+			r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
+			r = sqrt(pow((camY-camlookY), 2) + pow(r, 2));
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			r-=(y-yy)*100;
@@ -178,9 +181,9 @@ void fmotion(int xx, int yy)
 			beta-=((y-yy)*0.3);
 			if(beta > 89) beta = 89;
 			if(beta < -89) beta = -89;
-			camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
-			camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
-			camY = r * sin(beta*(PI/180));			
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
 	}
 	x=xx;y=yy;
 
