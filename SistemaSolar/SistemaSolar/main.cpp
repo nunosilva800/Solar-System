@@ -161,8 +161,8 @@ void fmotion(int xx, int yy)
 	if(mouseBtn!=1) return ;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
-			camlookX -= ((x-xx))*10;
-			camlookZ -= ((y-yy))*10;
+			camlookX -= ((x-xx))*100;
+			camlookZ -= ((y-yy))*100;
 			alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
 			beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
 			r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
