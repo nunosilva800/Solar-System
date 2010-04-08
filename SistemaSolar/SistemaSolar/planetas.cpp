@@ -49,11 +49,13 @@ bool orbitas = true;
 bool drawCintura = false;
 float distFactor = 0.03;
 
-float timeFactor = 0.8;
+float timeFactor = 0.1;
 
 GLuint cintura;
 GLuint cintura3;
 GLuint estrelas;
+
+GLfloat corLuz[4] = {1,1,1,0};
 
 void rotacao(GLfloat rotacao,float tilt)
 {
@@ -72,14 +74,11 @@ void draw_orbita(float raio, float angleX,float angleY, float angleZ){
 
 	float xx=0;
 	float yy=0;
-	glBegin(GL_LINES);
-	for (int i = 0; i < 180; i++)
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < 360; i++)
 	{
-		xx = raio * cos((float)i);
-		yy = raio * sin((float)i);
-		glVertex3f(xx,yy,0);
-		xx = raio * cos(i + 0.1);
-		yy = raio * sin(i + 0.1);
+		xx = raio * cos(i*(PI/180));
+		yy = raio * sin(i*(PI/180));
 		glVertex3f(xx,yy,0);
 	}
 	glEnd();
@@ -494,8 +493,8 @@ void desenharCintura(){
 	for(i=0; i<100000; i++){
 		dist = rand();
 		ang = rand() / 3.1415;
-		x = cos(ang) * (dist + distSolMarte*1.2*distFactor);
-		z = sin(ang) * (dist + distSolMarte*1.2*distFactor);
+		x = cos(ang) * (dist + distSolMarte*1.3*distFactor);
+		z = sin(ang) * (dist + distSolMarte*1.3*distFactor);
 		if(sqrt(x*x+z*z) < distSolJupiter*0.7*distFactor)
 			glVertex3f(x, 0, z);
 		else i--;

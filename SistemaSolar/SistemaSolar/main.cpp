@@ -28,6 +28,11 @@ int infotab;
 int fontTitle = (int) GLUT_BITMAP_HELVETICA_12;
 int fontText = (int) GLUT_BITMAP_HELVETICA_10;
 
+GLfloat lamb[] = {.2, .2, .2, 1};
+GLfloat ldiff[] = {1, 1, 1, 1};
+GLfloat lpos[] = {0.0, 0.0 ,0.0, 1.0};
+GLfloat specular[] = {.5, .5, .5, 1.0f};
+
 char s[100];
 
 void changeSize(int w, int h) {
@@ -94,6 +99,7 @@ void draw_Axes (void)
 		glColor3f (0,1,0);  glVertex3f (0,0,0);  glVertex3f (0,50000,0);    // Y green.
 		glColor3f (0,0,1);  glVertex3f (0,0,0);  glVertex3f (0,0,50000);    // Z blue.
     glEnd();
+	glColor3f(1,1,1);
 }
 
 
@@ -107,7 +113,12 @@ void renderScene(void) {
 	gluLookAt(camX,camY,camZ, 
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
-
+	
+	glLightfv(GL_LIGHT0, GL_POSITION, lpos);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+	
 	if(axes) draw_Axes();
 	
 	/*desenhar ponto para onde a camera olha
@@ -160,9 +171,9 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar a camera");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar a camara");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "CTRL+rato ou w / s para aproximar/afastar");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao da camera");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao da camara");
 
 	glutSwapBuffers();
 }
@@ -311,22 +322,28 @@ void fmotion(int xx, int yy)
 void menu(int id_op){
 	switch (id_op){
 		case 1 : {
+			alpha = 45, beta = 45, r = 100000;
+			camlookX = camlookY = camlookZ = 0;
+			break;
+				 }
+		case 2 : {
 			camlookX = distFactor*distSolTerra*sin(angTerra);
 			camlookZ = distFactor*distSolTerra*cos(angTerra);
-			camX = camlookX - raioTerra*4;
-			camY = 10000;
-			camZ = camlookZ - raioTerra*4;
-			r = raioTerra*2;
-
+			r = raioTerra*scale*10;
+			beta = 45; alpha = 45;
+			break;
 				 }
-
 	}
+	camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+	camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+	camY = camlookY +( r * sin(beta*(PI/180)));
 
 }
 
 void gerarMenu(){
 	glutCreateMenu(menu);
-	glutAddMenuEntry("Ir Para Terra",1);
+	glutAddMenuEntry("Vista Geral",1);
+	glutAddMenuEntry("Ir Para Terra",2);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
@@ -373,6 +390,10 @@ void main(int argc, char **argv) {
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glShadeModel(GL_SMOOTH);
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 //iniciar coordenadas da camera
 	camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));

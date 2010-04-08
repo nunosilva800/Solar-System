@@ -204,7 +204,7 @@ extern float timeFactor;
 void planetas();
 void createcircle (int k, int r, int h);
 void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
-void rotacao(extern GLfloat rotacao,float tilt);
+void rotacao(GLfloat rotacao,float tilt);
 void desenharCintura();
 void desenharEstrelas();
 void desenhaAnel();
