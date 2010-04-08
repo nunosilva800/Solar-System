@@ -1,5 +1,10 @@
-#include <string.h>
+#include <math.h>
+#include<IL/il.h>
+#include<IL\ilu.h>
+#include<IL\ilut.h>
+#include <GL/glut.h>
 #include "planetas.h"
+#include "texturas.h"
 
 float height = 2.0f;
 float x = 0.0f;
@@ -204,14 +209,26 @@ void gerarMenu(){
 }
 
 void main(int argc, char **argv) {
-
+	int i;
 // inicialização
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,600);
 	glutCreateWindow("SistemaSolar@CG@DI-UM");
-		
+	for(i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
+	texture[0]= LoadBitmap("C:/Toolkits/texturas_bmp/sol.bmp");
+	texture[1]= LoadBitmap("C:/Toolkits/texturas_bmp/mercurio.bmp");
+	texture[2]= LoadBitmap("C:/Toolkits/texturas_bmp/venus.bmp");
+	texture[3]= LoadBitmap("C:/Toolkits/texturas_bmp/terra.bmp");
+	texture[4]= LoadBitmap("C:/Toolkits/texturas_bmp/marte.bmp");
+	texture[5]= LoadBitmap("C:/Toolkits/texturas_bmp/jupiter.bmp");
+	texture[6]= LoadBitmap("C:/Toolkits/texturas_bmp/saturno.bmp");
+	texture[7]= LoadBitmap("C:/Toolkits/texturas_bmp/urano.bmp");
+	texture[8]= LoadBitmap("C:/Toolkits/texturas_bmp/neptuno.bmp");
+	texture[9]= LoadBitmap("C:/Toolkits/texturas_bmp/lua.bmp");
+	//printf("textura objective not loaded\n"); 	
+
 // registo de funções 
 	glutDisplayFunc(renderScene);
 	//glutIdleFunc(renderScene);

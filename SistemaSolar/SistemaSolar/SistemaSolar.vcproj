@@ -178,6 +178,10 @@
 				RelativePath=".\planetas.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\texturas.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -186,6 +190,10 @@
 			>
 			<File
 				RelativePath=".\planetas.h"
+				>
+			</File>
+			<File
+				RelativePath=".\texturas.h"
 				>
 			</File>
 		</Filter>
