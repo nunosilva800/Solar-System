@@ -6,6 +6,7 @@
 
 GLuint texture[10] = {};
 GLUquadric * Qplanetas[10] = {};
+
 int LoadBitmap(char *filename)
 {
     FILE * file;
