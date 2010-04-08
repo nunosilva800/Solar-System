@@ -370,7 +370,7 @@ void main(int argc, char **argv) {
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
 	for(i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
-	texture[0]= LoadBitmap("Resource/sol.bmp");
+	texture[0]= LoadBitmap("C:/Toolkits/texturas_bmp/sol.bmp");
 	texture[1]= LoadBitmap("C:/Toolkits/texturas_bmp/mercurio.bmp");
 	texture[2]= LoadBitmap("C:/Toolkits/texturas_bmp/venus.bmp");
 	texture[3]= LoadBitmap("C:/Toolkits/texturas_bmp/terra.bmp");
