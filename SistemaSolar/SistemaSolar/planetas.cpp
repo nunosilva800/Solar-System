@@ -53,6 +53,7 @@ float distFactor = 0.1;
 float timeFactor = 0.05;
 
 GLuint cintura;
+GLuint cintura3;
 GLuint estrelas;
 
 void rotacao(GLfloat rotacao,float tilt)
@@ -93,11 +94,15 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 	//glColor3f(1,1,0);//amarelo
 	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
+	
+	if(drawCintura)	glCallList(cintura);
+
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
 	gluSphere (Q,raioSol,32,32);
 	glDisable(GL_TEXTURE_2D);
+
 	glPopMatrix();
 }
 
@@ -407,14 +412,13 @@ void desenharIapetus(GLuint texture, GLUquadric * Q)
 
 void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric *  Q2)
 {
-	int i=0;
-	float dist, ang, x, z;
-	
+
 	glPushMatrix();
 	glRotatef(orbitalTiltSaturno,0.0,0.0,1.0);
 	angSaturno+= ((2*PI)/velSaturno)*timeFactor;
 	glTranslatef(distFactor*distSolSaturno*sin(angSaturno), 0, distFactor*distSolSaturno*cos(angSaturno));
 	
+
 	//glColor3f(1,0,1);//rosa
 	angRotSaturno += (360/velRSaturno)*timeFactor;
 	rotacao(angRotSaturno,axisTiltSaturno);
@@ -424,18 +428,22 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	gluSphere (Q,scale*raioSaturno,32,32);
 	glDisable(GL_TEXTURE_2D);
 	glRotatef(90,1,0,0);
-	glPushMatrix();
-	glRotatef(90.0,1.0,0.0,0.0);
-	glScalef(1,1,0.1);
 
+
+	//glPushMatrix();
+	//glRotatef(90.0,1.0,0.0,0.0);
+	//glScalef(1,1,0.1);
 	
-	glColor3f(1,0,0);
-	glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
-	glPopMatrix();
+	
+	//glColor3f(1,0,0);
+	//glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
+	//glPopMatrix();
 
 	desenharRhea(texture2, Q2);
 	desenharTitan(texture2, Q2);
 	desenharIapetus(texture2, Q2);
+
+	glCallList(cintura3);
 
 	glPopMatrix();
 	//glColor3f(1,0,1);//rosa
@@ -504,11 +512,35 @@ void desenharCintura(){
 		else i--;
 	}
 	glEnd();
+	glColor3f(1,1,1);
 
 	glEndList();
 }
-
-
+void desenhaAnel(){
+	
+	int i=0;
+	float dist, ang, x, z;
+	srand(30);
+	cintura3 = glGenLists(3);
+	glNewList( cintura3, GL_COMPILE );
+	
+	
+	glColor3f(0.5,0.5,0.2);
+	glBegin(GL_POINTS);
+	//existem 700,000 a 1.7 milhoens... mas para simplificar...
+	for(i=0; i<10000; i++){
+		dist = rand();
+		ang = rand() / 3.1415;
+		x = cos(ang) * (dist + raioSaturno*2.1*scale);
+		z = sin(ang) * (dist + raioSaturno*2.1*scale);
+		if(sqrt(x*x+z*z) < raioSaturno*3.0*scale)
+			glVertex3f(x, 0, z);
+		else i--;
+	}
+	glEnd();
+	glColor3f(1,1,1);
+	glEndList();
+}
 void desenharEstrelas()
 {
 	float x, y, z, elevation, alt;
@@ -543,9 +575,8 @@ void planetas(){
 	desenharUrano(texture[7], Qplanetas[7]);
 	desenharNeptuno(texture[8], Qplanetas[8]);
 
-	if(drawCintura)	glCallList(cintura);
+	
 
 	glCallList(estrelas);
-
 	
 }

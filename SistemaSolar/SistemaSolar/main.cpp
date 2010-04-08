@@ -172,8 +172,8 @@ void processKeys(unsigned char tecla, int x, int y){
 		case '+' : if(scale < 200) scale++; break;
 		case '-' : if(scale > 1) scale--; break;
 
-		case ',' : distFactor+=0.01; desenharCintura(); break;
-		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura(); break;
+		case ',' : distFactor+=0.01; desenharCintura(); desenhaAnel(); break;
+		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura(); desenhaAnel(); break;
 		
 		case 't' : timeFactor+=0.01; break;
 		case 'g' : timeFactor-=0.01; break;
@@ -352,6 +352,7 @@ void main(int argc, char **argv) {
 //preparação de display lists
 	desenharCintura();
 	desenharEstrelas();
+	desenhaAnel();
 
 // alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);

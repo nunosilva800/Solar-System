@@ -166,3 +166,4 @@ void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
 void rotacao(GLfloat rotacao,float tilt);
 void desenharCintura();
 void desenharEstrelas();
+void desenhaAnel();
