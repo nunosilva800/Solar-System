@@ -1,4 +1,5 @@
 #include "planetas.h"
+#include "texturas.h"
 
 //falta isto!
 
@@ -17,6 +18,10 @@ GLfloat angLua = 0;
 
 GLfloat angFobos = 0;
 GLfloat angDeimos =0;
+GLfloat angIO = 0;
+GLfloat angEuropa = 0;
+GLfloat angGanimedes = 0;
+GLfloat angCalisto = 0;
 
 GLfloat angRotSol = 0;
 GLfloat angRotMercurio = 0;
@@ -76,17 +81,21 @@ void draw_orbita(float raio, float angleX,float angleY, float angleZ){
 	glPopMatrix();	
 }
 
-void desenharSol()
+void desenharSol(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
-	glColor3f(1,1,0);//amarelo
+	//glColor3f(1,1,0);//amarelo
 	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
-	glutWireSphere(raioSol,32,32);
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,raioSol,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
-void desenharMercurio()
+void desenharMercurio(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltMercurio,0.0,0.0,1.0);
@@ -94,54 +103,62 @@ void desenharMercurio()
 	angMercurio += ((2*PI)/velMercurio)*timeFactor;
 	glTranslatef(distFactor*distSolMercurio*sin(angMercurio), 0, distFactor*distSolMercurio*cos(angMercurio));
 	
-	glColor3f(0.5,0.5,0.5);//cinza
+	//glColor3f(0.5,0.5,0.5);//cinza
 	angRotMercurio += (360/velRMercurio)*timeFactor;
 	rotacao(angRotMercurio,axisTiltMercurio);
-	glutWireSphere(scale*raioMercurio,32,32);
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioMercurio,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
 	if(orbitas)draw_orbita(distFactor*distSolMercurio,90,0.0,orbitalTiltMercurio);
 }
 
-void desenharVenus()
+void desenharVenus(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltVenus,0.0,0.0,1.0);
 	angVenus += ((2*PI)/velVenus)*timeFactor;
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
 	
-	glColor3f(0.6,0.5,0.1);//castanho
+	//glColor3f(0.6,0.5,0.1);//castanho
 	angRotVenus += (360/velRVenus)*timeFactor;
 	rotacao(angRotVenus,axisTiltVenus);
-	glutWireSphere(scale*raioVenus,32,32);
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	gluSphere (Q,scale*raioVenus,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	if(orbitas)draw_orbita(distFactor*distSolVenus,90,0.0,orbitalTiltVenus);
 }
 
-void desenharLua()
+void desenharLua(GLuint texture, GLUquadric * Q)
 {
 	glPushMatrix();
 	if(orbitas)draw_orbita(distFactor*scale*distTerraLua,90,0.0,0.0);
-	
 	angLua += (((2*PI)/velLua)-((360/velRTerra)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
-	
-	glColor3f(1,1,1);//branco
+
+	//glColor3f(1,1,1);//branco
 	angRotLua += (360/velRLua)*timeFactor;
 	rotacao(angRotLua,0.0);
-	glutWireSphere(scale*raioLua,32,32);
-	
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	gluSphere (Q,scale*raioLua,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 
-void desenharTerra()
+void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric *  Q2)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltTerra,0.0,0.0,1.0);
 	angTerra += ((2*PI)/velTerra)*timeFactor;
 	glTranslatef(distFactor*distSolTerra*sin(angTerra), 0, distFactor*distSolTerra*cos(angTerra));
 	
-	glColor3f(0,0,1);//azul
+	//glColor3f(0,0,1);//azul
 	//angRotTerra += ((0.25*360)/velRTerra)*timeFactor;
 	angRotTerra += (360/velRTerra)*timeFactor;
 
@@ -149,10 +166,15 @@ void desenharTerra()
 	//printf("angTransTerra: %f      angRotTerra: %f\n",(angTerra*(180/PI)),angRotTerra/360);
 	
 	rotacao(angRotTerra,axisTiltTerra);
-	glutWireSphere(scale*raioTerra,32,32);
-	desenharLua();
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioTerra,32,32);
+	glDisable(GL_TEXTURE_2D);
+	glRotatef(90,1,0,0);
+	desenharLua(texture2, Q2);
 	glPopMatrix();
-	glColor3f(0,0,1);//azul
+	//glColor3f(0,0,1);//azul
 	
 	if(orbitas)draw_orbita(distFactor*distSolTerra,90,0.0,orbitalTiltTerra);
 }
@@ -190,24 +212,27 @@ void desenharDeimos()
 	glPopMatrix();
 }
 
-void desenharMarte()
+void desenharMarte(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltMarte,0.0,0.0,1.0);
 	angMarte+= ((2*PI)/velMarte)*timeFactor;
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
 	
-	glColor3f(1,0,0);//vermelho
+	//glColor3f(1,0,0);//vermelho
 	angRotMarte += (360/velRMarte)*timeFactor;
 	rotacao(angRotMarte,axisTiltMarte);
-	glutWireSphere(scale*raioMarte,32,32);
-	
-	glColor3f(1,1,1);//branco
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioMarte,32,32);
+	glDisable(GL_TEXTURE_2D);
+
 	desenharDeimos();
 	desenharFobos();
-	glColor3f(1,0,0);//vermelho
-
+	
 	glPopMatrix();
+	
 	if(orbitas)draw_orbita(distFactor*distSolMarte,90,0.0,orbitalTiltMarte);
 }
 
@@ -216,7 +241,8 @@ void desenharIO()
 	glPushMatrix();
 	glColor3f(1,1,1);//branco
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterIo,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distJupiterIo*sin(velRIo), 0, distFactor*scale*distJupiterIo*cos(velRIo));
+	angIO += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distJupiterIo*sin(angIO), 0, distFactor*scale*distJupiterIo*cos(angIO));
 
 	glutWireSphere(scale*raioIo,32,32);
 	glPopMatrix();
@@ -227,7 +253,8 @@ void desenharEuropa()
 	glPushMatrix();
 	glColor3f(1,1,1);//branco
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterEuropa,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distJupiterEuropa*sin(velREuropa), 0, distFactor*scale*distJupiterEuropa*cos(velREuropa));
+	angEuropa += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distJupiterEuropa*sin(angEuropa), 0, distFactor*scale*distJupiterEuropa*cos(angEuropa));
 
 	glutWireSphere(scale*raioEuropa,32,32);
 	glPopMatrix();
@@ -238,7 +265,8 @@ void desenharGanimedes()
 	glPushMatrix();
 	glColor3f(1,1,1);//branco
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterGanymede,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distJupiterGanymede*sin(velRGanimedes), 0, distFactor*scale*distJupiterGanymede*cos(velRGanimedes));
+	angGanimedes += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distJupiterGanymede*sin(angGanimedes), 0, distFactor*scale*distJupiterGanymede*cos(angGanimedes));
 
 	glutWireSphere(scale*raioGanymede,32,32);
 	glPopMatrix();
@@ -249,31 +277,36 @@ void desenharCalisto()
 	glPushMatrix();
 	glColor3f(1,1,1);//branco
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterCalisto,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distJupiterCalisto*sin(velRCalisto), 0, distFactor*scale*distJupiterCalisto*cos(velRCalisto));
+	angCalisto += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distJupiterCalisto*sin(angCalisto), 0, distFactor*scale*distJupiterCalisto*cos(angCalisto));
 
 	glutWireSphere(scale*raioCalisto,32,32);
 	glPopMatrix();
 }
 
-void desenharJupiter()
+void desenharJupiter(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltJupiter,0.0,0.0,1.0);
 	angJupiter += ((2*PI)/velJupiter)*timeFactor;
 	glTranslatef(distFactor*distSolJupiter*sin(angJupiter), 0, distFactor*distSolJupiter*cos(angJupiter));
-	glColor3f(1,1,0);//amarelo
+	//glColor3f(1,1,0);//amarelo
 	
 	angRotJupiter += (360/velRJupiter)*timeFactor;
 	rotacao(angRotJupiter,axisTiltJupiter);
-	glutWireSphere(scale*raioJupiter,32,32);
-	
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioJupiter,32,32);
+	glDisable(GL_TEXTURE_2D);
+	glRotatef(90,1,0,0);
 	desenharIO();
 	desenharEuropa();
 	desenharGanimedes();
 	desenharCalisto();
 
 	glPopMatrix();
-	glColor3f(1,1,0);//amarelo
+	
 	if(orbitas)draw_orbita(distFactor*distSolJupiter,90,0.0,orbitalTiltJupiter);
 }
 
@@ -310,61 +343,73 @@ void desenharIapetus()
 	glPopMatrix();
 }
 
-void desenharSaturno()
+void desenharSaturno(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltSaturno,0.0,0.0,1.0);
 	angSaturno+= ((2*PI)/velSaturno)*timeFactor;
 	glTranslatef(distFactor*distSolSaturno*sin(angSaturno), 0, distFactor*distSolSaturno*cos(angSaturno));
 	
-	glColor3f(1,0,1);//rosa
+	//glColor3f(1,0,1);//rosa
 	angRotSaturno += (360/velRSaturno)*timeFactor;
 	rotacao(angRotSaturno,axisTiltSaturno);
-	glutWireSphere(scale*raioSaturno,32,32);
-
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioSaturno,32,32);
+	glDisable(GL_TEXTURE_2D);
+	glRotatef(90,1,0,0);
 	glPushMatrix();
 	glRotatef(90.0,1.0,0.0,0.0);
 	glScalef(1,1,0.1);
 	
-	glColor3f(1,0,0);
+	//glColor3f(1,0,0);
 	glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
 	glPopMatrix();
+	//glPopMatrix();
 
 	desenharRhea();
 	desenharTitan();
 	desenharIapetus();
 
 	glPopMatrix();
-	glColor3f(1,0,1);//rosa
+	//glColor3f(1,0,1);//rosa
 	if(orbitas)draw_orbita(distFactor*distSolSaturno,90,0.0,orbitalTiltSaturno);
 }
-void desenharUrano()
+void desenharUrano(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltUrano,0.0,0.0,1.0);
 	angUrano+= ((2*PI)/velUrano)*timeFactor;
 	glTranslatef(distFactor*distSolUrano*sin(angUrano), 0, distFactor*distSolUrano*cos(angUrano));
 	
-	glColor3f(0.8,0.1,0.4);//roxo
+	//glColor3f(0.8,0.1,0.4);//roxo
 	angRotUrano += (360/velRUrano)*timeFactor;
 	rotacao(angRotUrano,axisTiltUrano);
-	glutWireSphere(scale*raioUrano,32,32);
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	gluSphere (Q,scale*raioUrano,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
 	if(orbitas)draw_orbita(distFactor*distSolUrano,90,0.0,orbitalTiltUrano);
 }
 
-void desenharNeptuno()
+void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 {
 	glPushMatrix();
 	glRotatef(orbitalTiltNeptuno,0.0,0.0,1.0);
 	angNeptuno += ((2*PI)/velNeptuno)*timeFactor;
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
 	
-	glColor3f(0.12,0.432,0.123);//verde
+	//glColor3f(0.12,0.432,0.123);//verde
 	angRotNeptuno = (360/velRNeptuno)*timeFactor;
 	rotacao(angRotNeptuno,axisTiltNeptuno);
-	glutWireSphere(scale*raioNeptuno,32,32);
+	glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+	glRotatef(-90,1,0,0);
+	gluSphere (Q,scale*raioNeptuno,32,32);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
 	if(orbitas)draw_orbita(distFactor*distSolNeptuno,90,0.0,orbitalTiltNeptuno);
@@ -422,15 +467,15 @@ void desenharEstrelas()
 }
 
 void planetas(){
-	desenharSol();
-	desenharMercurio();
-	desenharVenus();
-	desenharTerra();
-	desenharMarte();
-	desenharJupiter();
-	desenharSaturno();
-	desenharUrano();
-	desenharNeptuno();
+	desenharSol(texture[0], Qplanetas[0]);
+	desenharMercurio(texture[1], Qplanetas[1]);
+	desenharVenus(texture[2], Qplanetas[2]);
+	desenharTerra(texture[3], Qplanetas[3],texture[9], Qplanetas[9]);
+	desenharMarte(texture[4], Qplanetas[4]);
+	desenharJupiter(texture[5], Qplanetas[5]);
+	desenharSaturno(texture[6], Qplanetas[6]);
+	desenharUrano(texture[7], Qplanetas[7]);
+	desenharNeptuno(texture[8], Qplanetas[8]);
 
 	if(drawCintura)	glCallList(cintura);
 
