@@ -36,6 +36,14 @@ GLfloat angRotLua = 0;
 
 GLfloat angRotFobos =0;
 GLfloat angRotDeimos =0;
+GLfloat angRotIO =0;
+GLfloat angRotEuropa =0;
+GLfloat angRotGanimedes =0;
+GLfloat angRotCalisto =0;
+GLfloat angRotRhea =0;
+GLfloat angRotTitan =0;
+GLfloat angRotIapetus =0;
+
 
 float scale = 50;
 float scalesol = scale*0.5;
@@ -143,7 +151,7 @@ void desenharLua(GLuint texture, GLUquadric * Q)
 
 	//glColor3f(1,1,1);//branco
 	angRotLua += (360/velRLua)*timeFactor;
-	rotacao(angRotLua,0.0);
+	rotacao(angRotLua,axisTiltLua);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	gluSphere (Q,scale*raioLua,32,32);
@@ -187,9 +195,8 @@ void desenharFobos()
 	angFobos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distMarteFobos*sin(angFobos), 0, distFactor*scale*distMarteFobos*cos(angFobos));
 
-	angRotFobos += (360/velRLua)*timeFactor;
+	angRotFobos += (360/velRFobos)*timeFactor;
 	rotacao(angRotFobos,0.0);
-
 	
 	glutWireSphere(scale*raioFobos,32,32);
 
@@ -204,7 +211,7 @@ void desenharDeimos()
 	angDeimos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distMarteDeimos*sin(angDeimos), 0, distFactor*scale*distMarteDeimos*cos(angDeimos));
 
-	angRotDeimos += (360/velRLua)*timeFactor;
+	angRotDeimos += (360/velRDeimos)*timeFactor;
 	rotacao(angRotDeimos,0.0);
 
 	glutWireSphere(scale*raioDeimos,32,32);
@@ -243,6 +250,9 @@ void desenharIO()
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterIo,90,0.0,0.0);
 	angIO += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distJupiterIo*sin(angIO), 0, distFactor*scale*distJupiterIo*cos(angIO));
+	
+	angRotIO += (360/velRIo)*timeFactor;
+	rotacao(angRotIO,0.0);
 
 	glutWireSphere(scale*raioIo,32,32);
 	glPopMatrix();
@@ -256,6 +266,9 @@ void desenharEuropa()
 	angEuropa += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distJupiterEuropa*sin(angEuropa), 0, distFactor*scale*distJupiterEuropa*cos(angEuropa));
 
+	angRotEuropa += (360/velREuropa)*timeFactor;
+	rotacao(angRotEuropa,0.0);
+
 	glutWireSphere(scale*raioEuropa,32,32);
 	glPopMatrix();
 }
@@ -268,6 +281,9 @@ void desenharGanimedes()
 	angGanimedes += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distJupiterGanymede*sin(angGanimedes), 0, distFactor*scale*distJupiterGanymede*cos(angGanimedes));
 
+	angRotGanimedes += (360/velRGanimedes)*timeFactor;
+	rotacao(angRotGanimedes,0.0);
+
 	glutWireSphere(scale*raioGanymede,32,32);
 	glPopMatrix();
 }
@@ -279,6 +295,9 @@ void desenharCalisto()
 	if(orbitas)draw_orbita(distFactor*scale*distJupiterCalisto,90,0.0,0.0);
 	angCalisto += (((2*PI)/velLua)-((360/velRJupiter)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distJupiterCalisto*sin(angCalisto), 0, distFactor*scale*distJupiterCalisto*cos(angCalisto));
+
+	angRotCalisto += (360/velRCalisto)*timeFactor;
+	rotacao(angRotCalisto,0.0);
 
 	glutWireSphere(scale*raioCalisto,32,32);
 	glPopMatrix();
@@ -317,6 +336,9 @@ void desenharRhea()
 	if(orbitas)draw_orbita(distFactor*scale*distSaturnoRhea,90,0.0,0.0);
 	glTranslatef(distFactor*scale*distSaturnoRhea*sin(velRReia), 0, distFactor*scale*distSaturnoRhea*cos(velRReia));
 
+	angRotRhea += (360/velRReia)*timeFactor;
+	rotacao(angRotRhea,0.0);
+
 	glutWireSphere(scale*raioRhea,32,32);
 	glPopMatrix();
 }
@@ -328,6 +350,9 @@ void desenharTitan()
 	if(orbitas)draw_orbita(distFactor*scale*distSaturnoTitan,90,0.0,0.0);
 	glTranslatef(distFactor*scale*distSaturnoTitan*sin(velRTita), 0, distFactor*scale*distSaturnoTitan*cos(velRTita));
 
+	angRotTitan += (360/velRTita)*timeFactor;
+	rotacao(angRotTitan,0.0);
+
 	glutWireSphere(scale*raioTitan,32,32);
 	glPopMatrix();
 }
@@ -338,6 +363,9 @@ void desenharIapetus()
 	glColor3f(1,1,1);//branco
 	if(orbitas)draw_orbita(distFactor*scale*distSaturnoIapetus,90,0.0,0.0);
 	glTranslatef(distFactor*scale*distSaturnoIapetus*sin(velRJapeto), 0, distFactor*scale*distSaturnoIapetus*cos(velRJapeto));
+
+	angRotIapetus += (360/velRJapeto)*timeFactor;
+	rotacao(angRotIapetus,0.0);
 
 	glutWireSphere(scale*raioIapetus,32,32);
 	glPopMatrix();
