@@ -154,7 +154,6 @@ void infotabScene(void){
 
 	float menuX = -1;
 	float menuY = 4;
-	char s[25];
 	
 	sprintf(s,"Escala: %g",scale);
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, s);
@@ -185,6 +184,8 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar a camara");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "CTRL+rato ou w / s para aproximar/afastar");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao da camara");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Botao direito para mais opcoes");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ESC : terminar aplicacao");
 
 	glutSwapBuffers();
 }
