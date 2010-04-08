@@ -15,13 +15,14 @@ int mouseMod = 0;
 
 float camX = 0, camY = 0, camZ = 0;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 45, beta = 45, r = 50000;
+float alpha = 45, beta = 45, r = 100000;
 
 bool axes = false;
 bool fullscreen = false;
 int MouseBtnState;
 int window;
-int winX, winY;
+int winX = 800;
+int winY = 600;
 int infotab;
 
 int fontTitle = (int) GLUT_BITMAP_HELVETICA_12;
@@ -130,9 +131,9 @@ void infotabScene(void){
 	glLoadIdentity();
 	gluLookAt(0,0,10, 0,0,0, 0,1,0);	
 
-	float menuX = -1.1;
+	float menuX = -1;
 	float menuY = 4;
-	char s[20];
+	char s[25];
 	
 	sprintf(s,"Escala: %g",scale);
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, s);
@@ -153,7 +154,7 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "f : Ligar/desligar modo ecra inteiro");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "o : Ligar/desligar orbitas");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "c : Ligar/desligar cintura de asteroides");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "(podera causar perdas de desempenho)");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
@@ -169,11 +170,11 @@ void infotabScene(void){
 void processKeys(unsigned char tecla, int x, int y){
 	switch(tecla){
 		case 27 : exit(0);
-		case '+' : if(scale < 200) scale++; break;
-		case '-' : if(scale > 1) scale--; break;
+		case '+' : if(scale < 200) scale++; desenhaAnel(); break;
+		case '-' : if(scale > 1) scale--; desenhaAnel(); break;
 
-		case ',' : distFactor+=0.01; desenharCintura(); desenhaAnel(); break;
-		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura(); desenhaAnel(); break;
+		case ',' : distFactor+=0.01; desenharCintura(); break;
+		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura();  break;
 		
 		case 't' : timeFactor+=0.01; break;
 		case 'g' : timeFactor-=0.01; break;
@@ -201,20 +202,21 @@ void processKeys(unsigned char tecla, int x, int y){
 
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;
 		case 'c' : if(drawCintura)drawCintura=false;
-				   else{ drawCintura=true; desenharCintura(); }
+				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
 				   break;
 		case 'w' : r-=1000;
 				if(r < 2000) r = 2000;
 				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 				camY = camlookY +( r * sin(beta*(PI/180)));
-				break;
+				return;
 		case 's' : r+=1000;
 				if(r > 1500000) r = 1500000;
 				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 				camY = camlookY +( r * sin(beta*(PI/180)));
-				break;
+				return;
+		default : return;
 	}
 	glutPostRedisplay();
 	glutSetWindow(infotab);
@@ -321,7 +323,7 @@ void main(int argc, char **argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
-	glutInitWindowSize(800,600);
+	glutInitWindowSize(winX,winY);
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
 	for(i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}

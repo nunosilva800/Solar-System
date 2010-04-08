@@ -3,7 +3,6 @@
 
 GLfloat rotDemios = 0;
 
-
 GLfloat angMercurio = 0;
 GLfloat angVenus = 0;
 GLfloat angTerra = 0;
@@ -47,10 +46,10 @@ float scale = 50;
 float scalesol = scale*0.5;
 bool orbitas = true;
 
-bool drawCintura = true;
-float distFactor = 0.1;
+bool drawCintura = false;
+float distFactor = 0.03;
 
-float timeFactor = 0.05;
+float timeFactor = 0.8;
 
 GLuint cintura;
 GLuint cintura3;
@@ -194,9 +193,9 @@ void desenharFobos(GLuint texture, GLUquadric * Q)
 {
 	glPushMatrix();
 
-	if(orbitas)draw_orbita(distFactor*scale*distMarteFobos,90,0.0,0.0);
+	if(orbitas)draw_orbita(scale*distMarteFobos,90,0.0,0.0);
 	angFobos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
-	glTranslatef(distFactor*scale*distMarteFobos*sin(angFobos), 0, distFactor*scale*distMarteFobos*cos(angFobos));
+	glTranslatef(scale*distMarteFobos*sin(angFobos), 0, scale*distMarteFobos*cos(angFobos));
 
 	angRotFobos += (360/velRFobos)*timeFactor;
 	rotacao(angRotFobos,0.0);
@@ -214,9 +213,9 @@ void desenharDeimos(GLuint texture, GLUquadric * Q)
 {
 	glPushMatrix();
 	
-	if(orbitas)draw_orbita(distFactor*scale*distMarteDeimos,90,0.0,0.0);
+	if(orbitas)draw_orbita(scale*distMarteDeimos,90,0.0,0.0);
 	angDeimos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
-	glTranslatef(distFactor*scale*distMarteDeimos*sin(angDeimos), 0, distFactor*scale*distMarteDeimos*cos(angDeimos));
+	glTranslatef(scale*distMarteDeimos*sin(angDeimos), 0, scale*distMarteDeimos*cos(angDeimos));
 
 	angRotDeimos += (360/velRDeimos)*timeFactor;
 	rotacao(angRotDeimos,0.0);
@@ -238,6 +237,9 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	angMarte+= ((2*PI)/velMarte)*timeFactor;
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
 	
+	desenharDeimos(texture2, Q2);
+	desenharFobos(texture2, Q2);
+
 	//glColor3f(1,0,0);//vermelho
 	angRotMarte += (360/velRMarte)*timeFactor;
 	rotacao(angRotMarte,axisTiltMarte);
@@ -246,9 +248,6 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	glRotatef(-90,1,0,0);
 	gluSphere (Q,scale*raioMarte,32,32);
 	glDisable(GL_TEXTURE_2D);
-
-	desenharDeimos(texture2, Q2);
-	desenharFobos(texture2, Q2);
 	
 	glPopMatrix();
 	
@@ -429,21 +428,11 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	glDisable(GL_TEXTURE_2D);
 	glRotatef(90,1,0,0);
 
-
-	//glPushMatrix();
-	//glRotatef(90.0,1.0,0.0,0.0);
-	//glScalef(1,1,0.1);
-	
-	
-	//glColor3f(1,0,0);
-	//glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
-	//glPopMatrix();
-
 	desenharRhea(texture2, Q2);
 	desenharTitan(texture2, Q2);
 	desenharIapetus(texture2, Q2);
 
-	glCallList(cintura3);
+	if(drawCintura) glCallList(cintura3);
 
 	glPopMatrix();
 	//glColor3f(1,0,1);//rosa
@@ -517,7 +506,8 @@ void desenharCintura(){
 	glEndList();
 }
 void desenhaAnel(){
-	
+	if(!drawCintura) return;
+
 	int i=0;
 	float dist, ang, x, z;
 	srand(30);
@@ -527,7 +517,6 @@ void desenhaAnel(){
 	
 	glColor3f(0.5,0.5,0.2);
 	glBegin(GL_POINTS);
-	//existem 700,000 a 1.7 milhoens... mas para simplificar...
 	for(i=0; i<10000; i++){
 		dist = rand();
 		ang = rand() / 3.1415;
@@ -574,9 +563,6 @@ void planetas(){
 	desenharSaturno(texture[6], Qplanetas[6],texture[9], Qplanetas[9]);
 	desenharUrano(texture[7], Qplanetas[7]);
 	desenharNeptuno(texture[8], Qplanetas[8]);
-
-	
-
 	glCallList(estrelas);
 	
 }
