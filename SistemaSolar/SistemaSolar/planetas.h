@@ -154,6 +154,47 @@
 #define MAX_STARS 			10000
 #define STAR_RADIUS 		2000000
 
+
+extern GLfloat rotDemios;
+
+extern GLfloat angMercurio;
+extern GLfloat angVenus;
+extern GLfloat angTerra;
+extern GLfloat angMarte;
+extern GLfloat angJupiter;
+extern GLfloat angSaturno;
+extern GLfloat angUrano;
+extern GLfloat angNeptuno;
+extern GLfloat angLua;
+
+extern GLfloat angFobos;
+extern GLfloat angDeimos;
+extern GLfloat angIO;
+extern GLfloat angEuropa;
+extern GLfloat angGanimedes;
+extern GLfloat angCalisto;
+
+extern GLfloat angRotSol;
+extern GLfloat angRotMercurio;
+extern GLfloat angRotVenus;
+extern GLfloat angRotTerra;
+extern GLfloat angRotMarte;
+extern GLfloat angRotJupiter;
+extern GLfloat angRotSaturno;
+extern GLfloat angRotUrano;
+extern GLfloat angRotNeptuno;
+extern GLfloat angRotLua;
+
+extern GLfloat angRotFobos;
+extern GLfloat angRotDeimos;
+extern GLfloat angRotIO;
+extern GLfloat angRotEuropa;
+extern GLfloat angRotGanimedes;
+extern GLfloat angRotCalisto;
+extern GLfloat angRotRhea;
+extern GLfloat angRotTitan;
+extern GLfloat angRotIapetus;
+
 extern float scale;
 extern bool orbitas;
 extern bool drawCintura;
@@ -163,7 +204,7 @@ extern float timeFactor;
 void planetas();
 void createcircle (int k, int r, int h);
 void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
-void rotacao(GLfloat rotacao,float tilt);
+void rotacao(extern GLfloat rotacao,float tilt);
 void desenharCintura();
 void desenharEstrelas();
 void desenhaAnel();

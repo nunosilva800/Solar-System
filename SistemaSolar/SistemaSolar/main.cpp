@@ -308,11 +308,25 @@ void fmotion(int xx, int yy)
 }
 
 
-void menu(int id_op){}
+void menu(int id_op){
+	switch (id_op){
+		case 1 : {
+			camlookX = distFactor*distSolTerra*sin(angTerra);
+			camlookZ = distFactor*distSolTerra*cos(angTerra);
+			camX = camlookX - raioTerra*4;
+			camY = 10000;
+			camZ = camlookZ - raioTerra*4;
+			r = raioTerra*2;
+
+				 }
+
+	}
+
+}
 
 void gerarMenu(){
 	glutCreateMenu(menu);
-	glutAddMenuEntry("'Sup?",1);
+	glutAddMenuEntry("Ir Para Terra",1);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
