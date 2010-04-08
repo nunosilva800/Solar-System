@@ -130,10 +130,10 @@ void desenharVenus(GLuint texture, GLUquadric *  Q)
 	glRotatef(orbitalTiltVenus,0.0,0.0,1.0);
 	angVenus += ((2*PI)/velVenus)*timeFactor;
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
-	
 	//glColor3f(0.6,0.5,0.1);//castanho
 	angRotVenus += (360/velRVenus)*timeFactor;
 	rotacao(angRotVenus,axisTiltVenus);
+	glRotatef(90,1,0,0);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	gluSphere (Q,scale*raioVenus,32,32);
@@ -148,7 +148,7 @@ void desenharLua(GLuint texture, GLUquadric * Q)
 	if(orbitas)draw_orbita(distFactor*scale*distTerraLua,90,0.0,0.0);
 	angLua += (((2*PI)/velLua)-((360/velRTerra)*(PI/180)))*timeFactor;
 	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
-
+    glRotatef(-90,1,0,0);
 	//glColor3f(1,1,1);//branco
 	angRotLua += (360/velRLua)*timeFactor;
 	rotacao(angRotLua,axisTiltLua);
@@ -373,6 +373,9 @@ void desenharIapetus()
 
 void desenharSaturno(GLuint texture, GLUquadric *  Q)
 {
+	int i=0;
+	float dist, ang, x, z;
+	
 	glPushMatrix();
 	glRotatef(orbitalTiltSaturno,0.0,0.0,1.0);
 	angSaturno+= ((2*PI)/velSaturno)*timeFactor;
@@ -390,11 +393,11 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q)
 	glPushMatrix();
 	glRotatef(90.0,1.0,0.0,0.0);
 	glScalef(1,1,0.1);
+
 	
-	//glColor3f(1,0,0);
+	glColor3f(1,0,0);
 	glutSolidTorus(0.3*raioSaturno*scale,1.8*raioSaturno*scale,360,150);
 	glPopMatrix();
-	//glPopMatrix();
 
 	desenharRhea();
 	desenharTitan();
@@ -414,6 +417,7 @@ void desenharUrano(GLuint texture, GLUquadric *  Q)
 	//glColor3f(0.8,0.1,0.4);//roxo
 	angRotUrano += (360/velRUrano)*timeFactor;
 	rotacao(angRotUrano,axisTiltUrano);
+	glRotatef(90,1,0,0);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	gluSphere (Q,scale*raioUrano,32,32);
@@ -508,4 +512,6 @@ void planetas(){
 	if(drawCintura)	glCallList(cintura);
 
 	glCallList(estrelas);
+
+	
 }
