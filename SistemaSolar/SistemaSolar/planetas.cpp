@@ -15,6 +15,9 @@ GLfloat angUrano = 0;
 GLfloat angNeptuno = 0;
 GLfloat angLua = 0;
 
+GLfloat angFobos = 0;
+GLfloat angDeimos =0;
+
 GLfloat angRotSol = 0;
 GLfloat angRotMercurio = 0;
 GLfloat angRotVenus = 0;
@@ -25,6 +28,9 @@ GLfloat angRotSaturno = 0;
 GLfloat angRotUrano = 0;
 GLfloat angRotNeptuno = 0;
 GLfloat angRotLua = 0;
+
+GLfloat angRotFobos =0;
+GLfloat angRotDeimos =0;
 
 float scale = 50;
 float scalesol = scale*0.5;
@@ -156,9 +162,13 @@ void desenharFobos()
 	glPushMatrix();
 
 	if(orbitas)draw_orbita(distFactor*scale*distMarteFobos,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distMarteFobos*sin(velRFobos), 0, distFactor*scale*distMarteFobos*cos(velRFobos));
+	angFobos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distMarteFobos*sin(angFobos), 0, distFactor*scale*distMarteFobos*cos(angFobos));
 
-	glColor3f(1,1,1);//branco
+	angRotFobos += (360/velRLua)*timeFactor;
+	rotacao(angRotFobos,0.0);
+
+	
 	glutWireSphere(scale*raioFobos,32,32);
 
 	glPopMatrix();
@@ -167,13 +177,16 @@ void desenharFobos()
 void desenharDeimos()
 {
 	glPushMatrix();
-	glColor3f(1,1,1);//branco
+	
 	if(orbitas)draw_orbita(distFactor*scale*distMarteDeimos,90,0.0,0.0);
-	glTranslatef(distFactor*scale*distMarteDeimos*sin(velRDeimos), 0, distFactor*scale*distMarteDeimos*cos(velRDeimos));
+	angDeimos += (((2*PI)/velLua)-((360/velRMarte)*(PI/180)))*timeFactor;
+	glTranslatef(distFactor*scale*distMarteDeimos*sin(angDeimos), 0, distFactor*scale*distMarteDeimos*cos(angDeimos));
 
-	rotDemios += velRDeimos*timeFactor;
-	rotacao(rotDemios,0.0);
+	angRotDeimos += (360/velRLua)*timeFactor;
+	rotacao(angRotDeimos,0.0);
+
 	glutWireSphere(scale*raioDeimos,32,32);
+
 	glPopMatrix();
 }
 
@@ -189,11 +202,12 @@ void desenharMarte()
 	rotacao(angRotMarte,axisTiltMarte);
 	glutWireSphere(scale*raioMarte,32,32);
 	
+	glColor3f(1,1,1);//branco
 	desenharDeimos();
 	desenharFobos();
+	glColor3f(1,0,0);//vermelho
 
 	glPopMatrix();
-	glColor3f(1.0,0.0,0.0);	
 	if(orbitas)draw_orbita(distFactor*distSolMarte,90,0.0,orbitalTiltMarte);
 }
 
