@@ -1,4 +1,4 @@
-#include<IL/il.h>
+#include<IL\il.h>
 #include<IL\ilu.h>
 #include<IL\ilut.h>
 #include <GL/glut.h>

@@ -6,6 +6,8 @@
 #include "planetas.h"
 #include "texturas.h"
 
+int frame=0,time,timebase=0;
+
 float height = 2.0f;
 float x = 0.0f;
 float z = 0.0f;
@@ -141,6 +143,14 @@ void renderScene(void) {
 	planetas();
 
 	// End of frame
+	frame++;
+	time=glutGet(GLUT_ELAPSED_TIME);
+	if (time - timebase > 1000) {
+		sprintf(s,"FPS:%4.2f", frame*1000.0/(time-timebase));
+		timebase = time;		
+		frame = 0;
+	}
+	glutSetWindowTitle(s);
 	glutSwapBuffers();
 }
 
@@ -154,7 +164,7 @@ void infotabScene(void){
 
 	float menuX = -1;
 	float menuY = 4;
-	
+
 	sprintf(s,"Escala: %g",scale);
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, s);
 	writeString(menuX, menuY-=0.2,0, (void *) fontText, "+ / - : Aumenta/diminui escala");
@@ -187,6 +197,7 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Botao direito para mais opcoes");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ESC : terminar aplicacao");
 
+	sprintf(s,"");
 	glutSwapBuffers();
 }
 
@@ -362,7 +373,6 @@ void gerarMenu(){
 }
 
 void main(int argc, char **argv) {
-	int i;
 // inicialização
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
@@ -370,7 +380,7 @@ void main(int argc, char **argv) {
 	glutInitWindowSize(winX,winY);
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
-	for(i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
+	for(int i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
 	texture[0]= LoadBitmap("Resource/sol.bmp");
 	texture[1]= LoadBitmap("Resource/mercurio.bmp");
 	texture[2]= LoadBitmap("Resource/venus.bmp");
@@ -410,7 +420,10 @@ void main(int argc, char **argv) {
 	camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
 	camY = r * sin(beta*(PI/180));
 
-	infotab = glutCreateSubWindow(window, 0.8*glutGet(GLUT_WINDOW_WIDTH), 0, 0.2*glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+//criar janela secundaria
+	infotab = glutCreateSubWindow(window, 
+		0.8*glutGet(GLUT_WINDOW_WIDTH), 0,
+		0.2*glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 	glutDisplayFunc(infotabScene);
 	glutReshapeFunc(infotabChangeSize);
 	
