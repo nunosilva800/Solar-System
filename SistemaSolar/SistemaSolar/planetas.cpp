@@ -1,3 +1,4 @@
+#include "interface.h"
 #include "planetas.h"
 #include "texturas.h"
 
