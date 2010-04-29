@@ -1,20 +1,24 @@
 #include "planetas.h"
 #include "interface.h"
 
-double raioCamara=30;
+double raioCamara=20;
 
-bool haColisaoTerra(){
-	printf("\nposX:%f posY:%f posz:%f",posTerra[0],posTerra[1],posTerra[2]);
-	printf("\nCamX:%f CamY:%f Camz:%f",camX,camY,camY);
-	float distObjs= sqrt(abs((posTerra[0]-camX)+(posTerra[1]-camY)+(posTerra[2]-camZ)))-raioTerra-raioCamara;
-	printf("\n distancia: %f \n\n",distObjs);
-	if (distObjs>0){
-		return false;		
-	}
-	else return true;
-}
 
 bool haColisao(){
-	return haColisaoTerra();
-	
+	float distObjs;
+	int i = 12;
+	for(int i=0;i<19;i++){
+		if(i==0)
+			distObjs = sqrt( 
+				pow(posicoes[i][0]-camX,2) + 
+				pow(posicoes[i][1]-camY,2) +
+				pow(posicoes[i][2]-camZ,2)) - raios[i]-raioCamara*scale;
+		else
+			distObjs = sqrt( 
+				pow(posicoes[i][0]-camX,2) + 
+				pow(posicoes[i][1]-camY,2) +
+				pow(posicoes[i][2]-camZ,2)) - (raios[i]*scale)-raioCamara*scale;
+		if(distObjs<=0){printf("colision %d\n",i);return true;}
+	}
+	return false;
 }

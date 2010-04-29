@@ -1,2 +1,1 @@
 bool haColisao();
-bool haColisaoTerra();

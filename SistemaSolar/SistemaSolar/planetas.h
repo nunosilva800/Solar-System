@@ -202,7 +202,8 @@ extern float distFactor;
 extern float timeFactor;
 
 //vectores com a posiçao dos planetas
-extern double posTerra[3];
+extern double posicoes[19][3];
+extern double raios[19];
 
 void planetas();
 void createcircle (int k, int r, int h);
