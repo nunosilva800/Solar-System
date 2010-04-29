@@ -16,7 +16,7 @@ float alpha = 200, beta = 25, r = 30000;
 
 bool axes = false;
 bool fullscreen = false;
-bool luz = true;
+bool luz = false;
 
 int winX = 800;
 int winY = 600;

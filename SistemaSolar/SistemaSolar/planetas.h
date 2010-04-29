@@ -149,7 +149,7 @@
 #define axisTiltUrano			97.86
 #define axisTiltNeptuno			29.6
 
-#define PI 3.14159265
+#define PI 3.1415926535897
 
 #define MAX_STARS 			10000
 #define STAR_RADIUS 		2000000
