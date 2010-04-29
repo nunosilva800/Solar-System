@@ -1,7 +1,7 @@
 #include "interface.h"
 #include "planetas.h"
 #include "texturas.h"
-
+#include "colisoes.h"
 
 float height = 2.0f;
 float x = 0.0f;
@@ -72,11 +72,14 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 'c' : if(drawCintura)drawCintura=false;
 				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
 				   break;
-		case 'w' : r-=1000;
-				if(r < 2000) r = 2000;
-				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-				camY = camlookY +( r * sin(beta*(PI/180)));
+		case 'w' :
+				if(!haColisao()){
+					r-=1000;
+					if(r < 2000) r = 2000;
+						camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+						camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+						camY = camlookY +( r * sin(beta*(PI/180)));
+				}
 				return;
 		case 's' : r+=1000;
 				if(r > 1500000) r = 1500000;

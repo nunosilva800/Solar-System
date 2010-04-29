@@ -43,6 +43,9 @@ GLfloat angRotTitan =0;
 GLfloat angRotIapetus =0;
 
 
+//vectores com as pos dos planetas
+double posTerra[3];
+
 float scale = 50;
 float scalesol = scale*0.5;
 bool orbitas = true;
@@ -172,8 +175,10 @@ void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	angRotTerra += (360/velRTerra)*timeFactor;
 
 	//experiencia
-	//printf("angTransTerra: %f      angRotTerra: %f\n",(angTerra*(180/PI)),angRotTerra/360);
-	
+	posTerra[0]=distFactor*distSolTerra*sin(angTerra);
+	posTerra[1]=0;
+	posTerra[2]=distFactor*distSolTerra*cos(angTerra);
+
 	rotacao(angRotTerra,axisTiltTerra);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
