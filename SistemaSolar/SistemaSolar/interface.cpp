@@ -35,6 +35,7 @@ int window;
 char s[100];
 
 void processKeys(unsigned char tecla, int x, int y){
+	float aux;
 	switch(tecla){
 		case 27 : exit(0);
 		case '+' : if(scale < 200) scale++; desenhaAnel(); break;
@@ -72,20 +73,33 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 'c' : if(drawCintura)drawCintura=false;
 				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
 				   break;
-		case 'w' :
-				if(!haColisao()){
-					r-=1000;
-					if(r < 2000) r = 2000;
+		case 'w' :	aux = r-1000;
+					if(aux<2000)aux=2000;
+					if(!haColisao(
+						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
+						(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
+						(camlookY +( aux * sin(beta*(PI/180))))
+						)){
+						r-=1000;
+						if(r < 2000) r = 2000;
 						camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 						camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 						camY = camlookY +( r * sin(beta*(PI/180)));
+					}
+					return;
+		case 's' :	aux = r+1000;
+					if(aux>1500000) aux = 1500000;
+					if(!haColisao(
+						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
+						(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
+						(camlookY +( aux * sin(beta*(PI/180))))
+						)){
+					r+=1000;
+					if(r > 1500000) r = 1500000;
+					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+					camY = camlookY +( r * sin(beta*(PI/180)));
 				}
-				return;
-		case 's' : r+=1000;
-				if(r > 1500000) r = 1500000;
-				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-				camY = camlookY +( r * sin(beta*(PI/180)));
 				return;
 		default : return;
 	}

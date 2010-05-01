@@ -197,9 +197,9 @@ void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	//angRotTerra += ((0.25*360)/velRTerra)*timeFactor;
 	angRotTerra += (360/velRTerra)*timeFactor;
 
-	posicoes[4][0]=distFactor*distSolTerra*sin(angTerra);
+	posicoes[4][0]=distFactor*distSolTerra*sin(angTerra+((2*PI)/velTerra)*timeFactor);
 	posicoes[4][1]=0.0;
-	posicoes[4][2]=distFactor*distSolTerra*sin(angTerra);
+	posicoes[4][2]=distFactor*distSolTerra*cos(angTerra+((2*PI)/velTerra)*timeFactor);
 	raios[4]=raioTerra;
 
 	rotacao(angRotTerra,axisTiltTerra);
