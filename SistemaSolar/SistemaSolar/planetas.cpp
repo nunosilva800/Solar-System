@@ -663,7 +663,8 @@ void desenharEstrelas()
         x = STAR_RADIUS * cos ( elevation ) * cos ( alt );
         z = STAR_RADIUS * cos ( elevation ) * sin ( alt );
 
-        glColor3f(1,1,1);
+		//definir normal a apontar para o sol (centro)
+		glNormal3f(-x,-y,-z);
 		glVertex3f ( x, y, z );
 	}
 	glEnd ( );

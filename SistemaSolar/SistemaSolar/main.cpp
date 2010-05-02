@@ -10,7 +10,6 @@
 int frame=0,time,timebase=0;
 char fps[10];
 
-
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -77,7 +76,6 @@ void draw_Axes (void)
     glEnd();
 	glColor3f(1,1,1);
 }
-
 
 void renderScene(void) {
 

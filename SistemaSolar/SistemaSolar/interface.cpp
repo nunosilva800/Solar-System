@@ -37,7 +37,7 @@ char s[100];
 void processKeys(unsigned char tecla, int x, int y){
 	float aux;
 	switch(tecla){
-		case 27 : exit(0);
+		case 27  : exit(0);
 		case '+' : if(scale < 200) scale++; desenhaAnel(); break;
 		case '-' : if(scale > 1) scale--; desenhaAnel(); break;
 
