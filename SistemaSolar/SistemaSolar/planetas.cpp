@@ -43,7 +43,6 @@ GLfloat angRotRhea =0;
 GLfloat angRotTitan =0;
 GLfloat angRotIapetus =0;
 
-
 //vectores com as pos dos planetas
 double posicoes[19][3];
 double raios[19];
@@ -58,7 +57,6 @@ float distFactor = 0.03;
 float timeFactor = 0.1;
 
 GLuint cintura;
-GLuint cintura3;
 GLuint estrelas;
 
 
@@ -529,15 +527,16 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioSaturno,32,32);
+	gluSphere(Q,scale*raioSaturno,32,32);
 	glDisable(GL_TEXTURE_2D);
+
 	glRotatef(90,1,0,0);
+	
+	desenhaAnel();
 
 	desenharRhea(texture2, Q2);
 	desenharTitan(texture2, Q2);
 	desenharIapetus(texture2, Q2);
-
-	if(drawCintura) glCallList(cintura3);
 
 	glPopMatrix();
 	//glColor3f(1,0,1);//rosa
@@ -623,29 +622,35 @@ void desenharCintura(){
 	glEndList();
 }
 void desenhaAnel(){
-	if(!drawCintura) return;
-
 	int i=0;
-	float dist, ang, x, z;
-	srand(30);
-	cintura3 = glGenLists(3);
-	glNewList( cintura3, GL_COMPILE );
-	
-	
-	glColor3f(0.5,0.5,0.2);
-	glBegin(GL_POINTS);
-	for(i=0; i<10000; i++){
-		dist = rand();
-		ang = rand() / 3.1415;
-		x = cos(ang) * (dist + raioSaturno*2.1*scale);
-		z = sin(ang) * (dist + raioSaturno*2.1*scale);
-		if(sqrt(x*x+z*z) < raioSaturno*3.0*scale)
-			glVertex3f(x, 0, z);
-		else i--;
-	}
+	float x, z;
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, texture[10]);
+
+	glBegin(GL_QUAD_STRIP);
+		for(i=0; i<=360; i++){
+			x = sin(i*PI/180) * raioSaturno*1.5*scale;
+			z = cos(i*PI/180) * raioSaturno*1.5*scale;
+			glNormal3f(0,1,0); glTexCoord2f(0,0); glVertex3f(x, 0, z);
+			
+			x = sin(i*PI/180) * raioSaturno*3*scale;
+			z = cos(i*PI/180) * raioSaturno*3*scale;
+			glNormal3f(0,1,0); glTexCoord2f(1,0); glVertex3f(x, 0, z);
+			
+			i++;
+			
+			x = sin(i*PI/180) * raioSaturno*1.5*scale;
+			z = cos(i*PI/180) * raioSaturno*1.5*scale;
+			glNormal3f(0,1,0); glTexCoord2f(0,1); glVertex3f(x, 0, z);
+			
+			x = sin(i*PI/180) * raioSaturno*3*scale;
+			z = cos(i*PI/180) * raioSaturno*3*scale;
+			glNormal3f(0,1,0); glTexCoord2f(1,1); glVertex3f(x, 0, z);
+		}
 	glEnd();
-	glColor3f(1,1,1);
-	glEndList();
+	glDisable(GL_TEXTURE_2D);
+
 }
 void desenharEstrelas()
 {

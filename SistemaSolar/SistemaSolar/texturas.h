@@ -4,7 +4,7 @@
 #include<IL\ilut.h>
 #include <GL/glut.h>
 
-extern GLuint texture[10];
+extern GLuint texture[11];
 extern GLUquadric * Qplanetas[10];
 
 int LoadBitmap(char *filename);

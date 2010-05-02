@@ -4,7 +4,7 @@
 #include <GL/glut.h>
 #include "texturas.h"
 
-GLuint texture[10] = {};
+GLuint texture[11] = {};
 GLUquadric * Qplanetas[10] = {};
 
 int LoadBitmap(char *filename)

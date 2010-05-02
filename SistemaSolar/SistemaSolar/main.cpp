@@ -193,12 +193,12 @@ void main(int argc, char **argv) {
 	texture[7]= LoadBitmap("Resource/urano.bmp");
 	texture[8]= LoadBitmap("Resource/neptuno.bmp");
 	texture[9]= LoadBitmap("Resource/lua.bmp");
+	texture[10]= LoadBitmap("Resource/saturnringcolor.bmp");
 	//printf("textura objective not loaded\n"); 	
 
 	//preparação de display lists
 	desenharCintura();
 	desenharEstrelas();
-	desenhaAnel();
 
 	// alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
