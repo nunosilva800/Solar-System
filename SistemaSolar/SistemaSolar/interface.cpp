@@ -105,10 +105,9 @@ void processKeys(unsigned char tecla, int x, int y){
 				return;
 		default : return;
 	}
-	glutPostRedisplay();
 	glutSetWindow(infotab);
 	glutPostRedisplay();
-	glutSetWindow(window);
+	
 }
 void processSpecialKeys(int key, int xx, int yy) 
 {
@@ -139,7 +138,6 @@ void processSpecialKeys(int key, int xx, int yy)
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			break;
 	}
-	glutPostRedisplay();
 }
 
 void fmouse(int button, int state, int xx, int yy) 
@@ -201,9 +199,7 @@ void fmotion(int xx, int yy)
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 	else glutSetCursor( GLUT_CURSOR_NONE );
 
-	glutPostRedisplay();
 }
-
 
 void menu(int id_op){
 	switch (id_op){

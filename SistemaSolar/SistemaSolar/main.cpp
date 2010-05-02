@@ -8,6 +8,7 @@
 #include "texturas.h"
 
 int frame=0,time,timebase=0;
+char fps[10];
 
 
 void changeSize(int w, int h) {
@@ -88,12 +89,12 @@ void renderScene(void) {
 	gluLookAt(camX,camY,camZ, 
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
-	
-	glLightfv(GL_LIGHT0, GL_POSITION, lpos);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+
 	if(luz){
+		glLightfv(GL_LIGHT0, GL_POSITION, lpos);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 	}else{
@@ -103,24 +104,17 @@ void renderScene(void) {
 
 	if(axes) draw_Axes();
 	
-	/*desenhar ponto para onde a camera olha
-	glColor3f(1,0,0);
-	glBegin(GL_POINTS);
-		glVertex3f(camlookX,camlookY,camlookZ);
-	glEnd();	
-	*/
-
 	planetas();
 
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
 	if (time - timebase > 1000) {
-		sprintf(s,"FPS:%4.2f", frame*1000.0/(time-timebase));
+		sprintf(fps,"FPS:%4.2f", frame*1000.0/(time-timebase));
 		timebase = time;		
 		frame = 0;
 	}
-	glutSetWindowTitle(s);
+	glutSetWindowTitle(fps);
 	glutSwapBuffers();
 }
 
@@ -167,7 +161,6 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Botao direito para mais opcoes");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ESC : terminar aplicacao");
 
-	sprintf(s,"");
 	glutSwapBuffers();
 }
 
@@ -179,6 +172,18 @@ void main(int argc, char **argv) {
 	glutInitWindowSize(winX,winY);
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
+// registo de funções 
+	glutDisplayFunc(renderScene);
+	glutReshapeFunc(changeSize);
+
+	glutKeyboardFunc(processKeys);
+	glutSpecialFunc(processSpecialKeys);
+	glutMotionFunc(fmotion);
+	glutMouseFunc(fmouse);
+
+	gerarMenu();
+
+	//carregar imagens
 	for(int i=0;i<10;i++){Qplanetas[i]=gluNewQuadric(); gluQuadricTexture( Qplanetas[i], GL_TRUE);}
 	texture[0]= LoadBitmap("Resource/sol.bmp");
 	texture[1]= LoadBitmap("Resource/mercurio.bmp");
@@ -192,39 +197,32 @@ void main(int argc, char **argv) {
 	texture[9]= LoadBitmap("Resource/lua.bmp");
 	//printf("textura objective not loaded\n"); 	
 
-// registo de funções 
-	glutDisplayFunc(renderScene);
-	//glutIdleFunc(renderScene);
-	glutReshapeFunc(changeSize);
-
-	glutKeyboardFunc(processKeys);
-	glutSpecialFunc(processSpecialKeys);
-	glutMotionFunc(fmotion);
-	glutMouseFunc(fmouse);
-
-	gerarMenu();
-
-//preparação de display lists
+	//preparação de display lists
 	desenharCintura();
 	desenharEstrelas();
 	desenhaAnel();
 
-// alguns settings para OpenGL
+	// alguns settings para OpenGL
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glShadeModel(GL_SMOOTH);
 
-//iniciar coordenadas da camera
+	//iniciar coordenadas da camera
 	camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
 	camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
 	camY = r * sin(beta*(PI/180));
 
-//criar janela secundaria
+	//criar janela secundaria
 	infotab = glutCreateSubWindow(window, 
 		0.8*glutGet(GLUT_WINDOW_WIDTH), 0,
 		0.2*glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 	glutDisplayFunc(infotabScene);
 	glutReshapeFunc(infotabChangeSize);
+	//esta janela trata do teclado da mesma forma
+	glutKeyboardFunc(processKeys);
+	glutSpecialFunc(processSpecialKeys);
+	glutMotionFunc(fmotion);
+	glutMouseFunc(fmouse);
 	
 // entrar no ciclo do GLUT 
 	glutMainLoop();
