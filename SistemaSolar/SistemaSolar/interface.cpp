@@ -78,7 +78,8 @@ void processKeys(unsigned char tecla, int x, int y){
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
 						(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
-						(camlookY +( aux * sin(beta*(PI/180))))
+						(camlookY +( aux * sin(beta*(PI/180)))),
+						-1
 						)){
 						r-=1000;
 						if(r < 2000) r = 2000;
@@ -92,7 +93,8 @@ void processKeys(unsigned char tecla, int x, int y){
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
 						(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
-						(camlookY +( aux * sin(beta*(PI/180))))
+						(camlookY +( aux * sin(beta*(PI/180)))),
+						-1
 						)){
 					r+=1000;
 					if(r > 1500000) r = 1500000;
@@ -156,6 +158,7 @@ void fmouse(int button, int state, int xx, int yy)
 
 void fmotion(int xx, int yy)
 {
+	float auxAlpha,auxBeta;
 	if(mouseBtn!=1) return ;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
@@ -174,14 +177,23 @@ void fmotion(int xx, int yy)
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
-		default:
-			alpha+=((x-xx)*0.3);
-			beta-=((y-yy)*0.3);
-			if(beta > 89) beta = 89;
-			if(beta < -89) beta = -89;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+		default:/*auxAlpha=alpha+((x-xx)*0.3);
+				  auxBeta=beta-((y-yy)*0.3);
+				  if(auxBeta > 89) beta = 89;
+				  if(auxBeta < -89) beta = -89;
+
+				if(!haColisao(camlookZ +( r * cos(auxBeta*(PI/180)) * cos(auxAlpha*(PI/180))),
+					camlookX +( r * cos(auxBeta*(PI/180)) * sin(auxAlpha*(PI/180))),
+					camlookY +( r * sin(auxBeta*(PI/180))),-1
+					)){*/
+					alpha+=((x-xx)*0.3);
+					beta-=((y-yy)*0.3);
+					if(beta > 89) beta = 89;
+					if(beta < -89) beta = -89;
+					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+					camY = camlookY +( r * sin(beta*(PI/180)));
+				//}
 	}
 	x=xx;y=yy;
 

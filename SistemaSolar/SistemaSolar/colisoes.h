@@ -1,1 +1,1 @@
-bool haColisao(float newCamX,float newCamY,float newCamZ);
+bool haColisao(float newCamX,float newCamY,float newCamZ,int planeta);
