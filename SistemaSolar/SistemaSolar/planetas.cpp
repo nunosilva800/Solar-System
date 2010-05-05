@@ -60,6 +60,13 @@ GLuint cintura;
 GLuint estrelas;
 
 
+GLfloat specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+GLfloat	lightPos[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+GLfloat emissionSun[] = { 0.9f, 0.0f, 0.0f, 0.0f};
+GLfloat nullv[] = { 0.0f, 0.0f, 0.0f, 1.0f};
+
+
 void rotacao(GLfloat rotacao,float tilt)
 {
 	glRotatef(tilt,0.0,0.0,1.0);
@@ -100,13 +107,35 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 	//glColor3f(1,1,0);//amarelo
 	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
+	glEnable(GL_LIGHT0);
+
+	//set the viewing transformation
+
+
+	//set specular reflectivity with low shine
+	//glColor4f(1.0, 0.8, 0.0, 1.0);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+	glMateriali(GL_FRONT, GL_SHININESS, 3);
+	glMaterialfv(GL_FRONT, GL_EMISSION, emissionSun); //make sun glow
+
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPos); //move light 1 under sun
+
+
 	
+
 	if(drawCintura)	glCallList(cintura);
 
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
 	gluSphere (Q,raioSol,32,32);
+	//save lighting
+	glPushAttrib(GL_LIGHTING_BIT);
+	glDisable(GL_LIGHT0);
+	glEnable(GL_LIGHT1); //turn on the sun
+
+	glMaterialfv(GL_FRONT, GL_SPECULAR, nullv);
+	glMaterialfv(GL_FRONT, GL_EMISSION, nullv);
 	glDisable(GL_TEXTURE_2D);
 
 	glPopMatrix();
@@ -138,6 +167,8 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	
 	if(orbitas)draw_orbita(distFactor*distSolMercurio,90,0.0,orbitalTiltMercurio);
 }
+
+
 
 void desenharVenus(GLuint texture, GLUquadric *  Q)
 {

@@ -10,6 +10,12 @@
 int frame=0,time,timebase=0;
 char fps[10];
 
+GLfloat ambientLight0[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+GLfloat ambientLight1[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+GLfloat diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+GLfloat specular1[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -79,7 +85,6 @@ void draw_Axes (void)
 
 void renderScene(void) {
 
-	glClearColor(0.0f,0.0f,0.0f,0.0f);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -88,11 +93,12 @@ void renderScene(void) {
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
 
+	
+	//glLightfv(GL_LIGHT0, GL_POSITION, lpos);
+	//glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
+	//glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
+	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 	if(luz){
-		glLightfv(GL_LIGHT0, GL_POSITION, lpos);
-		glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
-		glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
-		glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 	}else{
@@ -115,6 +121,47 @@ void renderScene(void) {
 	glutSetWindowTitle(fps);
 	glutSwapBuffers();
 }
+
+
+void SetupLighting(void)
+{
+	// Enable lighting
+	//glEnable(GL_LIGHTING);
+
+	// Setup and enable light0
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight0);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular1);
+
+	// Setup light1
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight1);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specular1);
+
+	// Enable color tracking
+	glEnable(GL_COLOR_MATERIAL);
+	
+	// Set Material properties to follow glColor values
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+}
+
+void SetupRC(void)
+{
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
+	SetupLighting();
+
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	glShadeModel(GL_SMOOTH);
+}
+
+
+
+
+
 
 void infotabScene(void){
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -165,6 +212,17 @@ void infotabScene(void){
 void main(int argc, char **argv) {
 // inicialização
 	glutInit(&argc, argv);
+	 //float   ambient_light[] = {0.3, 0.3, 0.45, 1.0};
+  // float           source_light[]  = {0.9, 0.8, 0.8, 1.0};
+//	glEnable       ( GL_LIGHTING );
+   //glLightModelfv ( GL_LIGHT_MODEL_AMBIENT,ambient_light );
+   //glLightfv      ( GL_LIGHT0,GL_DIFFUSE,source_light );
+  // glEnable       ( GL_LIGHT0 );
+
+   //   Enable material attributes
+  // glEnable ( GL_COLOR_MATERIAL );
+  // glColorMaterial ( GL_FRONT, GL_AMBIENT_AND_DIFFUSE );
+
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(winX,winY);
@@ -199,11 +257,10 @@ void main(int argc, char **argv) {
 	//preparação de display lists
 	desenharCintura();
 	desenharEstrelas();
+	desenhaAnel();
 
-	// alguns settings para OpenGL
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glShadeModel(GL_SMOOTH);
+// alguns settings para OpenGL
+	SetupRC();
 
 	//iniciar coordenadas da camera
 	camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
