@@ -133,6 +133,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="OpenGL32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -172,6 +173,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\3dsloader.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\colisoes.cpp"
 				>
 			</File>
@@ -184,11 +189,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\model.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\planetas.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\texturas.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\texture.cpp"
 				>
 			</File>
 		</Filter>
@@ -198,6 +211,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\3dsloader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\colisoes.h"
 				>
 			</File>
@@ -206,11 +223,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\model.h"
+				>
+			</File>
+			<File
 				RelativePath=".\planetas.h"
 				>
 			</File>
 			<File
 				RelativePath=".\texturas.h"
+				>
+			</File>
+			<File
+				RelativePath=".\texture.h"
 				>
 			</File>
 		</Filter>

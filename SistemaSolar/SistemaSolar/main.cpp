@@ -6,6 +6,7 @@
 #include "interface.h"
 #include "planetas.h"
 #include "texturas.h"
+#include "model.h"
 
 int frame=0,time,timebase=0;
 char fps[10];
@@ -101,7 +102,14 @@ void renderScene(void) {
 
 	if(axes) draw_Axes();
 	
+	//desenha a nave
+	glPushMatrix();
+	glTranslatef(camX+400,camY-400,camZ-400);
+	drawModel();
+	glPopMatrix();
+
 	planetas();
+	
 
 	// End of frame
 	frame++;
@@ -205,6 +213,9 @@ void main(int argc, char **argv) {
 	glutInitWindowSize(winX,winY);
 	window = glutCreateWindow("SistemaSolar@CG@DI-UM");
 
+	//inicia o modelo da nave
+	initModels();
+
 // registo de funções 
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
@@ -255,7 +266,7 @@ void main(int argc, char **argv) {
 	glutSpecialFunc(processSpecialKeys);
 	glutMotionFunc(fmotion);
 	glutMouseFunc(fmouse);
-	
+
 // entrar no ciclo do GLUT 
 	glutMainLoop();
 }
