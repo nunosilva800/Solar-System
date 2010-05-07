@@ -84,8 +84,6 @@ void draw_Axes (void)
 }
 
 void renderScene(void) {
-
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
@@ -93,11 +91,6 @@ void renderScene(void) {
 			camlookX,camlookY,camlookZ,
 			  0.0f,1.0f,0.0f);	
 
-	
-	//glLightfv(GL_LIGHT0, GL_POSITION, lpos);
-	//glLightfv(GL_LIGHT0, GL_AMBIENT, lamb);
-	//glLightfv(GL_LIGHT0, GL_DIFFUSE, ldiff);
-	//glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 	if(luz){
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -113,7 +106,7 @@ void renderScene(void) {
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
-	if (time - timebase > 1000) {
+	if (time - timebase > 500) {
 		sprintf(fps,"FPS:%4.2f", frame*1000.0/(time-timebase));
 		timebase = time;		
 		frame = 0;
@@ -157,11 +150,6 @@ void SetupRC(void)
 
 	glShadeModel(GL_SMOOTH);
 }
-
-
-
-
-
 
 void infotabScene(void){
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
@@ -212,17 +200,6 @@ void infotabScene(void){
 void main(int argc, char **argv) {
 // inicialização
 	glutInit(&argc, argv);
-	 //float   ambient_light[] = {0.3, 0.3, 0.45, 1.0};
-  // float           source_light[]  = {0.9, 0.8, 0.8, 1.0};
-//	glEnable       ( GL_LIGHTING );
-   //glLightModelfv ( GL_LIGHT_MODEL_AMBIENT,ambient_light );
-   //glLightfv      ( GL_LIGHT0,GL_DIFFUSE,source_light );
-  // glEnable       ( GL_LIGHT0 );
-
-   //   Enable material attributes
-  // glEnable ( GL_COLOR_MATERIAL );
-  // glColorMaterial ( GL_FRONT, GL_AMBIENT_AND_DIFFUSE );
-
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(winX,winY);

@@ -59,13 +59,10 @@ float timeFactor = 0.1;
 GLuint cintura;
 GLuint estrelas;
 
-
 GLfloat specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-
 GLfloat	lightPos[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 GLfloat emissionSun[] = { 0.9f, 0.0f, 0.0f, 0.0f};
 GLfloat nullv[] = { 0.0f, 0.0f, 0.0f, 1.0f};
-
 
 void rotacao(GLfloat rotacao,float tilt)
 {
@@ -104,35 +101,23 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 	posicoes[0][1]=0.0;
 	posicoes[0][2]=0.0;
 	raios[0]=raioSol;
-	//glColor3f(1,1,0);//amarelo
+
 	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
-	glEnable(GL_LIGHT0);
-
-	//set the viewing transformation
-
-
-	//set specular reflectivity with low shine
-	//glColor4f(1.0, 0.8, 0.0, 1.0);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
-	glMateriali(GL_FRONT, GL_SHININESS, 3);
-	glMaterialfv(GL_FRONT, GL_EMISSION, emissionSun); //make sun glow
-
-	glLightfv(GL_LIGHT1, GL_POSITION, lightPos); //move light 1 under sun
-
-
-	
 
 	if(drawCintura)	glCallList(cintura);
+
+	glEnable(GL_LIGHT0);
+	glLightfv(GL_LIGHT1, GL_POSITION, lightPos);
 
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
 	gluSphere (Q,raioSol,32,32);
-	//save lighting
+	
 	glPushAttrib(GL_LIGHTING_BIT);
 	glDisable(GL_LIGHT0);
-	glEnable(GL_LIGHT1); //turn on the sun
+	glEnable(GL_LIGHT1);
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, nullv);
 	glMaterialfv(GL_FRONT, GL_EMISSION, nullv);
@@ -154,7 +139,6 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	angMercurio += ((2*PI)/velMercurio)*timeFactor;
 	glTranslatef(distFactor*distSolMercurio*sin(angMercurio), 0, distFactor*distSolMercurio*cos(angMercurio));
 
-
 	//glColor3f(0.5,0.5,0.5);//cinza
 	angRotMercurio += (360/velRMercurio)*timeFactor;
 	rotacao(angRotMercurio,axisTiltMercurio);
@@ -167,8 +151,6 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	
 	if(orbitas)draw_orbita(distFactor*distSolMercurio,90,0.0,orbitalTiltMercurio);
 }
-
-
 
 void desenharVenus(GLuint texture, GLUquadric *  Q)
 {
@@ -638,13 +620,15 @@ void desenharCintura(){
 	glColor3f(0.5,0.5,0.2);
 	glBegin(GL_POINTS);
 	//existem 700,000 a 1.7 milhoens... mas para simplificar...
-	for(i=0; i<100000; i++){
+	for(i=0; i<10000; i++){
 		dist = rand();
 		ang = rand() / 3.1415;
 		x = cos(ang) * (dist + distSolMarte*1.3*distFactor);
 		z = sin(ang) * (dist + distSolMarte*1.3*distFactor);
-		if(sqrt(x*x+z*z) < distSolJupiter*0.7*distFactor)
+		if(sqrt(x*x+z*z) < distSolJupiter*0.7*distFactor){
+			glNormal3f(0,0,0);
 			glVertex3f(x, 0, z);
+		}
 		else i--;
 	}
 	glEnd();
@@ -658,7 +642,7 @@ void desenhaAnel(){
 
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture[10]);
-
+	glDisable(GL_CULL_FACE);
 	glBegin(GL_QUAD_STRIP);
 		for(i=0; i<=360; i++){
 			x = sin(i*PI/180) * raioSaturno*1.5*scale;
@@ -680,6 +664,7 @@ void desenhaAnel(){
 			glNormal3f(0,1,0); glTexCoord2f(1,1); glVertex3f(x, 0, z);
 		}
 	glEnd();
+	glEnable(GL_CULL_FACE);
 	glDisable(GL_TEXTURE_2D);
 
 }

@@ -16,18 +16,13 @@ float alpha = 200, beta = 25, r = 30000;
 
 bool axes = false;
 bool fullscreen = false;
-bool luz = false;
+bool luz = true;
 
 int winX = 800;
 int winY = 600;
 
 int fontTitle = (int) GLUT_BITMAP_HELVETICA_12;
 int fontText = (int) GLUT_BITMAP_HELVETICA_10;
-
-GLfloat lamb[] = {.2, .2, .2, 1};
-GLfloat ldiff[] = {1, 1, 1, 1};
-GLfloat lpos[] = {0.0, 0.0 ,0.0, 1.0};
-GLfloat specular[] = {.5, .5, .5, 1.0f};
 
 int infotab;
 int window;

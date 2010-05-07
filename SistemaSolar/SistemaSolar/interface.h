@@ -35,11 +35,6 @@ extern int infotab;
 extern int fontTitle;
 extern int fontText;
 
-extern GLfloat lamb[];
-extern GLfloat ldiff[];
-extern GLfloat lpos[];
-extern GLfloat specular[];
-
 extern char s[100];
 
 
