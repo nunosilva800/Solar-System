@@ -261,6 +261,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Resource\modelo_actor.3DS"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource\neptuno.bmp"
 				>
 			</File>
@@ -274,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\Resource\sol.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\Resource\spaceshiptexture.bmp"
 				>
 			</File>
 			<File
