@@ -74,15 +74,6 @@ void writeString(float x, float y,float z, void *font, char *s)
        glutBitmapCharacter(font, s[c] ); // draw the character to the screen
 }
 
-void draw_Axes (void)
-{ 
-	glBegin (GL_LINES);
-		glColor3f (1,0,0);  glVertex3f (0,0,0);  glVertex3f (50000,0,0);    // X red.
-		glColor3f (0,1,0);  glVertex3f (0,0,0);  glVertex3f (0,50000,0);    // Y green.
-		glColor3f (0,0,1);  glVertex3f (0,0,0);  glVertex3f (0,0,50000);    // Z blue.
-    glEnd();
-	glColor3f(1,1,1);
-}
 
 void renderScene(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -99,12 +90,10 @@ void renderScene(void) {
 		glDisable(GL_LIGHTING);
 		glDisable(GL_LIGHT0);
 	}
-
-	if(axes) draw_Axes();
 	
 	//desenha a nave
 	glPushMatrix();
-	glTranslatef(camX+400,camY-400,camZ-400);
+	glTranslatef(camlookX,camlookY,camlookZ);
 	drawModel();
 	glPopMatrix();
 
@@ -185,7 +174,6 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontText, ", / . : Aumenta/diminui distancias");
     writeString(menuX, menuY-=0.2,0, (void *) fontText, "----------------------------");
 
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "a : Ligar/desligar eixos");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "l : Ligar/desligar efeitos luz");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "f : Ligar/desligar modo ecra inteiro");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "o : Ligar/desligar orbitas");

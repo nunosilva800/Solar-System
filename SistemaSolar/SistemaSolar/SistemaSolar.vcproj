@@ -185,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\junk.txt"
+				>
+			</File>
+			<File
 				RelativePath=".\main.cpp"
 				>
 			</File>

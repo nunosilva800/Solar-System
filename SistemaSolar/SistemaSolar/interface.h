@@ -22,7 +22,6 @@ extern float alpha;
 extern float beta;
 extern float r;
 
-extern bool axes;
 extern bool fullscreen;
 extern bool luz;
 
