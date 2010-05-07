@@ -11,7 +11,6 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
-#include <GL/gl.h>
 #include <GL/glut.h>
 #include <IL/il.h>
 #include <IL/ilu.h>
