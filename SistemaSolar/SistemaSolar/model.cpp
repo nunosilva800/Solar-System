@@ -32,12 +32,8 @@ obj_type modelo;
 void drawModel(){
 	glPushMatrix();
 
-	//glRotatef(180,0,1,0);
-
-		
-	glRotatef(-90,1,0,0);
-	glRotatef(180,0,0,1);
-	//glScalef (1.030, 3.030, 3.030);
+//	glRotatef(-90,1,0,0);
+//	glRotatef(180,0,0,1);
 
 	glEnable(GL_TEXTURE_2D); // This Enable the Texture mapping
 

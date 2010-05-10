@@ -134,11 +134,11 @@ char Load3DS (obj_type_ptr p_object, char *p_filename)
                 for (i=0; i<l_qty; i++)
                 {
 					fread (&p_object->vertex[i].x, sizeof(float), 1, l_file);
- 					printf("Vertices list x: %f\n",p_object->vertex[i].x);
+ 					//printf("Vertices list x: %f\n",p_object->vertex[i].x);
                     fread (&p_object->vertex[i].y, sizeof(float), 1, l_file);
- 					printf("Vertices list y: %f\n",p_object->vertex[i].y);
+ 					//printf("Vertices list y: %f\n",p_object->vertex[i].y);
 					fread (&p_object->vertex[i].z, sizeof(float), 1, l_file);
- 					printf("Vertices list z: %f\n",p_object->vertex[i].z);
+ 					//printf("Vertices list z: %f\n",p_object->vertex[i].z);
 				}
 				break;
 
@@ -156,13 +156,13 @@ char Load3DS (obj_type_ptr p_object, char *p_filename)
                 for (i=0; i<l_qty; i++)
                 {
 					fread (&p_object->polygon[i].a, sizeof (unsigned short), 1, l_file);
-					printf("Polygon point a: %d\n",p_object->polygon[i].a);
+					//printf("Polygon point a: %d\n",p_object->polygon[i].a);
 					fread (&p_object->polygon[i].b, sizeof (unsigned short), 1, l_file);
-					printf("Polygon point b: %d\n",p_object->polygon[i].b);
+					//printf("Polygon point b: %d\n",p_object->polygon[i].b);
 					fread (&p_object->polygon[i].c, sizeof (unsigned short), 1, l_file);
-					printf("Polygon point c: %d\n",p_object->polygon[i].c);
+					//printf("Polygon point c: %d\n",p_object->polygon[i].c);
 					fread (&l_face_flags, sizeof (unsigned short), 1, l_file);
-					printf("Face flags: %x\n",l_face_flags);
+					//printf("Face flags: %x\n",l_face_flags);
 				}
                 break;
 
@@ -178,9 +178,9 @@ char Load3DS (obj_type_ptr p_object, char *p_filename)
 				for (i=0; i<l_qty; i++)
 				{
 					fread (&p_object->mapcoord[i].u, sizeof (float), 1, l_file);
-					printf("Mapping list u: %f\n",p_object->mapcoord[i].u);
+					//printf("Mapping list u: %f\n",p_object->mapcoord[i].u);
                     fread (&p_object->mapcoord[i].v, sizeof (float), 1, l_file);
-					printf("Mapping list v: %f\n",p_object->mapcoord[i].v);
+					//printf("Mapping list v: %f\n",p_object->mapcoord[i].v);
 				}
                 break;
 

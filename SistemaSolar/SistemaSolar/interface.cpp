@@ -28,6 +28,9 @@ int window;
 
 char s[100];
 
+int rotNaveX = -90;
+int rotNaveY = 0;
+int rotNaveZ = 180;
 
 float* unitVector(float a1,float a2,float a3,float b1,float b2,float b3){
 	float magnitude = sqrt( pow((a1-b1),2) + pow((a2-b2),2) + pow((a3-b3),2) );
@@ -51,26 +54,25 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 't' : timeFactor+=0.01; break;
 		case 'g' : timeFactor-=0.01; break;
 		case 'l' : luz?luz=false:luz=true; break;
-		case 'f' : if(fullscreen){
-					fullscreen=false;
-					glutPositionWindow(100,100),
-					glutReshapeWindow(winX,winY);
-					
-					glutSetWindow(infotab);
-					glutPositionWindow(0.8*winX,0);
-					glutReshapeWindow(0.2*winX, winY);
-					glutSetWindow(window);
-				   }
-				   else{
-					glutFullScreen();
-					fullscreen=true; 
-
-					glutSetWindow(infotab);
-					glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
-					glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
-					glutSetWindow(window);
-				   }
-				   break;
+		case 'f' : glutSetWindow(window);
+			if(fullscreen){
+				fullscreen=false;
+				glutPositionWindow(100,100),
+				glutReshapeWindow(winX,winY);
+				//ao sair de fullscreen, colocar a infotab no sitio correcto
+				glutSetWindow(infotab);
+				glutPositionWindow(0.8*winX,0);
+				glutReshapeWindow(0.2*winX, winY);
+		   }
+		   else{
+				glutFullScreen();
+				fullscreen=true; 
+				//ao entrar em fullscreen, colocar a infotab no sitio correcto
+				glutSetWindow(infotab);
+				glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
+				glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+		   }
+		   break;
 
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;
 		case 'c' : if(drawCintura)drawCintura=false;
@@ -121,9 +123,9 @@ void processKeys(unsigned char tecla, int x, int y){
 		default : return;
 	}
 	glutSetWindow(infotab);
-	glutPostRedisplay();
-	
+	glutPostRedisplay();	
 }
+
 void processSpecialKeys(int key, int xx, int yy) 
 {
 	switch(key) {
@@ -184,7 +186,7 @@ void fmotion(int xx, int yy)
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			r-=(y-yy)*100;
-			if(r > 1500000) r = 1500000;
+			if(r > 150000) r = 150000;
 			if(r < 2000) r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));

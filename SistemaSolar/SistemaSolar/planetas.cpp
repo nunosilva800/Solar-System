@@ -47,14 +47,13 @@ GLfloat angRotIapetus =0;
 double posicoes[19][3];
 double raios[19];
 
-float scale = 50;
-float scalesol = scale*0.5;
+float scale = 30;
 bool orbitas = true;
 
 bool drawCintura = false;
 float distFactor = 0.03;
 
-float timeFactor = 0.1;
+float timeFactor = 0.05;
 
 GLuint cintura;
 GLuint estrelas;
@@ -68,8 +67,6 @@ void rotacao(GLfloat rotacao,float tilt)
 {
 	glRotatef(tilt,0.0,0.0,1.0);
 	glRotated(rotacao,0.0,1.0,0.0);
-	
-	glutPostRedisplay();
 }
 
 void draw_orbita(float raio, float angleX,float angleY, float angleZ){
@@ -82,7 +79,7 @@ void draw_orbita(float raio, float angleX,float angleY, float angleZ){
 	float xx=0;
 	float yy=0;
 	glBegin(GL_LINE_LOOP);
-	for (int i = 0; i < 360; i++)
+	for (int i = 0; i < 360; i+=5)
 	{
 		xx = raio * cos(i*(PI/180));
 		yy = raio * sin(i*(PI/180));
@@ -105,6 +102,7 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 	angRotSol += (360/velRSol)*timeFactor;
 	rotacao(angRotSol,0.0);
 
+	//desenhar cintura de asteroides aqui, so mesmo para ter um efeito de rotaçao
 	if(drawCintura)	glCallList(cintura);
 
 	glEnable(GL_LIGHT0);
@@ -112,10 +110,10 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
+	
 	glRotatef(-90,1,0,0);
 	gluSphere (Q,raioSol,32,32);
 	
-	glPushAttrib(GL_LIGHTING_BIT);
 	glDisable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 
@@ -645,22 +643,23 @@ void desenhaAnel(){
 	glDisable(GL_CULL_FACE);
 	glBegin(GL_QUAD_STRIP);
 		for(i=0; i<=360; i++){
-			x = sin(i*PI/180) * raioSaturno*1.5*scale;
-			z = cos(i*PI/180) * raioSaturno*1.5*scale;
+			//os aneis estendem-se desde os 6 630 KM ate 120 700 KM
+			x = sin(i*PI/180) * (raioSaturno+6.630)*scale;
+			z = cos(i*PI/180) * (raioSaturno+6.630)*scale;
 			glNormal3f(0,1,0); glTexCoord2f(0,0); glVertex3f(x, 0, z);
 			
-			x = sin(i*PI/180) * raioSaturno*3*scale;
-			z = cos(i*PI/180) * raioSaturno*3*scale;
+			x = sin(i*PI/180) * (raioSaturno+120.700)*scale;
+			z = cos(i*PI/180) * (raioSaturno+120.700)*scale;
 			glNormal3f(0,1,0); glTexCoord2f(1,0); glVertex3f(x, 0, z);
 			
 			i++;
 			
-			x = sin(i*PI/180) * raioSaturno*1.5*scale;
-			z = cos(i*PI/180) * raioSaturno*1.5*scale;
+			x = sin(i*PI/180) * (raioSaturno+6.630)*scale;
+			z = cos(i*PI/180) * (raioSaturno+6.630)*scale;
 			glNormal3f(0,1,0); glTexCoord2f(0,1); glVertex3f(x, 0, z);
 			
-			x = sin(i*PI/180) * raioSaturno*3*scale;
-			z = cos(i*PI/180) * raioSaturno*3*scale;
+			x = sin(i*PI/180) * (raioSaturno+120.700)*scale;
+			z = cos(i*PI/180) * (raioSaturno+120.700)*scale;
 			glNormal3f(0,1,0); glTexCoord2f(1,1); glVertex3f(x, 0, z);
 		}
 	glEnd();
@@ -703,5 +702,5 @@ void planetas(){
 	desenharUrano(texture[7], Qplanetas[7]);
 	desenharNeptuno(texture[8], Qplanetas[8]);
 	glCallList(estrelas);
-	
+	glutPostRedisplay();
 }

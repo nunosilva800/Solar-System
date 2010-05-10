@@ -13,7 +13,7 @@ char fps[10];
 
 GLfloat ambientLight0[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 GLfloat ambientLight1[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-GLfloat diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+GLfloat diffuseLight[] = { 1, 1, 1, 1.0f };
 GLfloat specular1[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 
@@ -85,16 +85,19 @@ void renderScene(void) {
 
 	if(luz){
 		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT0);
 	}else{
 		glDisable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
 	}
 	
 	//desenha a nave
 	glPushMatrix();
+	glDisable(GL_LIGHTING);
 	glTranslatef(camlookX,camlookY,camlookZ);
+	glRotated(rotNaveX,1,0,0);
+	glRotated(rotNaveY,0,1,0);
+	glRotated(rotNaveZ,0,0,1);
 	drawModel();
+	if(luz)glEnable(GL_LIGHTING);
 	glPopMatrix();
 
 	planetas();

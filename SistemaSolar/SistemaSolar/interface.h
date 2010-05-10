@@ -36,6 +36,9 @@ extern int fontText;
 
 extern char s[100];
 
+extern int rotNaveX;
+extern int rotNaveY;
+extern int rotNaveZ;
 
 void processKeys(unsigned char tecla, int x, int y);
 void processSpecialKeys(int key, int xx, int yy);
