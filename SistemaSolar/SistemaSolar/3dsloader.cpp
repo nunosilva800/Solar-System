@@ -51,8 +51,6 @@ long filelength(int f)
     return(buf.st_size);
 }
 
-
-
 char Load3DS (obj_type_ptr p_object, char *p_filename)
 {
 	int i; //Index variable
@@ -75,9 +73,9 @@ char Load3DS (obj_type_ptr p_object, char *p_filename)
 		//getch(); //Insert this command for debug (to wait for keypress for each chuck reading)
 
 		fread (&l_chunk_id, 2, 1, l_file); //Read the chunk header
-		printf("ChunkID: %x\n",l_chunk_id);
+		//printf("ChunkID: %x\n",l_chunk_id);
 		fread (&l_chunk_lenght, 4, 1, l_file); //Read the lenght of the chunk
-		printf("ChunkLenght: %x\n",l_chunk_lenght);
+		//printf("ChunkLenght: %x\n",l_chunk_lenght);
 
 		switch (l_chunk_id)
         {

@@ -25,6 +25,7 @@ extern float r;
 extern bool fullscreen;
 extern bool luz;
 
+extern int cameraMode;
 extern int MouseBtnState;
 extern int window;
 extern int winX;
@@ -39,6 +40,7 @@ extern char s[100];
 extern int rotNaveX;
 extern int rotNaveY;
 extern int rotNaveZ;
+extern float navePos[3];
 
 void processKeys(unsigned char tecla, int x, int y);
 void processSpecialKeys(int key, int xx, int yy);

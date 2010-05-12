@@ -16,7 +16,6 @@ GLfloat ambientLight1[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 GLfloat diffuseLight[] = { 1, 1, 1, 1.0f };
 GLfloat specular1[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -90,19 +89,20 @@ void renderScene(void) {
 	}
 	
 	//desenha a nave
-	glPushMatrix();
-	glDisable(GL_LIGHTING);
-	glTranslatef(camlookX,camlookY,camlookZ);
-	glRotated(rotNaveX,1,0,0);
-	glRotated(rotNaveY,0,1,0);
-	glRotated(rotNaveZ,0,0,1);
-	drawModel();
-	if(luz)glEnable(GL_LIGHTING);
-	glPopMatrix();
+	if(cameraMode == 1){
+		glPushMatrix();
+		glDisable(GL_LIGHTING);
+		glTranslatef(camlookX,camlookY,camlookZ);
+		glRotated(rotNaveX,1,0,0);
+		glRotated(rotNaveY,0,1,0);
+		glRotated(rotNaveZ,0,0,1);
+		drawModel();
+		if(luz)glEnable(GL_LIGHTING);
+		glPopMatrix();
+	}
 
 	planetas();
 	
-
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
@@ -186,7 +186,10 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
+
+	if(cameraMode == 0) writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Camera Geral");
+	if(cameraMode == 1) writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Camera Nave");
+	
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar a camara");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "CTRL+rato ou w / s para aproximar/afastar");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao da camara");
