@@ -49,40 +49,6 @@ void processKeysNave(unsigned char tecla, int x, int y){
 	float aux;
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
 	switch(tecla){
-		case 27  : exit(0);
-		case '+' : if(scale < 200) scale++; desenhaAnel(); break;
-		case '-' : if(scale > 1) scale--; desenhaAnel(); break;
-
-		case ',' : distFactor+=0.01; desenharCintura(); break;
-		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura();  break;
-		
-		case 't' : timeFactor+=0.01; break;
-		case 'g' : timeFactor-=0.01; break;
-		case 'l' : luz?luz=false:luz=true; break;
-		case 'f' : glutSetWindow(window);
-			if(fullscreen){
-				fullscreen=false;
-				glutPositionWindow(100,100),
-				glutReshapeWindow(winX,winY);
-				//ao sair de fullscreen, colocar a infotab no sitio correcto
-				glutSetWindow(infotab);
-				glutPositionWindow(0.8*winX,0);
-				glutReshapeWindow(0.2*winX, winY);
-		   }
-		   else{
-				glutFullScreen();
-				fullscreen=true; 
-				//ao entrar em fullscreen, colocar a infotab no sitio correcto
-				glutSetWindow(infotab);
-				glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
-				glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
-		   }
-		   break;
-
-		case 'o' : orbitas?orbitas=false:orbitas=true; break;
-		case 'c' : if(drawCintura)drawCintura=false;
-				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
-				   break;
 		case 'w' :if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
 						(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
@@ -127,8 +93,6 @@ void processKeysNave(unsigned char tecla, int x, int y){
 					return;
 		default : return;
 	}
-	glutSetWindow(infotab);
-	glutPostRedisplay();	
 }
 
 void processSpecialKeysNave(int key, int xx, int yy) 
@@ -166,41 +130,6 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 	float aux;
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
 	switch(tecla){
-		case 27  : exit(0);
-		case '+' : if(scale < 200) scale++; desenhaAnel(); break;
-		case '-' : if(scale > 1) scale--; desenhaAnel(); break;
-
-		case ',' : distFactor+=0.01; desenharCintura(); break;
-		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura();  break;
-		
-		case 't' : timeFactor+=0.01; break;
-		case 'g' : timeFactor-=0.01; break;
-		case 'l' : luz?luz=false:luz=true; break;
-		case 'f' : if(fullscreen){
-					fullscreen=false;
-					glutPositionWindow(100,100),
-					glutReshapeWindow(winX,winY);
-					
-					glutSetWindow(infotab);
-					glutPositionWindow(0.8*winX,0);
-					glutReshapeWindow(0.2*winX, winY);
-					glutSetWindow(window);
-				   }
-				   else{
-					glutFullScreen();
-					fullscreen=true; 
-
-					glutSetWindow(infotab);
-					glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
-					glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
-					glutSetWindow(window);
-				   }
-				   break;
-
-		case 'o' : orbitas?orbitas=false:orbitas=true; break;
-		case 'c' : if(drawCintura)drawCintura=false;
-				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
-				   break;
 		case 'w' :	aux = r-1000;
 					if(aux<2000)aux=2000;
 					if(!haColisao(
@@ -230,14 +159,11 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 					camY = camlookY +( r * sin(beta*(PI/180)));
-				}
-				return;
-		default : return;
+					}
+					return;
 	}
-	glutSetWindow(infotab);
-	glutPostRedisplay();
-	
 }
+
 void processSpecialKeysGlobal(int key, int xx, int yy) 
 {
 	switch(key) {
@@ -271,8 +197,57 @@ void processSpecialKeysGlobal(int key, int xx, int yy)
 
 
 void processKeys(unsigned char tecla, int x, int y){
+	//teclas proprias do modo global
 	if(cameraMode == 0) processKeysGlobal(tecla, x, y);
+	//teclas propias do modo nave
 	if(cameraMode == 1) processKeysNave(tecla, x, y);
+	//funcionalidades comuns aos modos de navegação
+	switch(tecla){
+		case '0' : menu(1); break;
+		case '1' : menu(2); break;
+		case '2' : menu(3); break;
+		case '3' : menu(4); break;
+		case '4' : menu(5); break;
+		case '5' : menu(6); break;
+		case '6' : menu(7); break;
+		case '7' : menu(8); break;
+		case '8' : menu(9); break;
+		case '9' : menu(10); break;
+		case 27  : exit(0);
+		case '+' : if(scale < 200) scale++; desenhaAnel(); glutSetWindow(infotab); glutPostRedisplay(); break;
+		case '-' : if(scale > 1) scale--; desenhaAnel(); glutSetWindow(infotab); glutPostRedisplay(); break;
+
+		case ',' : distFactor+=0.01; desenharCintura(); glutSetWindow(infotab); glutPostRedisplay(); break;
+		case '.' : if(distFactor > 0.03)distFactor-=0.01; desenharCintura();
+			glutSetWindow(infotab); glutPostRedisplay(); break;
+		
+		case 't' : timeFactor+=0.01; glutSetWindow(infotab); glutPostRedisplay(); break;
+		case 'g' : timeFactor-=0.01; glutSetWindow(infotab); glutPostRedisplay(); break;
+		case 'l' : luz?luz=false:luz=true; break;
+		case 'f' : glutSetWindow(window);
+			if(fullscreen){
+				fullscreen=false;
+				glutPositionWindow(100,100),
+				glutReshapeWindow(winX,winY);
+				//ao sair de fullscreen, colocar a infotab no sitio correcto
+				glutSetWindow(infotab);
+				glutPositionWindow(0.8*winX,0);
+				glutReshapeWindow(0.2*winX, winY);
+		   }
+		   else{
+				glutFullScreen();
+				fullscreen=true; 
+				//ao entrar em fullscreen, colocar a infotab no sitio correcto
+				glutSetWindow(infotab);
+				glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
+				glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+		   }
+		   break;
+		case 'o' : orbitas?orbitas=false:orbitas=true; break;
+		case 'c' : if(drawCintura)drawCintura=false;
+				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
+				   break;
+	}
 }
 
 void processSpecialKeys(int key, int xx, int yy){
@@ -369,6 +344,26 @@ void menu(int id_op){
 			break;
 				 }
 		case 3 : {
+			camlookX = distFactor*distSolMercurio*sin(angMercurio);
+			camlookZ = distFactor*distSolMercurio*cos(angMercurio);
+			r = raioMercurio*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		 case 4 : {
+			camlookX = distFactor*distSolVenus*sin(angVenus);
+			camlookZ = distFactor*distSolVenus*cos(angVenus);
+			r = raioVenus*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		case 5 : {
 			camlookX = distFactor*distSolTerra*sin(angTerra);
 			camlookZ = distFactor*distSolTerra*cos(angTerra);
 			r = raioTerra*scale*10;
@@ -378,7 +373,7 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 4 : {
+		case 6 : {
 			camlookX = distFactor*distSolMarte*sin(angMarte);
 			camlookZ = distFactor*distSolMarte*cos(angMarte);
 			r = raioMarte*scale*10;
@@ -388,10 +383,40 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 5 : {
+		case 7 : {
 			camlookX = distFactor*distSolJupiter*sin(angJupiter);
 			camlookZ = distFactor*distSolJupiter*cos(angJupiter);
 			r = raioJupiter*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		 case 8 : {
+			camlookX = distFactor*distSolSaturno*sin(angSaturno);
+			camlookZ = distFactor*distSolSaturno*cos(angSaturno);
+			r = raioSaturno*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		case 9 : {
+			camlookX = distFactor*distSolUrano*sin(angUrano);
+			camlookZ = distFactor*distSolUrano*cos(angUrano);
+			r = raioUrano*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		 case 10 : {
+			camlookX = distFactor*distSolNeptuno*sin(angNeptuno);
+			camlookZ = distFactor*distSolNeptuno*cos(angNeptuno);
+			r = raioNeptuno*scale*10;
 			beta = 45; alpha = 45;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -405,9 +430,14 @@ void gerarMenu(){
 	glutCreateMenu(menu);
 	glutAddMenuEntry("Trocar Modo de Camera",1);
 	glutAddMenuEntry("Vista Geral",2);
-	glutAddMenuEntry("Ir Para Terra",3);
-	glutAddMenuEntry("Ir Para Marte",4);
-	glutAddMenuEntry("Ir Para Jupiter",5);
+	glutAddMenuEntry("Ir Para Mercurio",3);
+	glutAddMenuEntry("Ir Para Venus",4);
+	glutAddMenuEntry("Ir Para Terra",5);
+	glutAddMenuEntry("Ir Para Marte",6);
+	glutAddMenuEntry("Ir Para Jupiter",7);
+	glutAddMenuEntry("Ir Para Saturno",8);
+	glutAddMenuEntry("Ir Para Urano",9);
+	glutAddMenuEntry("Ir Para Nepturno",10);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
