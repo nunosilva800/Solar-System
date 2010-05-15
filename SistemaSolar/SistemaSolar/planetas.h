@@ -5,9 +5,6 @@
 
 #include <GL/glut.h>
 
-//diametro em KM
-#define diametroTerra 12.742
-#define raioTerra	6.371
 
 //Distancia ao sol		KM(x1000)
 #define distSolMercurio	58000
@@ -25,13 +22,14 @@
 #define raioSol			695.5
 #define raioMercurio	2.4395
 #define raioVenus		6.052
+#define raioTerra		6.371
 #define raioMarte		3.396
 #define raioJupiter		71.492
 #define raioSaturno		60.268
 #define raioUrano		25.559 
 #define raioNeptuno		24.764
 
-//Distancia planeta<->luas		KM
+//Distancia planeta<->luas		KM(x1000)
 #define distTerraLua			384.403
 	//Marte
 #define distMarteFobos			9.337
@@ -46,7 +44,7 @@
 #define distSaturnoTitan		1222
 #define distSaturnoIapetus		3560
 
-//Raios Luas			KM
+//Raios Luas			KM(x1000)
 #define raioLua			1.73710
 	//Marte
 #define raioFobos		0.0111

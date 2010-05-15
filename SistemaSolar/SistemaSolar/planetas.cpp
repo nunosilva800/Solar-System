@@ -79,7 +79,7 @@ void draw_orbita(float raio, float angleX,float angleY, float angleZ){
 	float xx=0;
 	float yy=0;
 	glBegin(GL_LINE_LOOP);
-	for (int i = 0; i < 360; i+=5)
+	for (int i = 0; i < 360; i++)
 	{
 		xx = raio * cos(i*(PI/180));
 		yy = raio * sin(i*(PI/180));

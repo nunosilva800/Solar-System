@@ -309,8 +309,8 @@ void fmotion(int xx, int yy)
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			r-=(y-yy)*100;
-			if(r > 150000) r = 150000;
-			if(r < 2000) r = 2000;
+			if(r > 1500000) r = 1500000;
+			if(r < 1000) r = 1000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -378,6 +378,26 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
+		case 4 : {
+			camlookX = distFactor*distSolMarte*sin(angMarte);
+			camlookZ = distFactor*distSolMarte*cos(angMarte);
+			r = raioMarte*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
+		case 5 : {
+			camlookX = distFactor*distSolJupiter*sin(angJupiter);
+			camlookZ = distFactor*distSolJupiter*cos(angJupiter);
+			r = raioJupiter*scale*10;
+			beta = 45; alpha = 45;
+			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));
+			break;
+				 }
 	}
 }
 
@@ -386,6 +406,8 @@ void gerarMenu(){
 	glutAddMenuEntry("Trocar Modo de Camera",1);
 	glutAddMenuEntry("Vista Geral",2);
 	glutAddMenuEntry("Ir Para Terra",3);
+	glutAddMenuEntry("Ir Para Marte",4);
+	glutAddMenuEntry("Ir Para Jupiter",5);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
