@@ -301,9 +301,8 @@ void fmotion(int xx, int yy)
 	}
 	x=xx;y=yy;
 
-	if(x < 0 || x > glutGet(GLUT_WINDOW_WIDTH) || y < 0 || y > glutGet(GLUT_WINDOW_HEIGHT) )
-		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-	else glutSetCursor( GLUT_CURSOR_NONE );
+	//fazer o rato desaparecer
+	glutSetCursor( GLUT_CURSOR_NONE );
 
 }
 
@@ -428,16 +427,16 @@ void menu(int id_op){
 
 void gerarMenu(){
 	glutCreateMenu(menu);
-	glutAddMenuEntry("Trocar Modo de Camera",1);
-	glutAddMenuEntry("Vista Geral",2);
-	glutAddMenuEntry("Ir Para Mercurio",3);
-	glutAddMenuEntry("Ir Para Venus",4);
-	glutAddMenuEntry("Ir Para Terra",5);
-	glutAddMenuEntry("Ir Para Marte",6);
-	glutAddMenuEntry("Ir Para Jupiter",7);
-	glutAddMenuEntry("Ir Para Saturno",8);
-	glutAddMenuEntry("Ir Para Urano",9);
-	glutAddMenuEntry("Ir Para Nepturno",10);
+	glutAddMenuEntry("Trocar Modo de Camera (0)",1);
+	glutAddMenuEntry("Vista Geral (1)",2);
+	glutAddMenuEntry("Ir Para Mercurio (2)",3);
+	glutAddMenuEntry("Ir Para Venus (3)",4);
+	glutAddMenuEntry("Ir Para Terra (4)",5);
+	glutAddMenuEntry("Ir Para Marte (5)",6);
+	glutAddMenuEntry("Ir Para Jupiter (6)",7);
+	glutAddMenuEntry("Ir Para Saturno (7)",8);
+	glutAddMenuEntry("Ir Para Urano (8)",9);
+	glutAddMenuEntry("Ir Para Nepturno (9)",10);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
