@@ -8,6 +8,14 @@
 #include "texturas.h"
 #include "model.h"
 
+/*#include <AL/alut.h>
+
+ALuint soundBuffer[1];
+ALuint soundSource[1];
+ALsizei Ssize,Sfreq;
+ALenum  Sformat;
+ALvoid  *Sdata;*/
+
 int frame=0,time,timebase=0;
 char fps[10];
 
@@ -93,9 +101,9 @@ void renderScene(void) {
 		glPushMatrix();
 		glDisable(GL_LIGHTING);
 		glTranslatef(camlookX,camlookY,camlookZ);
-		glRotated(rotNaveX,1,0,0);
-		glRotated(rotNaveY,0,1,0);
-		glRotated(rotNaveZ,0,0,1);
+		//rodar a nave
+		glRotated(-90,1,0,0);
+		glRotated(alpha+180,0,0,1);
 		drawModel();
 		if(luz)glEnable(GL_LIGHTING);
 		glPopMatrix();
@@ -199,6 +207,31 @@ void infotabScene(void){
 	glutSwapBuffers();
 }
 
+void initSound(){
+	/*
+	alutInit(NULL,NULL);
+	alListener3f(AL_POSITION, 0,0,0);
+	alListener3f(AL_VELOCITY, 0,0,0);
+    alListener3f(AL_ORIENTATION, 0,1,0);
+
+	alGenBuffers(1,soundBuffer);
+	//alutLoadWAVFile("C:\Users\Nuno\Documents\trolololoclpi.wav",&Sformat,&Sdata,&Ssize,&Sfreq,(ALboolean *)true);
+	Sdata = alutLoadMemoryFromFile("C:\Users\Nuno\Documents\trolololoclpi.wav",NULL,NULL,NULL);
+
+	alBufferData(soundBuffer[0], Sformat, Sdata, Ssize, Sfreq);
+	//alutUnloadWAV(Sformat,Sdata,Ssize,Sfreq);
+
+	alGenSources(1,soundSource);
+
+	alSourcef(soundSource[0], AL_PITCH, 1.0f);
+	alSourcef(soundSource[0], AL_GAIN, 1.0f);
+	alSource3f(soundSource[0], AL_POSITION,camX,camY,camZ);
+	alSource3f(soundSource[0], AL_VELOCITY,0,1,0);
+	alSourcei(soundSource[0], AL_BUFFER,*soundBuffer);
+	alSourcei(soundSource[0], AL_LOOPING, AL_TRUE);
+	*/
+}
+
 void main(int argc, char **argv) {
 // inicialização
 	glutInit(&argc, argv);
@@ -260,6 +293,8 @@ void main(int argc, char **argv) {
 	glutSpecialFunc(processSpecialKeys);
 	glutMotionFunc(fmotion);
 	glutMouseFunc(fmouse);
+
+	//initSound();
 
 // entrar no ciclo do GLUT 
 	glutMainLoop();
