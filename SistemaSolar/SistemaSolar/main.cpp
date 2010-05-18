@@ -7,6 +7,7 @@
 #include "planetas.h"
 #include "texturas.h"
 #include "model.h"
+#include "vfc.h"
 
 /*#include <AL/alut.h>
 
@@ -110,7 +111,18 @@ void renderScene(void) {
 	}
 
 	planetas();
+		if(winY == 0)
+	winY = 1;
+	float ratio = winX * 1.0 / winY;
+	calculaAltLarg(45,ratio,10,1000000000);
 	
+	
+	double vec1[]={camX,camY,camZ};
+	double vec2[]={camlookX,camlookY,camlookZ};
+	double vec3[]={0,1,0};
+
+	setPlanes(vec1,vec2,vec3);
+
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
@@ -281,6 +293,12 @@ void main(int argc, char **argv) {
 	camZ = r * cos(beta*(PI/180)) * cos(alpha*(PI/180));
 	camX = r * cos(beta*(PI/180)) * sin(alpha*(PI/180));
 	camY = r * sin(beta*(PI/180));
+
+	if(winY == 0)
+	winY = 1;
+	//inicializa a piramide do view f culling
+	float ratio = winX * 1.0 / winY;
+	calculaAltLarg(45,ratio,10,1000000000);
 
 	//criar janela secundaria
 	infotab = glutCreateSubWindow(window, 

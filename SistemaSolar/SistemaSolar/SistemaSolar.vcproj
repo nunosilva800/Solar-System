@@ -133,7 +133,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="OpenGL32.lib alut.lib OpenAL32.lib"
+				AdditionalDependencies="OpenGL32.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -208,6 +208,10 @@
 				RelativePath=".\texture.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\vfc.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -240,6 +244,10 @@
 			</File>
 			<File
 				RelativePath=".\texture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\vfc.h"
 				>
 			</File>
 		</Filter>

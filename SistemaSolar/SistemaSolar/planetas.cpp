@@ -2,6 +2,7 @@
 #include "planetas.h"
 #include "texturas.h"
 #include "colisoes.h"
+#include "vfc.h"
 
 GLfloat rotDemios = 0;
 
@@ -112,15 +113,21 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
     glBindTexture(GL_TEXTURE_2D, texture);
 	
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,raioSol,32,32);
-	
+	double vec[3];
+	vec[0]= posicoes[0][0];
+	vec[1]= posicoes[0][1];	
+	vec[2]= posicoes[0][2];
+//	if(sphereInFrustum(vec,raioSol))
+//	{
+			gluSphere (Q,raioSol,32,32);
+//	}
 	glDisable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, nullv);
 	glMaterialfv(GL_FRONT, GL_EMISSION, nullv);
 	glDisable(GL_TEXTURE_2D);
-
+		
 	glPopMatrix();
 }
 
@@ -433,7 +440,15 @@ void desenharJupiter(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioJupiter,32,32);
+
+	double vec[3];
+	vec[0]= posicoes[12][0];
+	vec[1]= posicoes[12][1];	
+	vec[2]= posicoes[12][2];
+	if(sphereInFrustum(vec,raioJupiter))
+	{
+		gluSphere (Q,scale*raioJupiter,32,32);
+	}
 	glDisable(GL_TEXTURE_2D);
 	glRotatef(90,1,0,0);
 	desenharIO(texture2, Q2);

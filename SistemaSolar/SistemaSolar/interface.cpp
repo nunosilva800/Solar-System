@@ -2,6 +2,7 @@
 #include "planetas.h"
 #include "texturas.h"
 #include "colisoes.h"
+#include "vfc.h"
 
 float height = 2.0f;
 float x = 0.0f;
@@ -120,8 +121,10 @@ void processSpecialKeysNave(int key, int xx, int yy)
 void processKeysGlobal(unsigned char tecla, int x, int y){
 	float aux;
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
+
+	
 	switch(tecla){
-		case 'w' :	aux = r-1000;
+		case 'w' :  aux = r-1000;
 					if(aux<2000)aux=2000;
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
@@ -262,7 +265,7 @@ void fmouse(int button, int state, int xx, int yy)
 
 void fmotion(int xx, int yy)
 {
-	float auxAlpha,auxBeta;
+
 	if(mouseBtn!=1) return ;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
