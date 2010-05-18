@@ -341,7 +341,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolMercurio*cos(angMercurio);
 			r = raioMercurio*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -352,7 +352,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolVenus*cos(angVenus);
 			r = raioVenus*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -363,7 +363,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolTerra*cos(angTerra);
 			r = raioTerra*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -374,7 +374,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolMarte*cos(angMarte);
 			r = raioMarte*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -385,7 +385,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolJupiter*cos(angJupiter);
 			r = raioJupiter*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -396,7 +396,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolSaturno*cos(angSaturno);
 			r = raioSaturno*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -407,7 +407,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolUrano*cos(angUrano);
 			r = raioUrano*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
@@ -418,7 +418,7 @@ void menu(int id_op){
 			camlookY = 0;
 			camlookZ = distFactor*distSolNeptuno*cos(angNeptuno);
 			r = raioNeptuno*scale*10;
-			beta = 45; alpha = 45;
+			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
