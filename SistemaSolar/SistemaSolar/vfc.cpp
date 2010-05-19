@@ -7,11 +7,12 @@ double fov[3];
 double matriznormais[6][3];
 double linhad[6];
 
-void calculaAltLarg(int fov,int ratio,int nearDist,int farDist){
+void calculaAltLarg(int fov,float ratio,int nearDist,int farDist){
 	nh = 2 * tanf(fov / 2) * nearDist;	
 	nw = nh * ratio;	
 	fh = 2 * tanf(fov / 2) * farDist;
 	fw = fh * ratio;
+
 }
 
 double innerProduct(double * vec1, double *vec2)
@@ -19,65 +20,61 @@ double innerProduct(double * vec1, double *vec2)
 	return (vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2]);
 }
 
-double* prodVect(double vec1[3],double vec2[3]){
-	double res[3];
+void prodVect(double vec1[3],double vec2[3],double* res){
 	res[0]= vec1[1]*vec2[2] - vec1[2]*vec2[1];
 	res[1]= vec1[2]*vec2[0] - vec1[0]*vec2[2];
 	res[2]= vec1[0]*vec2[1] - vec1[1]*vec2[0];
-
-	return res;
 }
 
-double* normaliza(double *vec){
+void normaliza(double *vec){
 	double magnitude = sqrt( pow(vec[0],2) + pow(vec[1],2) + pow(vec[2],2) );
-	double vector[3] = { vec[0]/magnitude,
-						vec[1]/magnitude,
-						vec[2]/magnitude };
-	return vector;
+
+	vec[0] = vec[0]/magnitude;
+	vec[1] = vec[1]/magnitude;
+	vec[2] = vec[2]/magnitude;
 }
 
-double* somaVectores(double vec1[3],double vec2[3]){
-	double res[3];
+void somaVectores(double* vec1,double *vec2,double *res){
 	res[0]= vec1[0]+vec2[0];
 	res[1]= vec1[1]+vec2[1];
 	res[2]= vec1[2]+vec2[2];
-	return res;
 } 
 
-double* subVectores(double vec1[3],double vec2[3]){
-	double res[3];
+void subVectores(double* vec1,double *vec2,double *res){
 	res[0]= vec1[0]-vec2[0];
 	res[1]= vec1[1]-vec2[1];
 	res[2]= vec1[2]-vec2[2];
-	return res;
 }
 
-double* multVecValor(double vec1[3],double valor){
-	double res[3];
+void multVecValor(double* vec1,double valor,double *res){
 	res[0]= vec1[0]*valor;
 	res[1]= vec1[1]*valor;
 	res[2]= vec1[2]*valor;
-	return res;
 }
 	
 
 void geraPlano(double *v1,double* v2,double*v3,int indice)
 {
-	double* aux1, *aux2;
+	double *aux1, *aux2;
+	double* arrAux;
 
-	aux1 = subVectores(v1,v2);
-	aux2 = subVectores(v3,v2);
+	aux1 = (double*)(malloc(3*sizeof(double)));
+	aux2 = (double*)(malloc(3*sizeof(double)));
+	arrAux = (double*)(malloc(3*sizeof(double)));
+
+	subVectores(v1,v2,aux1);
+	subVectores(v3,v2,aux2);
 	
-	double* arrAux=prodVect(aux2,aux1);
+	
+	prodVect(aux2,aux1,arrAux);
 
 	matriznormais[indice][0]= arrAux[0];
 	matriznormais[indice][1]= arrAux[1];
 	matriznormais[indice][2]= arrAux[2];
 
-	arrAux = normaliza(matriznormais[indice]);
-	matriznormais[indice][0]=arrAux[0];	
-	matriznormais[indice][1]=arrAux[1];	
-	matriznormais[indice][2]=arrAux[2];
+
+	normaliza(matriznormais[indice]);
+	
 
 	double * copy = v2;
 	
@@ -89,12 +86,25 @@ void geraPlano(double *v1,double* v2,double*v3,int indice)
 //camlooks é o l
 //o u é fixo 0.0f,1.0f,0.0f
 void setPlanes(double *p, double *l, double *u){
+	printf("CAMARA: %f %f %f \n",p[0],p[1],p[2]);
+	//p[2]-=29999;
+
+
 	double dir[3],Z[3];
 	double *nc,*fc;
-	double *X,*Y,*zAxis,*xAxis,*yAxis;
+	double *X,*Y,*yAxis;
 
-	double *ntr,*ntl,*nbr,*nbl;
-	double *ftr,*ftl,*fbr,*fbl;
+	X = (double*)malloc(3*sizeof(double));
+	yAxis = (double*)malloc(3*sizeof(double));
+	Y = (double*)malloc(3*sizeof(double));
+	nc = (double*)malloc(3*sizeof(double));
+	fc = (double*)malloc(3*sizeof(double));
+
+	double ntr[3],ntl[3],nbr[3],nbl[3];
+	double ftr[3],ftl[3],fbr[3],fbl[3];
+
+
+
 	int nearDist = 10;
 	int farDist = 1000000000;
 	// compute the Z axis of camera
@@ -103,49 +113,111 @@ void setPlanes(double *p, double *l, double *u){
 	Z[0]=p[0]-l[0];
 	Z[1]=p[1]-l[1];
 	Z[2]=p[2]-l[2];
-	zAxis = normaliza(Z);
+	normaliza(Z);
 
 	// X axis of camera with given "up" vector and Z axis
-	X = prodVect(u,zAxis);
-	xAxis = normaliza(X);
+	//printf("zAxis: %f %f %f \n",zAxis[0],zAxis[1],zAxis[2]);
+	X[0]= u[1]*Z[2] - u[2]*Z[1];
+	X[1]= u[2]*Z[0] - u[0]*Z[2];
+	X[2]= u[0]*Z[1] - u[1]*Z[0];
 
+	//X = prodVect(u,zAxis);
+	normaliza(X);
+	
 	// the real "up" vector is the cross product of Z and X
-	Y = prodVect(zAxis,xAxis);
+	Y[0]= Z[1]*X[2] - Z[2]*X[1];
+	Y[1]= Z[2]*X[0] - Z[0]*X[2];
+	Y[2]= Z[0]*X[1] - Z[1]*X[0];
+	//Y = prodVect(zAxis,xAxis);
 
 	// compute the centers of the near and far planes
-	nc = subVectores(p,multVecValor(zAxis,nearDist));
-	fc = subVectores(p,multVecValor(zAxis,farDist));
+	double *aux,*aux1,*aux2;
+	aux = (double*)(malloc(3*sizeof(double)));
+	aux1 = (double*)(malloc(3*sizeof(double)));
+	aux2 = (double*)(malloc(3*sizeof(double)));
+
+	multVecValor(Z,nearDist,aux);
+	subVectores(p,aux,nc);
+	
+	multVecValor(Z,farDist,aux);
+	subVectores(p,aux,fc);
+
+
+	printf("FC: %f %f %f\n",fc[0],fc[1],fc[2]);
+	printf("NC: %f %f %f\n",nc[0],nc[1],nc[2]);
 
 	// compute the 4 corners of the frustum on the near plane
-	yAxis = (double*)malloc(3*sizeof(double));
 	
-	ntl = somaVectores(nc,subVectores(multVecValor(yAxis,nh),multVecValor(xAxis,nw)));
+	multVecValor(Y,nh/2,aux);
+	multVecValor(X,nw/2,aux1);
+	subVectores(aux,aux1,aux2);
+	somaVectores(nc,aux2,ntl);
+	//ntl = somaVectores(nc,subVectores(multVecValor(X,nh),multVecValor(X,nw)));
 	//ntl = nc + yAxis * nh - xAxis * nw;
-	ntr = somaVectores(nc,somaVectores(multVecValor(yAxis,nh),multVecValor(xAxis,nw)));
+	multVecValor(Y,nh/2,aux);
+	multVecValor(X,nw/2,aux1);
+	somaVectores(aux,aux1,aux2);
+	somaVectores(nc,aux2,ntr);
+	//ntr = somaVectores(nc,somaVectores(multVecValor(X,nh),multVecValor(X,nw)));
 	//ntr = nc + yAxis * nh + xAxis * nw;
-	nbl = subVectores(nc,subVectores(multVecValor(yAxis,nh),multVecValor(xAxis,nw)));
+	multVecValor(Y,nh/2,aux);
+	multVecValor(X,nw/2,aux1);
+	subVectores(aux,aux1,aux2);
+	subVectores(nc,aux2,nbl);
+	//nbl = subVectores(nc,subVectores(multVecValor(X,nh),multVecValor(X,nw)));
 	//nbl = nc - yAxis * nh - xAxis * nw;
-	nbr = subVectores(nc,somaVectores(multVecValor(yAxis,nh),multVecValor(xAxis,nw)));
+	multVecValor(Y,nh/2,aux);
+	multVecValor(X,nw/2,aux1);
+	somaVectores(aux,aux1,aux2);
+	subVectores(nc,aux2,nbr);
+	//nbr = subVectores(nc,somaVectores(multVecValor(X,nh),multVecValor(X,nw)));
 	//nbr = nc - yAxis * nh + xAxis * nw;
 
 	// compute the 4 corners of the frustum on the far plane
-	//ftl = fc + multVecValor(yAxis,fh) - xAxis * fw;
-	ftl = somaVectores(fc,subVectores(multVecValor(yAxis,fh),multVecValor(xAxis,fw)));
-	//ftr = fc + yAxis * fh + xAxis * fw;
-	ftr = somaVectores(fc,somaVectores(multVecValor(yAxis,fh),multVecValor(xAxis,fw)));
-	//fbl = fc - yAxis * fh - xAxis * fw;
-	fbl = subVectores(fc,subVectores(multVecValor(yAxis,fh),multVecValor(xAxis,fw)));
-	//fbr = fc - yAxis * fh + xAxis * fw;
-	fbr = subVectores(fc,somaVectores(multVecValor(yAxis,fh),multVecValor(xAxis,fw)));
+	multVecValor(Y,fh/2,aux);
+	multVecValor(X,fw/2,aux1);
+	subVectores(aux,aux1,aux2);
+	somaVectores(fc,aux2,ftl);
+	
+	multVecValor(Y,fh/2,aux);
+	multVecValor(X,fw/2,aux1);
+	somaVectores(aux,aux1,aux2);
+	somaVectores(fc,aux2,ftr);
+	
+	multVecValor(Y,fh/2,aux);
+	multVecValor(X,fw/2,aux1);
+	somaVectores(aux,aux1,aux2);
+	subVectores(fc,aux2,fbl);
 
-	printf("nBR : %f %f %f",nbr[0],nbr[1],nbr[2]);
+	multVecValor(Y,fh/2,aux);
+	multVecValor(X,fw/2,aux1);
+	subVectores(aux,aux1,aux2);
+	subVectores(fc,aux2,fbr);
+
+	//ftl = fc + multVecValor(yAxis,fh) - xAxis * fw;
+	//ftl = somaVectores(fc,subVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
+	//ftr = fc + yAxis * fh + xAxis * fw;
+	//ftr = somaVectores(fc,somaVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
+	//fbl = fc - yAxis * fh - xAxis * fw;
+	//fbl = subVectores(fc,subVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
+	//fbr = fc - yAxis * fh + xAxis * fw;
+	//fbr = subVectores(fc,somaVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
+
+	printf("FTL %f %f %f\n",ftl[0],ftl[1],ftl[2]);
+	printf("FTR %f %f %f\n",ftr[0],ftr[1],ftr[2]);
+	printf("FBR %f %f %f\n",fbr[0],fbr[1],fbr[2]);
+	printf("FBL %f %f %f\n",fbl[0],fbl[1],fbl[2]);
+
+	glColor3f(1.0,1.0,1.0);
 	glBegin(GL_QUADS);
-	glVertex3dv(ntl);
-	glVertex3dv(nbl);
-	glVertex3dv(nbr);
-	glVertex3dv(ntr);
+	glVertex3d(fbl[0],fbl[1],fbl[2]/10);	
+	glVertex3d(fbr[0],fbr[1],fbr[2]/10);
+	glVertex3d(ftr[0],ftr[1],ftr[2]/10);
+	glVertex3d(ftl[0],ftl[1],ftl[2]/10);
 	glEnd();
 
+
+	
 	// compute the six planes
 	// the function set3Points assumes that the points
 	// are given in counter clockwise order

@@ -110,18 +110,20 @@ void renderScene(void) {
 		glPopMatrix();
 	}
 
-	planetas();
+
 		if(winY == 0)
 	winY = 1;
 	float ratio = winX * 1.0 / winY;
 	calculaAltLarg(45,ratio,10,1000000000);
 	
 	
-	double vec1[]={camX,camY,camZ};
-	double vec2[]={camlookX,camlookY,camlookZ};
-	double vec3[]={0,1,0};
+	double vec1[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
 
 	setPlanes(vec1,vec2,vec3);
+
+	planetas();
 
 	// End of frame
 	frame++;

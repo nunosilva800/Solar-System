@@ -13,7 +13,7 @@ int mouseMod = 0;
 
 float camX = 0, camY = 0, camZ = 0;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 200, beta = 25, r = 30000;
+float alpha = 0, beta = 0, r = 30000;
 
 bool fullscreen = false;
 bool luz = true;

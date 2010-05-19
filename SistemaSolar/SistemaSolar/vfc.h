@@ -1,10 +1,10 @@
-void calculaAltLarg(int fov,int ratio,int nearDist,int farDist);
+void calculaAltLarg(int fov,float ratio,int nearDist,int farDist);
 double innerProduct(double * vec1, double *vec2);
-double* prodVect(double vec1[3],double vec2[3]);
-double* normaliza(double *vec);
-double* somaVectores(double* vec1,double *vec2);
-double* subVectores(double* vec1,double *vec2);
-double* multVecValor(double* vec1,double valor);
+void prodVect(double vec1[3],double vec2[3],double* res);
+void normaliza(double *vec);
+void somaVectores(double* vec1,double *vec2,double *res);
+void subVectores(double* vec1,double *vec2,double *res);
+void multVecValor(double* vec1,double valor,double *res);
 void geraPlano(double *v1,double* v2,double*v3,int indice);
 void setPlanes(double *p, double *l, double *u);
 double distancia(double* p,int indice);
