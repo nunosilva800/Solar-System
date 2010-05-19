@@ -242,6 +242,18 @@ void processKeys(unsigned char tecla, int x, int y){
 				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
 				   break;
 	}
+
+		if(winY == 0)
+	winY = 1;
+	float ratio = winX * 0.8 / winY;
+	calculaAltLarg(45,ratio,10,1000000000);
+	
+	
+	double vec1[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
+
+	setPlanes(vec1,vec2,vec3);
 }
 
 void processSpecialKeys(int key, int xx, int yy){
@@ -297,6 +309,18 @@ void fmotion(int xx, int yy)
 
 	//fazer o rato desaparecer
 	glutSetCursor( GLUT_CURSOR_NONE );
+
+	if(winY == 0)
+	winY = 1;
+	float ratio = winX * 0.8 / winY;
+	calculaAltLarg(45,ratio,10,1000000000);
+	
+	
+	double vec1[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
+
+	setPlanes(vec1,vec2,vec3);
 
 }
 

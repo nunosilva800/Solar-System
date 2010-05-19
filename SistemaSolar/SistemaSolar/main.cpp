@@ -69,7 +69,7 @@ void infotabChangeSize(int w, int h) {
 	
     glViewport(0, 0, w, h);
 
-	gluPerspective(45,ratio,10,100);
+	gluPerspective(45,ratio,1,100);
 
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -109,19 +109,6 @@ void renderScene(void) {
 		if(luz)glEnable(GL_LIGHTING);
 		glPopMatrix();
 	}
-
-
-		if(winY == 0)
-	winY = 1;
-	float ratio = winX * 1.0 / winY;
-	calculaAltLarg(45,ratio,10,1000000000);
-	
-	
-	double vec1[]={(double)camX,(double)camY,(double)camZ};
-	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
-	double vec3[]={0.0,1.0,0.0};
-
-	setPlanes(vec1,vec2,vec3);
 
 	planetas();
 
@@ -299,7 +286,7 @@ void main(int argc, char **argv) {
 	if(winY == 0)
 	winY = 1;
 	//inicializa a piramide do view f culling
-	float ratio = winX * 1.0 / winY;
+	float ratio = winX * 0.8 / winY;
 	calculaAltLarg(45,ratio,10,1000000000);
 
 	//criar janela secundaria
