@@ -44,6 +44,8 @@ GLfloat angRotRhea =0;
 GLfloat angRotTitan =0;
 GLfloat angRotIapetus =0;
 
+GLint varfatias=32;
+
 //vectores com as pos dos planetas
 double posicoes[19][3];
 double raios[19];
@@ -68,6 +70,21 @@ void rotacao(GLfloat rotacao,float tilt)
 {
 	glRotatef(tilt,0.0,0.0,1.0);
 	glRotated(rotacao,0.0,1.0,0.0);
+}
+
+
+int calcularFatias(int indice)
+{
+	double dist = sqrt(pow(camX-posicoes[indice][0],2)+pow(camY-posicoes[indice][1],2)+pow(camZ-posicoes[indice][2],2));
+	
+	double res =(dist / (raios[indice]*4*distFactor*scale) );
+	if(res>24)
+	{
+		return 8;
+	}
+	return (32-res);
+	
+
 }
 
 void draw_orbita(float raio, float angleX,float angleY, float angleZ){
@@ -119,7 +136,8 @@ void desenharSol(GLuint texture, GLUquadric *  Q)
 	vec[2]= posicoes[0][2];
 //	if(sphereInFrustum(vec,raioSol))
 //	{
-			gluSphere (Q,raioSol,32,32);
+			gluSphere (Q,raioSol,calcularFatias(0),32);
+			
 //	}
 	glDisable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
@@ -139,10 +157,11 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	posicoes[1][0]=distFactor*distSolMercurio*sin(angMercurio);
 	posicoes[1][1]=0.0;
 	posicoes[1][2]=distFactor*distSolMercurio*cos(angMercurio);
-	raios[1]=raioMercurio;
+	raios[1]=raioMercurio*scale;
 
 	angMercurio += ((2*PI)/velMercurio)*timeFactor;
 	glTranslatef(distFactor*distSolMercurio*sin(angMercurio), 0, distFactor*distSolMercurio*cos(angMercurio));
+	
 
 	//glColor3f(0.5,0.5,0.5);//cinza
 	angRotMercurio += (360/velRMercurio)*timeFactor;
@@ -150,7 +169,7 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioMercurio,32,32);
+	gluSphere (Q,scale*raioMercurio,calcularFatias(1),32);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
@@ -166,7 +185,7 @@ void desenharVenus(GLuint texture, GLUquadric *  Q)
 	posicoes[2][0]=distFactor*distSolVenus*sin(angVenus);
 	posicoes[2][1]=0.0;
 	posicoes[2][2]=distFactor*distSolVenus*cos(angVenus);
-	raios[2]=raioVenus;
+	raios[2]=raioVenus*scale;
 
 	glTranslatef(distFactor*distSolVenus*sin(angVenus), 0, distFactor*distSolVenus*cos(angVenus));
 
@@ -176,7 +195,7 @@ void desenharVenus(GLuint texture, GLUquadric *  Q)
 	glRotatef(90,1,0,0);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
-	gluSphere (Q,scale*raioVenus,32,32);
+	gluSphere (Q,scale*raioVenus,calcularFatias(2),32);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	if(orbitas)draw_orbita(distFactor*distSolVenus,90,0.0,orbitalTiltVenus);
@@ -191,7 +210,7 @@ void desenharLua(GLuint texture, GLUquadric * Q)
 	posicoes[3][0]=distFactor*scale*distTerraLua*sin(angLua);
 	posicoes[3][1]=0.0;
 	posicoes[3][2]=distFactor*scale*distTerraLua*cos(angLua);
-	raios[3]=raioLua;
+	raios[3]=raioLua*scale;
 
 	glTranslatef(distFactor*scale*distTerraLua*sin(angLua), 0, distFactor*scale*distTerraLua*cos(angLua));
 
@@ -217,7 +236,7 @@ void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	posicoes[4][0]=distFactor*distSolTerra*sin(angTerra+((2*PI)/velTerra)*timeFactor);
 	posicoes[4][1]=0.0;
 	posicoes[4][2]=distFactor*distSolTerra*cos(angTerra+((2*PI)/velTerra)*timeFactor);
-	raios[4]=raioTerra;
+	raios[4]=raioTerra*scale;
 
 	glTranslatef(distFactor*distSolTerra*sin(angTerra), 0, distFactor*distSolTerra*cos(angTerra));
 
@@ -229,7 +248,7 @@ void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioTerra,32,32);
+	gluSphere (Q,scale*raioTerra,calcularFatias(4),32);
 	glDisable(GL_TEXTURE_2D);
 	glRotatef(90,1,0,0);
 	desenharLua(texture2, Q2);
@@ -249,7 +268,7 @@ void desenharFobos(GLuint texture, GLUquadric * Q)
 	posicoes[5][0]=scale*distMarteFobos*sin(angFobos);
 	posicoes[5][1]=0.0;
 	posicoes[5][2]=scale*distMarteFobos*cos(angFobos);
-	raios[5]=raioFobos;
+	raios[5]=raioFobos*scale;
 
 	glTranslatef(scale*distMarteFobos*sin(angFobos), 0, scale*distMarteFobos*cos(angFobos));
 
@@ -275,7 +294,7 @@ void desenharDeimos(GLuint texture, GLUquadric * Q)
 	posicoes[6][0]=scale*distMarteDeimos*sin(angDeimos);
 	posicoes[6][1]=0.0;
 	posicoes[6][2]=scale*distMarteDeimos*cos(angDeimos);
-	raios[6]=raioDeimos;
+	raios[6]=raioDeimos*scale;
 
 	glTranslatef(scale*distMarteDeimos*sin(angDeimos), 0, scale*distMarteDeimos*cos(angDeimos));
 
@@ -301,7 +320,7 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	posicoes[7][0]=distFactor*distSolMarte*sin(angMarte);
 	posicoes[7][1]=0.0;
 	posicoes[7][2]=distFactor*distSolMarte*cos(angMarte);
-	raios[7]=raioMarte;
+	raios[7]=raioMarte*scale;
 
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
 
@@ -314,7 +333,7 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioMarte,32,32);
+	gluSphere (Q,scale*raioMarte,calcularFatias(7),32);
 	glDisable(GL_TEXTURE_2D);
 	
 	glPopMatrix();
@@ -332,7 +351,7 @@ void desenharIO(GLuint texture, GLUquadric * Q)
 	posicoes[8][0]=distFactor*scale*distJupiterIo*sin(angIO);
 	posicoes[8][1]=0.0;
 	posicoes[8][2]=distFactor*scale*distJupiterIo*cos(angIO);
-	raios[8]=raioIo;
+	raios[8]=raioIo*scale;
 
 	glTranslatef(distFactor*scale*distJupiterIo*sin(angIO), 0, distFactor*scale*distJupiterIo*cos(angIO));
 
@@ -356,7 +375,7 @@ void desenharEuropa(GLuint texture, GLUquadric * Q)
 	posicoes[9][0]=distFactor*scale*distJupiterEuropa*sin(angEuropa);
 	posicoes[9][1]=0.0;
 	posicoes[9][2]=distFactor*scale*distJupiterEuropa*cos(angEuropa);
-	raios[9]=raioEuropa;
+	raios[9]=raioEuropa*scale;
 
 	glTranslatef(distFactor*scale*distJupiterEuropa*sin(angEuropa), 0, distFactor*scale*distJupiterEuropa*cos(angEuropa));
 
@@ -381,7 +400,7 @@ void desenharGanimedes(GLuint texture, GLUquadric * Q)
 	posicoes[10][0]=distFactor*scale*distJupiterGanymede*sin(angGanimedes);
 	posicoes[10][1]=0.0;
 	posicoes[10][2]=distFactor*scale*distJupiterGanymede*cos(angGanimedes);
-	raios[10]=raioGanymede;
+	raios[10]=raioGanymede*scale;
 
 	glTranslatef(distFactor*scale*distJupiterGanymede*sin(angGanimedes), 0, distFactor*scale*distJupiterGanymede*cos(angGanimedes));
 
@@ -407,7 +426,7 @@ void desenharCalisto(GLuint texture, GLUquadric * Q)
 	posicoes[11][0]=distFactor*scale*distJupiterCalisto*sin(angCalisto);
 	posicoes[11][1]=0.0;
 	posicoes[11][2]=distFactor*scale*distJupiterCalisto*cos(angCalisto);
-	raios[11]=raioCalisto;
+	raios[11]=raioCalisto*scale;
 	
 	glTranslatef(distFactor*scale*distJupiterCalisto*sin(angCalisto), 0, distFactor*scale*distJupiterCalisto*cos(angCalisto));
 
@@ -430,7 +449,7 @@ void desenharJupiter(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	posicoes[12][0]=distFactor*distSolJupiter*sin(angJupiter);
 	posicoes[12][1]=0.0;
 	posicoes[12][2]=distFactor*distSolJupiter*cos(angJupiter);
-	raios[12]=raioJupiter;
+	raios[12]=raioJupiter*scale;
 
 	glTranslatef(distFactor*distSolJupiter*sin(angJupiter), 0, distFactor*distSolJupiter*cos(angJupiter));
 	//glColor3f(1,1,0);//amarelo
@@ -445,10 +464,9 @@ void desenharJupiter(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	vec[0]= posicoes[12][0];
 	vec[1]= posicoes[12][1];	
 	vec[2]= posicoes[12][2];
-	if(sphereInFrustum(vec,raioJupiter))
-	{
-		gluSphere (Q,scale*raioJupiter,32,32);
-	}
+	
+		gluSphere (Q,scale*raioJupiter,calcularFatias(12),32);
+	
 	glDisable(GL_TEXTURE_2D);
 	glRotatef(90,1,0,0);
 	desenharIO(texture2, Q2);
@@ -470,7 +488,7 @@ void desenharRhea(GLuint texture, GLUquadric * Q)
 	posicoes[13][0]=distFactor*scale*distSaturnoRhea*sin(velRReia);
 	posicoes[13][1]=0.0;
 	posicoes[13][2]=distFactor*scale*distSaturnoRhea*cos(velRReia);
-	raios[13]=raioRhea;
+	raios[13]=raioRhea*scale;
 
 	glTranslatef(distFactor*scale*distSaturnoRhea*sin(velRReia), 0, distFactor*scale*distSaturnoRhea*cos(velRReia));
 
@@ -494,7 +512,7 @@ void desenharTitan(GLuint texture, GLUquadric * Q)
 	posicoes[14][0]=distFactor*scale*distSaturnoTitan*sin(velRTita);
 	posicoes[14][1]=0.0;
 	posicoes[14][2]=distFactor*scale*distSaturnoTitan*cos(velRTita);
-	raios[14]=raioTitan;
+	raios[14]=raioTitan*scale;
 
 	glTranslatef(distFactor*scale*distSaturnoTitan*sin(velRTita), 0, distFactor*scale*distSaturnoTitan*cos(velRTita));
 
@@ -518,7 +536,7 @@ void desenharIapetus(GLuint texture, GLUquadric * Q)
 	posicoes[15][0]=distFactor*scale*distSaturnoIapetus*sin(velRJapeto);
 	posicoes[15][1]=0.0;
 	posicoes[15][2]=distFactor*scale*distSaturnoIapetus*cos(velRJapeto);
-	raios[15]=raioIapetus;
+	raios[15]=raioIapetus*scale;
 
 	glTranslatef(distFactor*scale*distSaturnoIapetus*sin(velRJapeto), 0, distFactor*scale*distSaturnoIapetus*cos(velRJapeto));
 
@@ -543,7 +561,7 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	posicoes[16][0]=distFactor*distSolSaturno*sin(angSaturno);
 	posicoes[16][1]=0.0;
 	posicoes[16][2]=distFactor*distSolSaturno*cos(angSaturno);
-	raios[16]=raioSaturno;
+	raios[16]=raioSaturno*scale;
 
 	glTranslatef(distFactor*distSolSaturno*sin(angSaturno), 0, distFactor*distSolSaturno*cos(angSaturno));
 
@@ -553,7 +571,7 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere(Q,scale*raioSaturno,32,32);
+	gluSphere(Q,scale*raioSaturno,calcularFatias(16),32);
 	glDisable(GL_TEXTURE_2D);
 
 	glRotatef(90,1,0,0);
@@ -577,7 +595,7 @@ void desenharUrano(GLuint texture, GLUquadric *  Q)
 	posicoes[17][0]=distFactor*distSolUrano*sin(angUrano);
 	posicoes[17][1]=0.0;
 	posicoes[17][2]=distFactor*distSolUrano*cos(angUrano);
-	raios[17]=raioUrano;
+	raios[17]=raioUrano*scale;
 
 	glTranslatef(distFactor*distSolUrano*sin(angUrano), 0, distFactor*distSolUrano*cos(angUrano));
 
@@ -587,7 +605,7 @@ void desenharUrano(GLuint texture, GLUquadric *  Q)
 	glRotatef(90,1,0,0);
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
-	gluSphere (Q,scale*raioUrano,32,32);
+	gluSphere (Q,scale*raioUrano,calcularFatias(17),32);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
@@ -603,7 +621,7 @@ void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 	posicoes[18][0]=distFactor*distSolNeptuno*sin(angNeptuno);
 	posicoes[18][1]=0.0;
 	posicoes[18][2]=distFactor*distSolNeptuno*cos(angNeptuno);
-	raios[18]=raioNeptuno;
+	raios[18]=raioNeptuno*scale;
 
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
 
@@ -613,7 +631,7 @@ void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	glRotatef(-90,1,0,0);
-	gluSphere (Q,scale*raioNeptuno,32,32);
+	gluSphere (Q,scale*raioNeptuno,calcularFatias(18),32);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 	
