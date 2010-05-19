@@ -105,8 +105,6 @@ void setPlanes(double *p, double *l, double *u){
 	double ntr[3],ntl[3],nbr[3],nbl[3];
 	double ftr[3],ftl[3],fbr[3],fbl[3];
 
-
-
 	int nearDist = 2;
 	int farDist = 1000000000;
 	// compute the Z axis of camera
@@ -190,8 +188,6 @@ void setPlanes(double *p, double *l, double *u){
 	somaVectores(aux,aux1,aux2);
 	subVectores(fc,aux2,fbr);
 
-	
-
 	//ftl = fc + multVecValor(yAxis,fh) - xAxis * fw;
 	//ftl = somaVectores(fc,subVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
 	//ftr = fc + yAxis * fh + xAxis * fw;
@@ -201,7 +197,7 @@ void setPlanes(double *p, double *l, double *u){
 	//fbr = fc - yAxis * fh + xAxis * fw;
 	//fbr = subVectores(fc,somaVectores(multVecValor(yAxis,fh),multVecValor(X,fw)));
 
-	//far plane azul
+	/*/far plane azul
 	glColor3f(0.0,0.0,1.0);
 	glBegin(GL_QUADS);
 	glVertex3d(fbl[0],fbl[1],fbl[2]);	
@@ -240,7 +236,7 @@ void setPlanes(double *p, double *l, double *u){
 	glVertex3d(ftr[0],ftr[1],ftr[2]/10);
 	glVertex3d(ntr[0],ntr[1],ntr[2]/10);
 	glEnd();
-
+*/
 
 	// compute the six planes
 	// the function set3Points assumes that the points
@@ -281,6 +277,6 @@ int sphereInFrustum(double *point, double radius) {
 			result =  2;//INTERSECT;
 		
 	}
-	printf("OLHA: %d\n",result);
+	//printf("OLHA: %d\n",result);
 	return(result);
 }

@@ -72,7 +72,6 @@ void rotacao(GLfloat rotacao,float tilt)
 	glRotated(rotacao,0.0,1.0,0.0);
 }
 
-
 int calcularFatias(int indice)
 {
 	double dist = sqrt(pow(camX-posicoes[indice][0],2)+pow(camY-posicoes[indice][1],2)+pow(camZ-posicoes[indice][2],2));
@@ -83,8 +82,6 @@ int calcularFatias(int indice)
 		return 8;
 	}
 	return (32-res);
-	
-
 }
 
 void draw_orbita(float raio, float angleX,float angleY, float angleZ){
