@@ -89,23 +89,37 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[0] = up[1] * vec[2] - up[2] * vec[1];
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
-			camlookX = camlookX + res[0]*1000;
-			camlookY = camlookY + res[1]*1000;
-			camlookZ = camlookZ + res[2]*1000;
-			camX = camX + res[0]*1000;
-			camY = camY + res[1]*1000;
-			camZ = camZ + res[2]*1000;
+			if(!haColisaoNave(
+					(camlookZ + res[2]*1000),
+					(camlookX + res[0]*1000),
+					(camlookY + res[1]*1000),
+					-1
+					)){
+				camlookX = camlookX + res[0]*1000;
+				camlookY = camlookY + res[1]*1000;
+				camlookZ = camlookZ + res[2]*1000;
+				camX = camX + res[0]*1000;
+				camY = camY + res[1]*1000;
+				camZ = camZ + res[2]*1000;
+				}
 			return;
 		case 'q' :
 			res[0] = up[1] * vec[2] - up[2] * vec[1];
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
-			camlookX = camlookX - res[0]*1000;
-			camlookY = camlookY - res[1]*1000;
-			camlookZ = camlookZ - res[2]*1000;
-			camX = camX - res[0]*1000;
-			camY = camY - res[1]*1000;
-			camZ = camZ - res[2]*1000;
+			if(!haColisaoNave(
+					(camlookZ - res[2]*1000),
+					(camlookX - res[0]*1000),
+					(camlookY - res[1]*1000),
+					-1
+					)){
+				camlookX = camlookX - res[0]*1000;
+				camlookY = camlookY - res[1]*1000;
+				camlookZ = camlookZ - res[2]*1000;
+				camX = camX - res[0]*1000;
+				camY = camY - res[1]*1000;
+				camZ = camZ - res[2]*1000;
+				}
 			return;
 		default : return;
 	}
