@@ -71,16 +71,13 @@ void geraPlano(double *v1,double* v2,double*v3,int indice)
 	subVectores(v1,v2,aux1);
 	subVectores(v3,v2,aux2);
 	
-	
 	prodVect(aux2,aux1,arrAux);
 
 	matriznormais[indice][0]= arrAux[0];
 	matriznormais[indice][1]= arrAux[1];
 	matriznormais[indice][2]= arrAux[2];
 
-
-	normaliza(matriznormais[indice]);
-	
+	normaliza(matriznormais[indice]);	
 
 	double * copy = v2;
 	

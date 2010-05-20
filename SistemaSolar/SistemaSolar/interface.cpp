@@ -13,13 +13,15 @@ int mouseMod = 0;
 
 float camX = 0, camY = 0, camZ = 0;
 float camlookX = 0.0f, camlookY = 0.0f, camlookZ = 0.0f;
-float alpha = 0, beta = 0, r = 30000;
+float alpha = -150, beta = 30, r = 30000;
 
 bool fullscreen = false;
 bool luz = true;
 
 int winX = 800;
+int oldwinX = 800;
 int winY = 600;
+int oldwinY = 600;
 
 int fontTitle = (int) GLUT_BITMAP_HELVETICA_12;
 int fontText = (int) GLUT_BITMAP_HELVETICA_10;
@@ -258,8 +260,10 @@ void processKeys(unsigned char tecla, int x, int y){
 		case 'l' : luz?luz=false:luz=true; break;
 		case 'f' : glutSetWindow(window);
 			if(fullscreen){
+				winX = oldwinX;
+				winY = oldwinY;
 				fullscreen=false;
-				glutPositionWindow(100,100),
+				glutPositionWindow(100,100);
 				glutReshapeWindow(winX,winY);
 				//ao sair de fullscreen, colocar a infotab no sitio correcto
 				glutSetWindow(infotab);
@@ -268,11 +272,15 @@ void processKeys(unsigned char tecla, int x, int y){
 		   }
 		   else{
 				glutFullScreen();
+				oldwinX = winX;
+				oldwinY = winY;
+				winX = glutGet(GLUT_SCREEN_WIDTH);
+				winY = glutGet(GLUT_SCREEN_HEIGHT);
 				fullscreen=true; 
 				//ao entrar em fullscreen, colocar a infotab no sitio correcto
 				glutSetWindow(infotab);
-				glutPositionWindow(0.8*glutGet(GLUT_SCREEN_WIDTH), 0);
-				glutReshapeWindow(0.2*glutGet(GLUT_SCREEN_WIDTH), glutGet(GLUT_SCREEN_HEIGHT));
+				glutPositionWindow(0.8*winX, 0);
+				glutReshapeWindow(0.2*winX, winY);
 		   }
 		   break;
 		case 'o' : orbitas?orbitas=false:orbitas=true; break;

@@ -30,6 +30,8 @@ extern int MouseBtnState;
 extern int window;
 extern int winX;
 extern int winY;
+extern int oldwinX;
+extern int oldwinY;
 extern int infotab;
 
 extern int fontTitle;
