@@ -8,6 +8,12 @@ double fov[3];
 double matriznormais[6][3];
 double linhad[6];
 
+void criaVector(float v1,float v2,float v3,double res[3]){
+	res[0]=(double)v1;
+	res[1]=(double)v2;
+	res[2]=(double)v3;
+}
+
 void calculaAltLarg(int fov,float ratio,int nearDist,int farDist){
 	/*float nhx = 2 * tanf(fov / 2) * nearDist;	
 	nw = nh * ratio;	

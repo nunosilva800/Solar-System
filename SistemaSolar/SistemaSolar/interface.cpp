@@ -288,11 +288,7 @@ void processKeys(unsigned char tecla, int x, int y){
 				   else{ drawCintura=true; desenharCintura(); desenhaAnel(); }
 				   break;
 	}
-	if(winY == 0)
-	winY = 1;
-	float ratio = winX * 0.8 / winY;
-	calculaAltLarg(45,ratio,10,1000000000);
-	
+
 	double vec1[]={(double)camX,(double)camY,(double)camZ};
 	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
 	double vec3[]={0.0,1.0,0.0};
@@ -317,11 +313,6 @@ void fmouse(int button, int state, int xx, int yy)
 			mouseBtn = 0;
 	}
 	glutSetCursor   ( GLUT_CURSOR_LEFT_ARROW );
-	
-	if(winY == 0)
-	winY = 1;
-	float ratio = winX * 0.8 / winY;
-	calculaAltLarg(45,ratio,10,1000000000);
 	
 	double vec1[]={(double)camX,(double)camY,(double)camZ};
 	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
@@ -364,11 +355,6 @@ void fmotion(int xx, int yy)
 				camY = camlookY +( r * sin(beta*(PI/180)));
 	}
 	x=xx;y=yy;
-
-	if(winY == 0)
-	winY = 1;
-	float ratio = winX * 0.8 / winY;
-	calculaAltLarg(45,ratio,10,1000000000);
 	
 	double vec1[]={(double)camX,(double)camY,(double)camZ};
 	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};

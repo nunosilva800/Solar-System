@@ -52,6 +52,10 @@ void changeSize(int w, int h) {
 
 	// Set the correct perspective
 	gluPerspective(45,ratio,10,1000000000);
+	
+	//vfc
+	ratio = winX * 0.8 / winY;
+	calculaAltLarg(45,ratio,10,1000000000);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -289,6 +293,12 @@ void main(int argc, char **argv) {
 	//inicializa a piramide do view f culling
 	float ratio = winX * 0.8 / winY;
 	calculaAltLarg(45,ratio,10,1000000000);
+
+	double vec1[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
+
+	setPlanes(vec1,vec2,vec3);
 
 	//criar janela secundaria
 	infotab = glutCreateSubWindow(window, 

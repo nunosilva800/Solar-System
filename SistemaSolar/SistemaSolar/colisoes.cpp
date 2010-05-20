@@ -1,5 +1,6 @@
 #include "planetas.h"
 #include "interface.h"
+#include "vfc.h"
 
 double raioCamara=10;
 float newCamX=0,newCamY=0,newCamZ=0;
@@ -19,7 +20,13 @@ bool haColisao(float newCamZ,float newCamX,float newCamY,int planeta){
 				pow(posicoes[planeta][0]-newCamX,2) + 
 				pow(posicoes[planeta][1]-newCamY,2) +
 				pow(posicoes[planeta][2]-newCamZ,2)) - (raios[planeta])-(raioCamara*scale);
-		if(distObjs<=0)return true;
+		if(distObjs<=0){
+			double vec1[]={(double)camX,(double)camY,(double)camZ};
+			double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+			double vec3[]={0.0,1.0,0.0};
+			setPlanes(vec1,vec2,vec3);
+			return true;
+		}
 	return false;
 	
 	}
@@ -66,7 +73,13 @@ bool haColisaoNave(float newCamZ,float newCamX,float newCamY,int planeta){
 				pow(posicoes[planeta][0]-newCamX,2) + 
 				pow(posicoes[planeta][1]-newCamY,2) +
 				pow(posicoes[planeta][2]-newCamZ,2)) - (raios[planeta])-r;
-		if(distObjs<=0)return true;
+		if(distObjs<=0){
+			double vec1[]={(double)camX,(double)camY,(double)camZ};
+			double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+			double vec3[]={0.0,1.0,0.0};
+			setPlanes(vec1,vec2,vec3);
+			return true;
+		}
 	return false;
 	
 	}
@@ -83,7 +96,7 @@ bool haColisaoNave(float newCamZ,float newCamX,float newCamY,int planeta){
 					pow(posicoes[i][1]-newCamY,2) +
 					pow(posicoes[i][2]-newCamZ,2)) - (raios[i])-r;
 			//prints
-			if(distObjs<=0)printf("COLISAO:    raio %f\n",r);
+			if(distObjs<=0)printf("COLISAO:    raio %f    planeta %d\n",r,i);
 			//printf(" planeta %d\n",i);
 			//printf("posicoes camara XX:%f YY:%f ZZ:%f\n",newCamX,newCamY,newCamZ);
 			//printf("posicoes planeta XX:%f YY:%f ZZ:%f\n",posicoes[i][0],posicoes[i][1],posicoes[i][2]);
