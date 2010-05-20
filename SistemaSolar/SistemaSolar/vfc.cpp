@@ -272,7 +272,7 @@ int sphereInFrustum(double *point, double radius) {
 	for(int i=0; i < 6; i++) {
 		distance = distancia(p,i);
 		if (distance < -radius)
-			{printf("OLHA: 0\n");return 0;}//OUTSIDE;
+			{/*printf("OLHA: 0\n");*/return 0;}//OUTSIDE;
 		else if (distance < radius)
 			result =  2;//INTERSECT;
 		

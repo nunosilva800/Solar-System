@@ -47,7 +47,7 @@ void processKeysNave(unsigned char tecla, int x, int y){
 	float aux;
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
 	switch(tecla){
-		case 'w' :if(!haColisao(
+		case 'w' :if(!haColisaoNave(
 						(camlookZ-vec[2]*1000),
 						(camlookX-vec[0]*1000),
 						(camlookY-vec[1]*1000),
@@ -61,7 +61,7 @@ void processKeysNave(unsigned char tecla, int x, int y){
 						camZ = camZ-vec[2]*1000;
 						}
 					return;
-		case 's' : if(!haColisao(
+		case 's' : if(!haColisaoNave(
 						(camlookZ+vec[2]*1000),
 						(camlookX+vec[0]*1000),
 						(camlookY+vec[1]*1000),

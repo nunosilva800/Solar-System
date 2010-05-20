@@ -52,3 +52,50 @@ bool haColisao(float newCamZ,float newCamX,float newCamY,int planeta){
 		return false;
 	}
 }
+
+bool haColisaoNave(float newCamZ,float newCamX,float newCamY,int planeta){
+	float distObjs;
+	if(planeta>=0){
+		if(planeta==0)
+			distObjs = sqrt( 
+				pow(posicoes[planeta][0]-newCamX,2) + 
+				pow(posicoes[planeta][1]-newCamY,2) +
+				pow(posicoes[planeta][2]-newCamZ,2)) - raios[planeta]-r;
+		else
+			distObjs = sqrt( 
+				pow(posicoes[planeta][0]-newCamX,2) + 
+				pow(posicoes[planeta][1]-newCamY,2) +
+				pow(posicoes[planeta][2]-newCamZ,2)) - (raios[planeta])-r;
+		if(distObjs<=0)return true;
+	return false;
+	
+	}
+	else{
+		for(int i=0;i<19;i++){
+			if(i==0)
+				distObjs = sqrt( 
+					pow(posicoes[i][0]-newCamX,2) + 
+					pow(posicoes[i][1]-newCamY,2) +
+					pow(posicoes[i][2]-newCamZ,2)) - raios[i]-r;
+			else
+				distObjs = sqrt( 
+					pow(posicoes[i][0]-newCamX,2) + 
+					pow(posicoes[i][1]-newCamY,2) +
+					pow(posicoes[i][2]-newCamZ,2)) - (raios[i])-r;
+			//prints
+			if(distObjs<=0)printf("COLISAO:    raio %f\n",r);
+			//printf(" planeta %d\n",i);
+			//printf("posicoes camara XX:%f YY:%f ZZ:%f\n",newCamX,newCamY,newCamZ);
+			//printf("posicoes planeta XX:%f YY:%f ZZ:%f\n",posicoes[i][0],posicoes[i][1],posicoes[i][2]);
+			//printf("distancia aos centros: %f\n",sqrt( 
+			//		pow(posicoes[i][0]-newCamX,2) + 
+			//		pow(posicoes[i][1]-newCamY,2) +
+			//		pow(posicoes[i][2]-newCamZ,2)) );
+			//printf("distancia às superficies %f\n",distObjs);
+
+
+			if(distObjs<=0)return true;
+			}
+		return false;
+	}
+}
