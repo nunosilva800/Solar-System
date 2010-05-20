@@ -46,6 +46,8 @@ float* unitVector(float a1,float a2,float a3,float b1,float b2,float b3){
 void processKeysNave(unsigned char tecla, int x, int y){
 	float aux;
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
+	float up[3] = { 0, 1, 0};
+	float res[3];
 	switch(tecla){
 		case 'w' :if(!haColisaoNave(
 						(camlookZ-vec[2]*1000),
@@ -82,6 +84,28 @@ void processKeysNave(unsigned char tecla, int x, int y){
 		case 'd' :
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos((alpha--)*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin((alpha--)*(PI/180)));
+			return;
+		case 'e' :
+			res[0] = up[1] * vec[2] - up[2] * vec[1];
+			res[1] = up[2] * vec[0] - up[0] * vec[2];
+			res[2] = up[0] * vec[1] - up[1] * vec[0];
+			camlookX = camlookX + res[0]*1000;
+			camlookY = camlookY + res[1]*1000;
+			camlookZ = camlookZ + res[2]*1000;
+			camX = camX + res[0]*1000;
+			camY = camY + res[1]*1000;
+			camZ = camZ + res[2]*1000;
+			return;
+		case 'q' :
+			res[0] = up[1] * vec[2] - up[2] * vec[1];
+			res[1] = up[2] * vec[0] - up[0] * vec[2];
+			res[2] = up[0] * vec[1] - up[1] * vec[0];
+			camlookX = camlookX - res[0]*1000;
+			camlookY = camlookY - res[1]*1000;
+			camlookZ = camlookZ - res[2]*1000;
+			camX = camX - res[0]*1000;
+			camY = camY - res[1]*1000;
+			camZ = camZ - res[2]*1000;
 			return;
 		default : return;
 	}
@@ -289,20 +313,24 @@ void fmotion(int xx, int yy)
 	if(mouseBtn!=1) return ;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
-			camlookX -= (x-xx)*100;
-			camlookZ -= (y-yy)*100;
-			alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
-			beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
-			r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
-			r = sqrt(pow((camY-camlookY), 2) + pow(r, 2));
+			if(cameraMode == 0){
+				camlookX -= (x-xx)*100;
+				camlookZ -= (y-yy)*100;
+				alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
+				beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
+				r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
+				r = sqrt(pow((camY-camlookY), 2) + pow(r, 2));
+			}
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
-			r-=(y-yy)*100;
-			if(r > 1500000) r = 1500000;
-			if(r < 1000) r = 1000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			if(cameraMode == 0){
+				r-=(y-yy)*100;
+				if(r > 1500000) r = 1500000;
+				if(r < 1000) r = 1000;
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+				camY = camlookY +( r * sin(beta*(PI/180)));
+			}
 			break;
 		default:
 				alpha+=((x-xx)*0.3);
@@ -335,7 +363,7 @@ void menu(int id_op){
 				camlookX = navePos[0];
 				camlookY = navePos[1];
 				camlookZ = navePos[2];
-				r = 3000;
+				r = 2000;
 				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 				camY = camlookY +( r * sin(beta*(PI/180)));

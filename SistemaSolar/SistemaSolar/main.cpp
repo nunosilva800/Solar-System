@@ -105,6 +105,7 @@ void renderScene(void) {
 		//rodar a nave
 		glRotated(-90,1,0,0);
 		glRotated(alpha+180,0,0,1);
+		//draw_orbita(3000,0,0,0);
 		drawModel();
 		if(luz)glEnable(GL_LIGHTING);
 		glPopMatrix();

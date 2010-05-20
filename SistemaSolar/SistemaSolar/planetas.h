@@ -205,7 +205,7 @@ extern double raios[19];
 
 void planetas();
 void createcircle (int k, int r, int h);
-void draw_Orbita(float raio, float angleX,float angleY,float angleZ);
+void draw_orbita(float raio, float angleX,float angleY,float angleZ);
 void rotacao(GLfloat rotacao,float tilt);
 void desenharCintura();
 void desenharEstrelas();
