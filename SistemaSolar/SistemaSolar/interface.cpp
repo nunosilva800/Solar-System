@@ -446,7 +446,7 @@ void menu(int id_op){
 				 }
 		case 6 : {
 			camlookX = distFactor*distSolMarte*sin(angMarte);
-			camlookY = distFactor*distSolMarte*sin(orbitalTiltMarte*(PI/180)) ;
+			camlookY = distFactor*distSolMarte*sin(angMarte) * sin(orbitalTiltMarte*(PI/180)) ;
 			camlookZ = distFactor*distSolMarte*cos(angMarte);
 			r = raioMarte*scale*10;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
