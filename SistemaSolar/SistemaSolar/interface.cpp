@@ -52,31 +52,31 @@ void processKeysNave(unsigned char tecla, int x, int y){
 	float res[3];
 	switch(tecla){
 		case 'w' :if(!haColisaoNave(
-						(camlookZ-vec[2]*1000),
-						(camlookX-vec[0]*1000),
-						(camlookY-vec[1]*1000),
+						(camlookZ-vec[2]*10000*distFactor),
+						(camlookX-vec[0]*10000*distFactor),
+						(camlookY-vec[1]*10000*distFactor),
 						-1
 						)){
-						camlookX = camlookX-vec[0]*1000;
-						camlookY = camlookY-vec[1]*1000;
-						camlookZ = camlookZ-vec[2]*1000;
-						camX = camX-vec[0]*1000;
-						camY = camY-vec[1]*1000;
-						camZ = camZ-vec[2]*1000;
+						camlookX = camlookX-vec[0]*10000*distFactor;
+						camlookY = camlookY-vec[1]*10000*distFactor;
+						camlookZ = camlookZ-vec[2]*10000*distFactor;
+						camX = camX-vec[0]*10000*distFactor;
+						camY = camY-vec[1]*10000*distFactor;
+						camZ = camZ-vec[2]*10000*distFactor;
 						}
 					return;
 		case 's' : if(!haColisaoNave(
-						(camlookZ+vec[2]*1000),
-						(camlookX+vec[0]*1000),
-						(camlookY+vec[1]*1000),
+						(camlookZ+vec[2]*10000*distFactor),
+						(camlookX+vec[0]*10000*distFactor),
+						(camlookY+vec[1]*10000*distFactor),
 						-1
 						)){
-						camlookX = camlookX+vec[0]*1000;
-						camlookY = camlookY+vec[1]*1000;
-						camlookZ = camlookZ+vec[2]*1000;
-						camX = camX+vec[0]*1000;
-						camY = camY+vec[1]*1000;
-						camZ = camZ+vec[2]*1000;
+						camlookX = camlookX+vec[0]*10000*distFactor;
+						camlookY = camlookY+vec[1]*10000*distFactor;
+						camlookZ = camlookZ+vec[2]*10000*distFactor;
+						camX = camX+vec[0]*10000*distFactor;
+						camY = camY+vec[1]*10000*distFactor;
+						camZ = camZ+vec[2]*10000*distFactor;
 				}
 				return;
 		case 'a' :
@@ -92,17 +92,17 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
 			if(!haColisaoNave(
-					(camlookZ + res[2]*1000),
-					(camlookX + res[0]*1000),
-					(camlookY + res[1]*1000),
+					(camlookZ + res[2]*10000*distFactor),
+					(camlookX + res[0]*10000*distFactor),
+					(camlookY + res[1]*10000*distFactor),
 					-1
 					)){
-				camlookX = camlookX + res[0]*1000;
-				camlookY = camlookY + res[1]*1000;
-				camlookZ = camlookZ + res[2]*1000;
-				camX = camX + res[0]*1000;
-				camY = camY + res[1]*1000;
-				camZ = camZ + res[2]*1000;
+				camlookX = camlookX + res[0]*10000*distFactor;
+				camlookY = camlookY + res[1]*10000*distFactor;
+				camlookZ = camlookZ + res[2]*10000*distFactor;
+				camX = camX + res[0]*10000*distFactor;
+				camY = camY + res[1]*10000*distFactor;
+				camZ = camZ + res[2]*10000*distFactor;
 				}
 			return;
 		case 'q' :
@@ -110,17 +110,17 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
 			if(!haColisaoNave(
-					(camlookZ - res[2]*1000),
-					(camlookX - res[0]*1000),
-					(camlookY - res[1]*1000),
+					(camlookZ - res[2]*10000*distFactor),
+					(camlookX - res[0]*10000*distFactor),
+					(camlookY - res[1]*10000*distFactor),
 					-1
 					)){
-				camlookX = camlookX - res[0]*1000;
-				camlookY = camlookY - res[1]*1000;
-				camlookZ = camlookZ - res[2]*1000;
-				camX = camX - res[0]*1000;
-				camY = camY - res[1]*1000;
-				camZ = camZ - res[2]*1000;
+				camlookX = camlookX - res[0]*10000*distFactor;
+				camlookY = camlookY - res[1]*10000*distFactor;
+				camlookZ = camlookZ - res[2]*10000*distFactor;
+				camX = camX - res[0]*10000*distFactor;
+				camY = camY - res[1]*10000*distFactor;
+				camZ = camZ - res[2]*10000*distFactor;
 				}
 			return;
 		default : return;
@@ -131,7 +131,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
 	
 	switch(tecla){
-		case 'w' :  aux = r-1000;
+		case 'w' :  aux = r-10000*distFactor;
 					if(aux<2000)aux=2000;
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
@@ -139,7 +139,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 						(camlookY +( aux * sin(beta*(PI/180)))),
 						-1
 						)){
-						r-=1000;
+							r -= 10000*distFactor;
 						if(r < 2000) r = 2000;
 							
 						camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -147,7 +147,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 						camY = camlookY +( r * sin(beta*(PI/180)));
 					}
 					return;
-		case 's' :	aux = r+1000;
+		case 's' :	aux = r+10000*distFactor;
 					if(aux>1500000) aux = 1500000;
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
@@ -155,7 +155,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 						(camlookY +( aux * sin(beta*(PI/180)))),
 						-1
 						)){
-					r+=1000;
+					r+=10000*distFactor;
 					if(r > 1500000) r = 1500000;
 					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -338,8 +338,8 @@ void fmotion(int xx, int yy)
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
 			if(cameraMode == 0){
-				camlookX -= (x-xx)*100;
-				camlookZ -= (y-yy)*100;
+				camlookX -= (x-xx)*500*distFactor;
+				camlookZ -= (y-yy)*500*distFactor;
 				alpha = atan((camX-camlookX) / (camZ-camlookZ)) * (180/PI);
 				beta = atan((camY-camlookY) / (camZ-camlookZ)) * (180/PI);
 				r = sqrt(pow((camZ-camlookZ), 2) + pow((camX-camlookX), 2));
@@ -348,9 +348,9 @@ void fmotion(int xx, int yy)
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			if(cameraMode == 0){
-				r-=(y-yy)*100;
+				r-=(y-yy)*3*scale;
 				if(r > 1500000) r = 1500000;
-				if(r < 1000) r = 1000;
+				if(r < 30*scale) r = 30*scale;
 				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 				camY = camlookY +( r * sin(beta*(PI/180)));
@@ -411,10 +411,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 3 : {
-			camlookX = distFactor*distSolMercurio*sin(angMercurio);
-			camlookY = distFactor*distSolMercurio*sin(orbitalTiltMercurio*(PI/180)) ;
-			camlookZ = distFactor*distSolMercurio*cos(angMercurio);
+		case 3 : {//mercurio
+			camlookX = posicoes[1][0];
+			camlookY = posicoes[1][1];
+			camlookZ = posicoes[1][2];
 			r = raioMercurio*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -422,10 +422,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		 case 4 : {
-			camlookX = distFactor*distSolVenus*sin(angVenus);
-			camlookY = distFactor*distSolVenus*sin(orbitalTiltVenus*(PI/180)) ;
-			camlookZ = distFactor*distSolVenus*cos(angVenus);
+		 case 4 : {//venus
+			camlookX = posicoes[2][0];
+			camlookY = posicoes[2][1];
+			camlookZ = posicoes[2][2];
 			r = raioVenus*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -433,10 +433,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 5 : {
-			camlookX = distFactor*distSolTerra*sin(angTerra);
-			camlookY = distFactor*distSolTerra*sin(orbitalTiltTerra*(PI/180)) ;
-			camlookZ = distFactor*distSolTerra*cos(angTerra);
+		case 5 : {//terra
+			camlookX = posicoes[4][0];
+			camlookY = posicoes[4][1];
+			camlookZ = posicoes[4][2];
 			r = raioTerra*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -444,21 +444,20 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 6 : {
-			camlookX = distFactor*distSolMarte*sin(angMarte);
-			camlookY = distFactor*distSolMarte*sin(angMarte) * sin(orbitalTiltMarte*(PI/180)) ;
-			camlookZ = distFactor*distSolMarte*cos(angMarte);
+		case 6 : {//marte
+			camlookX = posicoes[7][0];
+			camlookY = posicoes[7][1];
+			camlookZ = posicoes[7][2];
 			r = raioMarte*scale*10;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 			camY = camlookY +( r * sin(beta*(PI/180)));
-			
 			break;
 				 }
-		case 7 : {
-			camlookX = distFactor*distSolJupiter*sin(angJupiter);
-			camlookY = distFactor*distSolJupiter*sin(orbitalTiltJupiter*(PI/180)) ;
-			camlookZ = distFactor*distSolJupiter*cos(angJupiter);
+		case 7 : {//jupiter
+			camlookX = posicoes[12][0];
+			camlookY = posicoes[12][1];
+			camlookZ = posicoes[12][2];
 			r = raioJupiter*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -466,10 +465,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		 case 8 : {
-			camlookX = distFactor*distSolSaturno*sin(angSaturno);
-			camlookY = distFactor*distSolSaturno*sin(orbitalTiltSaturno*(PI/180)) ;
-			camlookZ = distFactor*distSolSaturno*cos(angSaturno);
+		 case 8 : {//saturno
+			camlookX = posicoes[16][0];
+			camlookY = posicoes[16][1];
+			camlookZ = posicoes[16][2];
 			r = raioSaturno*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -477,10 +476,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		case 9 : {
-			camlookX = distFactor*distSolUrano*sin(angUrano);
-			camlookY = distFactor*distSolUrano*sin(orbitalTiltUrano*(PI/180)) ;
-			camlookZ = distFactor*distSolUrano*cos(angUrano);
+		case 9 : {//urano
+			camlookX = posicoes[17][0];
+			camlookY = posicoes[17][1];
+			camlookZ = posicoes[17][2];
 			r = raioUrano*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -488,10 +487,10 @@ void menu(int id_op){
 			camY = camlookY +( r * sin(beta*(PI/180)));
 			break;
 				 }
-		 case 10 : {
-			camlookX = distFactor*distSolNeptuno*sin(angNeptuno);
-			camlookY = distFactor*distSolNeptuno*sin(orbitalTiltNeptuno*(PI/180)) ;
-			camlookZ = distFactor*distSolNeptuno*cos(angNeptuno);
+		 case 10 : {//nepturno
+			camlookX = posicoes[18][0];
+			camlookY = posicoes[18][1];
+			camlookZ = posicoes[18][2];
 			r = raioNeptuno*scale*10;
 			
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
@@ -511,9 +510,9 @@ void menu(int id_op){
 			break;
 				 }
 		case 33 : {
-			camlookX = distFactor*distSolMercurio*sin(angMercurio) + raioMercurio*scale*2;
-			camlookY = raioMercurio*scale*2;
-			camlookZ = distFactor*distSolMercurio*cos(angMercurio) + raioMercurio*scale*2;
+			camlookX = posicoes[1][0] + raioMercurio*scale*2;
+			camlookY = posicoes[1][1] + raioMercurio*scale*2;
+			camlookZ = posicoes[1][2] + raioMercurio*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -521,9 +520,9 @@ void menu(int id_op){
 			break;
 				 }
 		 case 44 : {
-			camlookX = distFactor*distSolVenus*sin(angVenus) + raioVenus*scale*2;
-			camlookY = raioVenus*scale*2;
-			camlookZ = distFactor*distSolVenus*cos(angVenus) + raioVenus*scale*2;
+			camlookX = posicoes[2][0] + raioVenus*scale*2;
+			camlookY = posicoes[2][1] + raioVenus*scale*2;
+			camlookZ = posicoes[2][2] + raioVenus*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -531,9 +530,9 @@ void menu(int id_op){
 			break;
 				 }
 		case 55 : {
-			camlookX = distFactor*distSolTerra*sin(angTerra) + raioTerra*scale*2;
-			camlookY = raioTerra*scale*2;
-			camlookZ = distFactor*distSolTerra*cos(angTerra) + raioTerra*scale*2;
+			camlookX = posicoes[4][0] + raioTerra*scale*2;
+			camlookY = posicoes[4][1] + raioTerra*scale*2;
+			camlookZ = posicoes[4][2] + raioTerra*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -541,9 +540,9 @@ void menu(int id_op){
 			break;
 				 }
 		case 66 : {
-			camlookX = distFactor*distSolMarte*sin(angMarte) + raioMarte*scale*2;
-			camlookY = raioMarte*scale*2;
-			camlookZ = distFactor*distSolMarte*cos(angMarte + raioMarte*scale*2);
+			camlookX = posicoes[7][0] + raioMarte*scale*2;
+			camlookY = posicoes[7][1] + raioMarte*scale*2;
+			camlookZ = posicoes[7][2] + raioMarte*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -551,9 +550,9 @@ void menu(int id_op){
 			break;
 				 }
 		case 77 : {
-			camlookX = distFactor*distSolJupiter*sin(angJupiter) + raioJupiter*scale*2;
-			camlookY = raioJupiter*scale*2;
-			camlookZ = distFactor*distSolJupiter*cos(angJupiter) + raioJupiter*scale*2;
+			camlookX = posicoes[12][0] + raioJupiter*scale*2;
+			camlookY = posicoes[12][1] + raioJupiter*scale*2;
+			camlookZ = posicoes[12][2] + raioJupiter*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -561,9 +560,9 @@ void menu(int id_op){
 			break;
 				 }
 		 case 88 : {
-			camlookX = distFactor*distSolSaturno*sin(angSaturno) + raioSaturno*scale*2;
-			camlookY = raioSaturno*scale*2;
-			camlookZ = distFactor*distSolSaturno*cos(angSaturno) + raioSaturno*scale*2;
+			camlookX = posicoes[16][0] + raioSaturno*scale*2;
+			camlookY = posicoes[16][1] + raioSaturno*scale*2;
+			camlookZ = posicoes[16][2] + raioSaturno*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -571,9 +570,9 @@ void menu(int id_op){
 			break;
 				 }
 		case 99 : {
-			camlookX = distFactor*distSolUrano*sin(angUrano) + raioUrano*scale*2;
-			camlookY = raioUrano*scale*2;
-			camlookZ = distFactor*distSolUrano*cos(angUrano) + raioUrano*scale*2;
+			camlookX = posicoes[17][0] + raioUrano*scale*2;
+			camlookY = posicoes[17][1] + raioUrano*scale*2;
+			camlookZ = posicoes[17][2] + raioUrano*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -581,9 +580,9 @@ void menu(int id_op){
 			break;
 				 }
 		 case 1010 : {
-			camlookX = distFactor*distSolNeptuno*sin(angNeptuno) + raioNeptuno*scale*2;
-			camlookY = raioNeptuno*scale*2;
-			camlookZ = distFactor*distSolNeptuno*cos(angNeptuno) + raioNeptuno*scale*2;
+			camlookX = posicoes[18][0] + raioNeptuno*scale*2;
+			camlookY = posicoes[18][1] + raioNeptuno*scale*2;
+			camlookZ = posicoes[18][2] + raioNeptuno*scale*2;
 			r = 2000;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));

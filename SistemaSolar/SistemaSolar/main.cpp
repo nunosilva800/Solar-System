@@ -116,7 +116,7 @@ void renderScene(void) {
 	}
 
 	planetas();
-//glPushMatrix();glTranslatef(camlookX,camlookY,camlookZ);glutSolidSphere(100,15,15); glPopMatrix();
+
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);
@@ -181,12 +181,12 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontText, "+ / - : Aumenta/diminui escala");
     writeString(menuX, menuY-=0.2,0, (void *) fontText, "----------------------------");
 
-	sprintf(s,"Tempo: %g",timeFactor);
+	sprintf(s,"Tempo: %1.2f",timeFactor);
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, s);
 	writeString(menuX, menuY-=0.2,0, (void *) fontText, "t / g : Aumenta/diminui tempo");
     writeString(menuX, menuY-=0.2,0, (void *) fontText, "----------------------------");
 
-	sprintf(s,"Distancias: %g",distFactor);
+	sprintf(s,"Distancias: %1.2f",distFactor);
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, s);
 	writeString(menuX, menuY-=0.2,0, (void *) fontText, ", / . : Aumenta/diminui distancias");
     writeString(menuX, menuY-=0.2,0, (void *) fontText, "----------------------------");

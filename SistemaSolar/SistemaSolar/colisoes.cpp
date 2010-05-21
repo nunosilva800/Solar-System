@@ -4,7 +4,9 @@
 
 double raioCamara=10;
 float newCamX=0,newCamY=0,newCamZ=0;
-
+//detecçao colisoes planeta -> nave/camara
+double dir[3];
+double cam[3];
 
 
 bool haColisao(float newCamZ,float newCamX,float newCamY,int planeta){
@@ -111,4 +113,36 @@ bool haColisaoNave(float newCamZ,float newCamX,float newCamY,int planeta){
 			}
 		return false;
 	}
+}
+
+void afastaCamara(int planeta){
+	if(cameraMode==0){
+		criaVector(camX,camY,camZ,cam);
+		normaliza(cam);
+		normaliza(posicoes[planeta]);
+		subVectores(cam,posicoes[planeta],dir);
+
+		camX = camX+dir[0]*500*scale;
+		camY = camY+dir[1]*500*scale;
+		camZ = camZ+dir[2]*500*scale;	
+		printf("LOL 1 planeta %d\n",planeta);
+	}else{
+		criaVector(camlookX,camlookY,camlookZ,cam);
+		normaliza(cam);
+		normaliza(posicoes[planeta]);
+		subVectores(cam,posicoes[planeta],dir);
+
+		camlookX = camlookX+dir[0]*500*scale;
+		camlookY = camlookY+dir[1]*500*scale;
+		camlookZ = camlookZ+dir[2]*500*scale;
+		camX = camX+dir[0]*500*scale;
+		camY = camY+dir[1]*500*scale;
+		camZ = camZ+dir[2]*500*scale;
+		printf("LOL 2\n");
+	}
+	double vec1[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
+
+	setPlanes(vec1,vec2,vec3);
 }

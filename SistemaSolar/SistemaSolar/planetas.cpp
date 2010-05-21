@@ -66,38 +66,6 @@ GLfloat	lightPos[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 GLfloat emissionSun[] = { 0.9f, 0.0f, 0.0f, 0.0f};
 GLfloat nullv[] = { 0.0f, 0.0f, 0.0f, 1.0f};
 
-//detecçao colisoes planeta -> nave/camara
-double dir[3];
-double cam[3];
-
-void afastaCamara(int planeta){
-	if(cameraMode==0){
-		criaVector(camX,camY,camZ,cam);
-		normaliza(cam);
-		normaliza(posicoes[planeta]);
-		subVectores(cam,posicoes[planeta],dir);
-
-		camX = camX+dir[0]*3000;
-		camY = camY+dir[1]*3000;
-		camZ = camZ+dir[2]*3000;	
-		printf("LOL 1 planeta %d\n",planeta);
-	}else{
-		criaVector(camlookX,camlookY,camlookZ,cam);
-		normaliza(cam);
-		normaliza(posicoes[planeta]);
-		subVectores(cam,posicoes[planeta],dir);
-
-		camlookX = camlookX+dir[0]*3000;
-		camlookY = camlookY+dir[1]*3000;
-		camlookZ = camlookZ+dir[2]*3000;
-		camX = camX+dir[0]*3000;
-		camY = camY+dir[1]*3000;
-		camZ = camZ+dir[2]*3000;
-		printf("LOL 2\n");
-	}
-
-}
-
 void rotacao(GLfloat rotacao,float tilt)
 {
 	glRotatef(tilt,0.0,0.0,1.0);
@@ -186,7 +154,7 @@ void desenharMercurio(GLuint texture, GLUquadric *  Q)
 	glRotatef(orbitalTiltMercurio,0.0,0.0,1.0);
 
 	posicoes[1][0]=distFactor*distSolMercurio*sin(angMercurio);
-	posicoes[1][1]=0.0;
+	posicoes[1][1]=distFactor*distSolMercurio*sin(angMercurio)*sin(orbitalTiltMercurio*(PI/180)) ;
 	posicoes[1][2]=distFactor*distSolMercurio*cos(angMercurio);
 	raios[1]=raioMercurio*scale;
 
@@ -220,7 +188,7 @@ void desenharVenus(GLuint texture, GLUquadric *  Q)
 	angVenus += ((2*PI)/velVenus)*timeFactor;
 
 	posicoes[2][0]=distFactor*distSolVenus*sin(angVenus);
-	posicoes[2][1]=0.0;
+	posicoes[2][1]=distFactor*distSolVenus*sin(angVenus) * sin(orbitalTiltVenus*(PI/180)) ;
 	posicoes[2][2]=distFactor*distSolVenus*cos(angVenus);
 	raios[2]=raioVenus*scale;
 
@@ -252,7 +220,7 @@ void desenharLua(GLuint texture, GLUquadric * Q)
 	angLua += (((2*PI)/velLua)-((360/velRTerra)*(PI/180)))*timeFactor;
 	
 	posicoes[3][0]=distFactor*scale*distTerraLua*sin(angLua);
-	posicoes[3][1]=0.0;
+	posicoes[3][1]=distFactor*sin(angLua) * sin(orbitalTiltLua*(PI/180)) ;
 	posicoes[3][2]=distFactor*scale*distTerraLua*cos(angLua);
 	raios[3]=raioLua*scale;
 
@@ -284,7 +252,7 @@ void desenharTerra(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	
 
 	posicoes[4][0]=distFactor*distSolTerra*sin(angTerra+((2*PI)/velTerra)*timeFactor);
-	posicoes[4][1]=0.0;
+	posicoes[4][1]=distFactor*distSolTerra*sin(angTerra) * sin(orbitalTiltTerra*(PI/180)) ;
 	posicoes[4][2]=distFactor*distSolTerra*cos(angTerra+((2*PI)/velTerra)*timeFactor);
 	raios[4]=raioTerra*scale;
 
@@ -385,7 +353,7 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	angMarte+= ((2*PI)/velMarte)*timeFactor;
 	
 	posicoes[7][0]=distFactor*distSolMarte*sin(angMarte);
-	posicoes[7][1]=0.0;
+	posicoes[7][1]=distFactor*distSolMarte*sin(angMarte) * sin(orbitalTiltMarte*(PI/180)) ;
 	posicoes[7][2]=distFactor*distSolMarte*cos(angMarte);
 	raios[7]=raioMarte*scale;
 
@@ -549,7 +517,7 @@ void desenharJupiter(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	angJupiter += ((2*PI)/velJupiter)*timeFactor;
 	
 	posicoes[12][0]=distFactor*distSolJupiter*sin(angJupiter);
-	posicoes[12][1]=0.0;
+	posicoes[12][1]=distFactor*distSolJupiter*sin(angJupiter) * sin(orbitalTiltJupiter*(PI/180)) ;
 	posicoes[12][2]=distFactor*distSolJupiter*cos(angJupiter);
 	raios[12]=raioJupiter*scale;
 
@@ -685,7 +653,7 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	angSaturno+= ((2*PI)/velSaturno)*timeFactor;
 	
 	posicoes[16][0]=distFactor*distSolSaturno*sin(angSaturno);
-	posicoes[16][1]=0.0;
+	posicoes[16][1]=distFactor*distSolSaturno*sin(angSaturno) * sin(orbitalTiltSaturno*(PI/180)) ;
 	posicoes[16][2]=distFactor*distSolSaturno*cos(angSaturno);
 	raios[16]=raioSaturno*scale;
 
@@ -726,7 +694,7 @@ void desenharUrano(GLuint texture, GLUquadric *  Q)
 	angUrano+= ((2*PI)/velUrano)*timeFactor;
 	
 	posicoes[17][0]=distFactor*distSolUrano*sin(angUrano);
-	posicoes[17][1]=0.0;
+	posicoes[17][1]=distFactor*distSolUrano*sin(angUrano) * sin(orbitalTiltUrano*(PI/180)) ;
 	posicoes[17][2]=distFactor*distSolUrano*cos(angUrano);
 	raios[17]=raioUrano*scale;
 
@@ -759,7 +727,7 @@ void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 	angNeptuno += ((2*PI)/velNeptuno)*timeFactor;
 	
 	posicoes[18][0]=distFactor*distSolNeptuno*sin(angNeptuno);
-	posicoes[18][1]=0.0;
+	posicoes[18][1]=distFactor*distSolNeptuno*sin(angNeptuno) * sin(orbitalTiltNeptuno*(PI/180)) ;
 	posicoes[18][2]=distFactor*distSolNeptuno*cos(angNeptuno);
 	raios[18]=raioNeptuno*scale;
 
