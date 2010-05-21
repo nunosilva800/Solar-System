@@ -116,7 +116,7 @@ void renderScene(void) {
 	}
 
 	planetas();
-
+//glPushMatrix();glTranslatef(camlookX,camlookY,camlookZ);glutSolidSphere(100,15,15); glPopMatrix();
 	// End of frame
 	frame++;
 	time=glutGet(GLUT_ELAPSED_TIME);

@@ -150,7 +150,7 @@
 #define PI 3.1415926535897
 
 #define MAX_STARS 			10000
-#define STAR_RADIUS 		2000000
+#define STAR_RADIUS 		20000000
 
 
 extern GLfloat rotDemios;
