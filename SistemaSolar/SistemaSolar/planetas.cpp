@@ -74,9 +74,10 @@ void rotacao(GLfloat rotacao,float tilt)
 
 int calcularFatias(int indice)
 {
-	double dist = sqrt(pow(camX-posicoes[indice][0],2) + 
+	double dist = sqrt(
+		pow(camX-posicoes[indice][0],2) + 
 		pow(camY-posicoes[indice][1],2) + 
-		pow(camZ-posicoes[indice][2],2));	
+		pow(camZ-posicoes[indice][2],2) );	
 	double res = (dist / (raios[indice]*4*distFactor*scale) );
 	if(res>24) return 8;
 	return (32-res);

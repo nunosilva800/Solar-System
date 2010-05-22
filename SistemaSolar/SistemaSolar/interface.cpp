@@ -52,31 +52,31 @@ void processKeysNave(unsigned char tecla, int x, int y){
 	float res[3];
 	switch(tecla){
 		case 'w' :if(!haColisaoNave(
-						(camlookZ-vec[2]*10000*distFactor),
-						(camlookX-vec[0]*10000*distFactor),
-						(camlookY-vec[1]*10000*distFactor),
+						(camlookZ-vec[2]*1000*distFactor*scale),
+						(camlookX-vec[0]*1000*distFactor*scale),
+						(camlookY-vec[1]*1000*distFactor*scale),
 						-1
 						)){
-						camlookX = camlookX-vec[0]*10000*distFactor;
-						camlookY = camlookY-vec[1]*10000*distFactor;
-						camlookZ = camlookZ-vec[2]*10000*distFactor;
-						camX = camX-vec[0]*10000*distFactor;
-						camY = camY-vec[1]*10000*distFactor;
-						camZ = camZ-vec[2]*10000*distFactor;
+						camlookX = camlookX-vec[0]*1000*distFactor*scale;
+						camlookY = camlookY-vec[1]*1000*distFactor*scale;
+						camlookZ = camlookZ-vec[2]*1000*distFactor*scale;
+						camX = camX-vec[0]*1000*distFactor*scale;
+						camY = camY-vec[1]*1000*distFactor*scale;
+						camZ = camZ-vec[2]*1000*distFactor*scale;
 						}
 					return;
 		case 's' : if(!haColisaoNave(
-						(camlookZ+vec[2]*10000*distFactor),
-						(camlookX+vec[0]*10000*distFactor),
-						(camlookY+vec[1]*10000*distFactor),
+						(camlookZ+vec[2]*1000*distFactor*scale),
+						(camlookX+vec[0]*1000*distFactor*scale),
+						(camlookY+vec[1]*1000*distFactor*scale),
 						-1
 						)){
-						camlookX = camlookX+vec[0]*10000*distFactor;
-						camlookY = camlookY+vec[1]*10000*distFactor;
-						camlookZ = camlookZ+vec[2]*10000*distFactor;
-						camX = camX+vec[0]*10000*distFactor;
-						camY = camY+vec[1]*10000*distFactor;
-						camZ = camZ+vec[2]*10000*distFactor;
+						camlookX = camlookX+vec[0]*1000*distFactor*scale;
+						camlookY = camlookY+vec[1]*1000*distFactor*scale;
+						camlookZ = camlookZ+vec[2]*1000*distFactor*scale;
+						camX = camX+vec[0]*1000*distFactor*scale;
+						camY = camY+vec[1]*1000*distFactor*scale;
+						camZ = camZ+vec[2]*1000*distFactor*scale;
 				}
 				return;
 		case 'a' :
@@ -92,17 +92,17 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
 			if(!haColisaoNave(
-					(camlookZ + res[2]*10000*distFactor),
-					(camlookX + res[0]*10000*distFactor),
-					(camlookY + res[1]*10000*distFactor),
+					(camlookZ + res[2]*1000*distFactor*scale),
+					(camlookX + res[0]*1000*distFactor*scale),
+					(camlookY + res[1]*1000*distFactor*scale),
 					-1
 					)){
-				camlookX = camlookX + res[0]*10000*distFactor;
-				camlookY = camlookY + res[1]*10000*distFactor;
-				camlookZ = camlookZ + res[2]*10000*distFactor;
-				camX = camX + res[0]*10000*distFactor;
-				camY = camY + res[1]*10000*distFactor;
-				camZ = camZ + res[2]*10000*distFactor;
+				camlookX = camlookX + res[0]*1000*distFactor*scale;
+				camlookY = camlookY + res[1]*1000*distFactor*scale;
+				camlookZ = camlookZ + res[2]*1000*distFactor*scale;
+				camX = camX + res[0]*1000*distFactor*scale;
+				camY = camY + res[1]*1000*distFactor*scale;
+				camZ = camZ + res[2]*1000*distFactor*scale;
 				}
 			return;
 		case 'q' :
@@ -110,17 +110,17 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
 			if(!haColisaoNave(
-					(camlookZ - res[2]*10000*distFactor),
-					(camlookX - res[0]*10000*distFactor),
-					(camlookY - res[1]*10000*distFactor),
+					(camlookZ - res[2]*1000*distFactor*scale),
+					(camlookX - res[0]*1000*distFactor*scale),
+					(camlookY - res[1]*1000*distFactor*scale),
 					-1
 					)){
-				camlookX = camlookX - res[0]*10000*distFactor;
-				camlookY = camlookY - res[1]*10000*distFactor;
-				camlookZ = camlookZ - res[2]*10000*distFactor;
-				camX = camX - res[0]*10000*distFactor;
-				camY = camY - res[1]*10000*distFactor;
-				camZ = camZ - res[2]*10000*distFactor;
+				camlookX = camlookX - res[0]*1000*distFactor*scale;
+				camlookY = camlookY - res[1]*1000*distFactor*scale;
+				camlookZ = camlookZ - res[2]*1000*distFactor*scale;
+				camX = camX - res[0]*1000*distFactor*scale;
+				camY = camY - res[1]*1000*distFactor*scale;
+				camZ = camZ - res[2]*1000*distFactor*scale;
 				}
 			return;
 		default : return;
@@ -131,7 +131,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
 	
 	switch(tecla){
-		case 'w' :  aux = r-10000*distFactor;
+		case 'w' :  aux = r-500*distFactor*scale;
 					if(aux<2000)aux=2000;
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
@@ -139,15 +139,15 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 						(camlookY +( aux * sin(beta*(PI/180)))),
 						-1
 						)){
-							r -= 10000*distFactor;
-						if(r < 2000) r = 2000;
+							r -= 500*distFactor*scale;
+						if(r < 1000*distFactor*scale) r = 1000*distFactor*scale;
 							
 						camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 						camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 						camY = camlookY +( r * sin(beta*(PI/180)));
 					}
 					return;
-		case 's' :	aux = r+10000*distFactor;
+		case 's' :	aux = r+500*distFactor*scale;
 					if(aux>1500000) aux = 1500000;
 					if(!haColisao(
 						(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
@@ -155,7 +155,7 @@ void processKeysGlobal(unsigned char tecla, int x, int y){
 						(camlookY +( aux * sin(beta*(PI/180)))),
 						-1
 						)){
-					r+=10000*distFactor;
+					r+=500*distFactor*scale;
 					if(r > 1500000) r = 1500000;
 					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -350,7 +350,7 @@ void fmotion(int xx, int yy)
 			if(cameraMode == 0){
 				r-=(y-yy)*3*scale;
 				if(r > 1500000) r = 1500000;
-				if(r < 30*scale) r = 30*scale;
+				if(r < 50*scale) r = 50*scale;
 				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
 				camY = camlookY +( r * sin(beta*(PI/180)));
