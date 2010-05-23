@@ -45,7 +45,6 @@ void unitVector(float a1,float a2,float a3,float b1,float b2,float b3,float* vec
 }
 
 void processKeysNave(unsigned char tecla, int x, int y){
-	float aux;
 	float vec[3];
 	unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ,vec);
 	float up[3] = { 0, 1, 0};
@@ -60,25 +59,18 @@ void processKeysNave(unsigned char tecla, int x, int y){
 						(camlookY-vec[1]*1000*distFactor*scale),
 						-1
 						)){
-							printf("pos camara antes %f %f %f\n",camX,camY,camZ);
-							printf("pos nave antes %f %f %f\n\n",camlookX,camlookY,camlookZ);
-
-							printf("sclae %f\n",scale);
-							printf("distfactor %f\n",distFactor);
-							printf("sovec :%f %f %f \n",vec[0],vec[1],vec[2]);
-							printf("vec :%f %f %f \n",vec[0]*1000*distFactor*scale,vec[1]*1000*distFactor*scale,vec[2]*1000*distFactor*scale);
-
 						camlookX = camlookX-vec[0]*1000*distFactor*scale;
 						camlookY = camlookY-vec[1]*1000*distFactor*scale;
 						camlookZ = camlookZ-vec[2]*1000*distFactor*scale;
 						camX = camX-vec[0]*1000*distFactor*scale;
 						camY = camY-vec[1]*1000*distFactor*scale;
 						camZ = camZ-vec[2]*1000*distFactor*scale;
-						printf("pos camara depois %f %f %f\n",camX,camY,camZ);
-						printf("pos nave depois %f %f %f\n\n",camlookX,camlookY,camlookZ);
 						}
 					return;
-		case 's' : if(!haColisaoNave(
+		case 's' : if(!haColisaoNave2(
+						(camZ+vec[2]*1000*distFactor*scale),
+						(camX+vec[0]*1000*distFactor*scale),
+						(camY+vec[1]*1000*distFactor*scale),
 						(camlookZ+vec[2]*1000*distFactor*scale),
 						(camlookX+vec[0]*1000*distFactor*scale),
 						(camlookY+vec[1]*1000*distFactor*scale),
@@ -93,18 +85,41 @@ void processKeysNave(unsigned char tecla, int x, int y){
 				}
 				return;
 		case 'a' :
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos((alpha++)*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin((alpha++)*(PI/180)));
+			if(!haColisaoNave2(
+						(camlookZ +( r * cos(beta*(PI/180)) * cos((alpha++)*(PI/180)))),
+						(camlookX +( r * cos(beta*(PI/180)) * sin((alpha++)*(PI/180)))),
+						camY,
+						camlookZ,
+						camlookX,
+						camlookY,
+						-1
+						)){
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos((alpha++)*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin((alpha++)*(PI/180)));
+			}
 			return;
 		case 'd' :
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos((alpha--)*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin((alpha--)*(PI/180)));
+			if(!haColisaoNave2(
+						(camlookZ +( r * cos(beta*(PI/180)) * cos((alpha--)*(PI/180)))),
+						(camlookX +( r * cos(beta*(PI/180)) * sin((alpha--)*(PI/180)))),
+						camY,
+						camlookZ,
+						camlookX,
+						camlookY,
+						-1
+						)){
+				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos((alpha--)*(PI/180)));
+				camX = camlookX +( r * cos(beta*(PI/180)) * sin((alpha--)*(PI/180)));
+			}
 			return;
 		case 'e' :
 			res[0] = up[1] * vec[2] - up[2] * vec[1];
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
-			if(!haColisaoNave(
+			if(!haColisaoNave2(
+					(camZ + res[2]*1000*distFactor*scale),
+					(camX + res[0]*1000*distFactor*scale),
+					(camY + res[1]*1000*distFactor*scale),
 					(camlookZ + res[2]*1000*distFactor*scale),
 					(camlookX + res[0]*1000*distFactor*scale),
 					(camlookY + res[1]*1000*distFactor*scale),
@@ -122,7 +137,10 @@ void processKeysNave(unsigned char tecla, int x, int y){
 			res[0] = up[1] * vec[2] - up[2] * vec[1];
 			res[1] = up[2] * vec[0] - up[0] * vec[2];
 			res[2] = up[0] * vec[1] - up[1] * vec[0];
-			if(!haColisaoNave(
+			if(!haColisaoNave2(
+					(camZ - res[2]*1000*distFactor*scale),
+					(camX - res[0]*1000*distFactor*scale),
+					(camY - res[1]*1000*distFactor*scale),
 					(camlookZ - res[2]*1000*distFactor*scale),
 					(camlookX - res[0]*1000*distFactor*scale),
 					(camlookY - res[1]*1000*distFactor*scale),
@@ -349,6 +367,7 @@ void fmouse(int button, int state, int xx, int yy)
 void fmotion(int xx, int yy)
 {
 	if(mouseBtn!=1) return ;
+	float aux;
 	switch(mouseMod){
 		case GLUT_ACTIVE_ALT://muda lookat
 			if(cameraMode == 0){
@@ -362,22 +381,39 @@ void fmotion(int xx, int yy)
 			break;
 		case GLUT_ACTIVE_CTRL://aproxima / afasta
 			if(cameraMode == 0){
-				r-=(y-yy)*3*scale;
-				if(r > 1500000) r = 1500000;
-				if(r < 50*scale) r = 50*scale;
-				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-				camY = camlookY +( r * sin(beta*(PI/180)));
+				aux = r;
+				aux-=(y-yy)*3*scale;
+				if(aux > 1500000) aux = 1500000;
+				if(aux < 50*scale) aux = 50*scale;
+				if(!haColisao(
+					(camlookZ +( aux * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
+					(camlookX +( aux * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
+					(camlookY +( aux * sin(beta*(PI/180)))),
+					-1))
+				{
+					r-=(y-yy)*3*scale;
+					if(r > 1500000) r = 1500000;
+					if(r < 50*scale) r = 50*scale;
+					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+					camY = camlookY +( r * sin(beta*(PI/180)));
+				}
 			}
 			break;
 		default:
-				alpha+=((x-xx)*0.3);
-				beta-=((y-yy)*0.3);
-				if(beta > 89) beta = 89;
-				if(beta < -89) beta = -89;
-				camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-				camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-				camY = camlookY +( r * sin(beta*(PI/180)));
+			if(!haColisao(
+				(camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)))),
+				(camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)))),
+				(camlookY +( r * sin(beta*(PI/180)))),
+				-1)){
+					alpha+=((x-xx)*0.3);
+					beta-=((y-yy)*0.3);
+					if(beta > 89) beta = 89;
+					if(beta < -89) beta = -89;
+					camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
+					camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
+					camY = camlookY +( r * sin(beta*(PI/180)));
+			}
 	}
 	x=xx;y=yy;
 	//update view frustum
@@ -389,6 +425,10 @@ void fmotion(int xx, int yy)
 }
 
 void menu(int id_op){
+	double vec [3];
+	double vec1 [3];
+	double camAux[3];
+	double planetaAux[3]={0,0,0};
 	switch (id_op){
 		case 1 : {
 			if(cameraMode == 0){
@@ -524,13 +564,37 @@ void menu(int id_op){
 			break;
 				 }
 		case 33 : {
+			normaliza(camAux);
+			vec1[0] = posicoes[1][0];
+			vec1[1] = posicoes[1][1];
+			vec1[2] = posicoes[1][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[1][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[1][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[1][2] - vec[2]*(300+raioMercurio*scale*2);
+
+
+
+			//criaVector(camlookX,camlookY,camlookZ,camAux);
+			//normaliza(camAux);
+			//normaliza(posicoes[1]);
+			//subVectores(camAux,posicoes[1],vec);
+
+			r = 3000;
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
+			/*
 			camlookX = posicoes[1][0] + raioMercurio*scale*2;
 			camlookY = posicoes[1][1] + raioMercurio*scale*2;
 			camlookZ = posicoes[1][2] + raioMercurio*scale*2;
-			r = 2000;
+
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camY = camlookY +( r * sin(beta*(PI/180)));*/
 			break;
 				 }
 		 case 44 : {

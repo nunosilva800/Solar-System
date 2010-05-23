@@ -44,18 +44,7 @@ bool haColisao(float newCamZ,float newCamX,float newCamY,int planeta){
 					pow(posicoes[i][0]-newCamX,2) + 
 					pow(posicoes[i][1]-newCamY,2) +
 					pow(posicoes[i][2]-newCamZ,2)) - (raios[i])-(raioCamara*scale);
-			//prints
 			if(distObjs<=0)printf("COLISAO:");
-			//printf(" planeta %d\n",i);
-			//printf("posicoes camara XX:%f YY:%f ZZ:%f\n",newCamX,newCamY,newCamZ);
-			//printf("posicoes planeta XX:%f YY:%f ZZ:%f\n",posicoes[i][0],posicoes[i][1],posicoes[i][2]);
-			//printf("distancia aos centros: %f\n",sqrt( 
-			//		pow(posicoes[i][0]-newCamX,2) + 
-			//		pow(posicoes[i][1]-newCamY,2) +
-			//		pow(posicoes[i][2]-newCamZ,2)) );
-			//printf("distancia às superficies %f\n",distObjs);
-
-
 			if(distObjs<=0)return true;
 			}
 		return false;
@@ -147,10 +136,7 @@ void afastaCamara(int planeta){
 
 
 bool haColisaoNave2(float camZ,float camX,float camY,float lookZ,float lookX,float lookY,int planeta){
-	if(haColisao(camZ,camX,camY,planeta)){
-		printf("colidou a camara\n");
-		return true;}
 	if(haColisao(lookZ,lookX,lookY,planeta))
-	printf("colidou a nave\n");
-	return haColisao(lookZ,lookX,lookY,planeta);
+		return true;
+	return haColisao(camZ,camX,camY,planeta);
 }

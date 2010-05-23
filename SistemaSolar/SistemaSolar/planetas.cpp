@@ -297,7 +297,7 @@ void desenharFobos(GLuint texture, GLUquadric * Q)
 	raios[5]=raioFobos*scale;
 
 		//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,5)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,5)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,5)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,5)) )
 		afastaCamara(5);
 
 	glTranslatef(scale*distMarteFobos*sin(angFobos), 0, scale*distMarteFobos*cos(angFobos));
@@ -328,7 +328,7 @@ void desenharDeimos(GLuint texture, GLUquadric * Q)
 	raios[6]=raioDeimos*scale;
 
 		//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,6)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,6)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,6)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,6)) )
 		afastaCamara(6);
 
 	glTranslatef(scale*distMarteDeimos*sin(angDeimos), 0, scale*distMarteDeimos*cos(angDeimos));
@@ -359,7 +359,7 @@ void desenharMarte(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadric 
 	raios[7]=raioMarte*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,7)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,7)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,7)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,7)) )
 		afastaCamara(7);
 
 	glTranslatef(distFactor*distSolMarte*sin(angMarte), 0, distFactor*distSolMarte*cos(angMarte));
@@ -397,7 +397,7 @@ void desenharIO(GLuint texture, GLUquadric * Q)
 	raios[8]=raioIo*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,8)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,8)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,8)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,8)) )
 		afastaCamara(8);
 
 	glTranslatef(distFactor*scale*distJupiterIo*sin(angIO), 0, distFactor*scale*distJupiterIo*cos(angIO));
@@ -428,7 +428,7 @@ void desenharEuropa(GLuint texture, GLUquadric * Q)
 	raios[9]=raioEuropa*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,9)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,9)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,9)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,9)) )
 		afastaCamara(9);
 
 	glTranslatef(distFactor*scale*distJupiterEuropa*sin(angEuropa), 0, distFactor*scale*distJupiterEuropa*cos(angEuropa));
@@ -460,7 +460,7 @@ void desenharGanimedes(GLuint texture, GLUquadric * Q)
 	raios[10]=raioGanymede*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,10)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,10)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,10)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,10)) )
 		afastaCamara(10);
 
 	glTranslatef(distFactor*scale*distJupiterGanymede*sin(angGanimedes), 0, distFactor*scale*distJupiterGanymede*cos(angGanimedes));
@@ -493,7 +493,7 @@ void desenharCalisto(GLuint texture, GLUquadric * Q)
 	raios[11]=raioCalisto*scale;
 	
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,11)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,11)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,11)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,11)) )
 		afastaCamara(11);
 
 	glTranslatef(distFactor*scale*distJupiterCalisto*sin(angCalisto), 0, distFactor*scale*distJupiterCalisto*cos(angCalisto));
@@ -523,8 +523,11 @@ void desenharJupiter(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	raios[12]=raioJupiter*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,12)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,12)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,12)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,12)) )
+		{
+		printf("AFASTEI\n");
 		afastaCamara(12);
+		}
 
 	glTranslatef(distFactor*distSolJupiter*sin(angJupiter), 0, distFactor*distSolJupiter*cos(angJupiter));
 	//glColor3f(1,1,0);//amarelo
@@ -566,7 +569,7 @@ void desenharRhea(GLuint texture, GLUquadric * Q)
 	raios[13]=raioRhea*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,13)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,13)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,13)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,13)) )
 		afastaCamara(13);
 
 	glTranslatef(distFactor*scale*distSaturnoRhea*sin(velRReia), 0, distFactor*scale*distSaturnoRhea*cos(velRReia));
@@ -597,7 +600,7 @@ void desenharTitan(GLuint texture, GLUquadric * Q)
 	raios[14]=raioTitan*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,14)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,14)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,14)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,14)) )
 		afastaCamara(14);
 
 	glTranslatef(distFactor*scale*distSaturnoTitan*sin(velRTita), 0, distFactor*scale*distSaturnoTitan*cos(velRTita));
@@ -628,7 +631,7 @@ void desenharIapetus(GLuint texture, GLUquadric * Q)
 	raios[15]=raioIapetus*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,15)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,15)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,15)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,15)) )
 		afastaCamara(15);
 
 	glTranslatef(distFactor*scale*distSaturnoIapetus*sin(velRJapeto), 0, distFactor*scale*distSaturnoIapetus*cos(velRJapeto));
@@ -659,7 +662,7 @@ void desenharSaturno(GLuint texture, GLUquadric *  Q, GLuint texture2, GLUquadri
 	raios[16]=raioSaturno*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,16)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,16)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,16)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,16)) )
 		afastaCamara(16);
 
 	glTranslatef(distFactor*distSolSaturno*sin(angSaturno), 0, distFactor*distSolSaturno*cos(angSaturno));
@@ -700,7 +703,7 @@ void desenharUrano(GLuint texture, GLUquadric *  Q)
 	raios[17]=raioUrano*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,17)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,17)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,17)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,17)) )
 		afastaCamara(17);
 
 	glTranslatef(distFactor*distSolUrano*sin(angUrano), 0, distFactor*distSolUrano*cos(angUrano));
@@ -733,7 +736,7 @@ void desenharNeptuno(GLuint texture, GLUquadric *  Q)
 	raios[18]=raioNeptuno*scale;
 
 	//colisao planeta -> nave
-	if((cameraMode==0 && haColisao(camZ,camX,camY,18)) || (cameraMode == 1 && haColisaoNave(camlookZ,camlookX,camlookY,18)) )
+	if((cameraMode==0 && haColisao(camZ,camX,camY,18)) || (cameraMode == 1 && haColisaoNave2(camZ,camX,camY,camlookZ,camlookX,camlookY,18)) )
 		afastaCamara(18);
 
 	glTranslatef(distFactor*distSolNeptuno*sin(angNeptuno), 0, distFactor*distSolNeptuno*cos(angNeptuno));
