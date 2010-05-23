@@ -429,6 +429,7 @@ void menu(int id_op){
 	double vec1 [3];
 	double camAux[3];
 	double planetaAux[3]={0,0,0};
+
 	switch (id_op){
 		case 1 : {
 			if(cameraMode == 0){
@@ -458,7 +459,7 @@ void menu(int id_op){
 				 }
 		 //settings para modo de camara geral
 		case 2 : {
-			alpha = 200, beta = 25, r = 30000;
+			alpha = 200, beta = 25, r = 300000*distFactor;
 			camlookX = camlookY = camlookZ = 0;
 			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
 			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
@@ -554,22 +555,29 @@ void menu(int id_op){
 				 }
 	   //settings para a nave
 		case 22 : {
-			camlookX = 10000;
-			camlookY = 1000;
-			camlookZ = 1000;
+			camlookX = 1000000*distFactor;
+			camlookY = 100000*distFactor;
+			camlookZ = 100000*distFactor;
+			
+			vec[0]=camlookX;
+			vec[1]=camlookY;
+			vec[2]=camlookZ;
+			normaliza(vec);
+			subVectores(planetaAux,vec,vec1);
+
+			
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ + vec[2]*r;
+			camX = camlookX + vec[0]*r;	
+			camY = camlookY + vec[1]*r;
 			break;
 				 }
 		case 33 : {
-			normaliza(camAux);
 			vec1[0] = posicoes[1][0];
 			vec1[1] = posicoes[1][1];
 			vec1[2] = posicoes[1][2];
-
 			normaliza(vec1);
+
 			subVectores(planetaAux,vec1,vec);
 
 			camlookX = posicoes[1][0] - vec[0]*(300+raioMercurio*scale*2);
@@ -583,7 +591,6 @@ void menu(int id_op){
 			break;
 				 }
 		 case 44 : {
-			normaliza(camAux);
 			vec1[0] = posicoes[2][0];
 			vec1[1] = posicoes[2][1];
 			vec1[2] = posicoes[2][2];
@@ -602,7 +609,6 @@ void menu(int id_op){
 			break;
 				 }
 		case 55 : {
-			normaliza(camAux);
 			vec1[0] = posicoes[4][0];
 			vec1[1] = posicoes[4][1];
 			vec1[2] = posicoes[4][2];
