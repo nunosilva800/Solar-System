@@ -195,7 +195,9 @@ void infotabScene(void){
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "f : Ligar/desligar modo ecra inteiro");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "o : Ligar/desligar orbitas");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "c : Ligar/desligar cintura de asteroides");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "(podera causar perdas de desempenho)");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "0 : Mudar modo de navegação");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "1..9 : Focar num planeta");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "");
@@ -204,9 +206,9 @@ void infotabScene(void){
 	if(cameraMode == 0) writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Camera Geral");
 	if(cameraMode == 1) writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Camera Nave");
 	
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar a camara");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "CTRL+rato ou w / s para aproximar/afastar");
-	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao da camara");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Use o rato ou setas para rodar");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "CTRL+rato, W/S para aproximar/afastar");
+	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ALT+rato para mudar a direcao");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "Botao direito para mais opcoes");
 	writeString(menuX, menuY-=0.2,0, (void *) fontTitle, "ESC : terminar aplicacao");
 

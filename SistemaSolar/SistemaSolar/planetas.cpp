@@ -764,7 +764,8 @@ void desenharCintura(){
 	glNewList( cintura, GL_COMPILE );
 	
 	srand(30);
-	glColor3f(0.5,0.5,0.2);
+	//castanho claro
+	glColor3f(0.7,0.7,0.2);
 	glBegin(GL_POINTS);
 	//existem 700,000 a 1.7 milhoens... mas para simplificar...
 	for(i=0; i<10000; i++){
