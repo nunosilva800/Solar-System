@@ -151,7 +151,7 @@ void initModels()
     {
         //MessageBox(NULL,"Image file: spaceshiptexture.bmp not found", "Zetadeck",MB_OK | MB_ICONERROR);
 
-    	printf("textura da navenao encontrada\n");
+    	printf("textura da nave nao encontrada\n");
 
         exit (0);
     }

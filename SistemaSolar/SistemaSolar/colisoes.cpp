@@ -44,7 +44,7 @@ bool haColisao(float newCamZ,float newCamX,float newCamY,int planeta){
 					pow(posicoes[i][0]-newCamX,2) + 
 					pow(posicoes[i][1]-newCamY,2) +
 					pow(posicoes[i][2]-newCamZ,2)) - (raios[i])-(raioCamara*scale);
-			if(distObjs<=0)printf("COLISAO:");
+			//if(distObjs<=0)printf("COLISAO:");
 			if(distObjs<=0)return true;
 			}
 		return false;
@@ -87,7 +87,7 @@ bool haColisaoNave(float newCamZ,float newCamX,float newCamY,int planeta){
 					pow(posicoes[i][1]-newCamY,2) +
 					pow(posicoes[i][2]-newCamZ,2)) - (raios[i])-r;
 			//prints
-			if(distObjs<=0)printf("COLISAO:    raio %f    planeta %d\n",r,i);
+			//if(distObjs<=0)printf("COLISAO:    raio %f    planeta %d\n",r,i);
 			//printf(" planeta %d\n",i);
 			//printf("posicoes camara XX:%f YY:%f ZZ:%f\n",newCamX,newCamY,newCamZ);
 			//printf("posicoes planeta XX:%f YY:%f ZZ:%f\n",posicoes[i][0],posicoes[i][1],posicoes[i][2]);
