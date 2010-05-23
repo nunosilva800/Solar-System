@@ -576,95 +576,143 @@ void menu(int id_op){
 			camlookY = posicoes[1][1] - vec[1]*(300+raioMercurio*scale*2);
 			camlookZ = posicoes[1][2] - vec[2]*(300+raioMercurio*scale*2);
 
-
-
-			//criaVector(camlookX,camlookY,camlookZ,camAux);
-			//normaliza(camAux);
-			//normaliza(posicoes[1]);
-			//subVectores(camAux,posicoes[1],vec);
-
-			r = 3000;
+			r = 2000;
 			camZ = camlookZ - r*vec[2];
 			camX = camlookX - r*vec[0];
 			camY = camlookY - r*vec[1];
-			/*
-			camlookX = posicoes[1][0] + raioMercurio*scale*2;
-			camlookY = posicoes[1][1] + raioMercurio*scale*2;
-			camlookZ = posicoes[1][2] + raioMercurio*scale*2;
-
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));*/
 			break;
 				 }
 		 case 44 : {
-			camlookX = posicoes[2][0] + raioVenus*scale*2;
-			camlookY = posicoes[2][1] + raioVenus*scale*2;
-			camlookZ = posicoes[2][2] + raioVenus*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[2][0];
+			vec1[1] = posicoes[2][1];
+			vec1[2] = posicoes[2][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[2][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[2][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[2][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		case 55 : {
-			camlookX = posicoes[4][0] + raioTerra*scale*2;
-			camlookY = posicoes[4][1] + raioTerra*scale*2;
-			camlookZ = posicoes[4][2] + raioTerra*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[4][0];
+			vec1[1] = posicoes[4][1];
+			vec1[2] = posicoes[4][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[4][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[4][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[4][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		case 66 : {
-			camlookX = posicoes[7][0] + raioMarte*scale*2;
-			camlookY = posicoes[7][1] + raioMarte*scale*2;
-			camlookZ = posicoes[7][2] + raioMarte*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[7][0];
+			vec1[1] = posicoes[7][1];
+			vec1[2] = posicoes[7][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[7][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[7][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[7][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		case 77 : {
-			camlookX = posicoes[12][0] + raioJupiter*scale*2;
-			camlookY = posicoes[12][1] + raioJupiter*scale*2;
-			camlookZ = posicoes[12][2] + raioJupiter*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[12][0];
+			vec1[1] = posicoes[12][1];
+			vec1[2] = posicoes[12][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[12][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[12][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[12][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		 case 88 : {
-			camlookX = posicoes[16][0] + raioSaturno*scale*2;
-			camlookY = posicoes[16][1] + raioSaturno*scale*2;
-			camlookZ = posicoes[16][2] + raioSaturno*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[16][0];
+			vec1[1] = posicoes[16][1];
+			vec1[2] = posicoes[16][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[16][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[16][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[16][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		case 99 : {
-			camlookX = posicoes[17][0] + raioUrano*scale*2;
-			camlookY = posicoes[17][1] + raioUrano*scale*2;
-			camlookZ = posicoes[17][2] + raioUrano*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[17][0];
+			vec1[1] = posicoes[17][1];
+			vec1[2] = posicoes[17][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[17][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[17][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[17][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 		 case 1010 : {
-			camlookX = posicoes[18][0] + raioNeptuno*scale*2;
-			camlookY = posicoes[18][1] + raioNeptuno*scale*2;
-			camlookZ = posicoes[18][2] + raioNeptuno*scale*2;
+			normaliza(camAux);
+			vec1[0] = posicoes[18][0];
+			vec1[1] = posicoes[18][1];
+			vec1[2] = posicoes[2][2];
+
+			normaliza(vec1);
+			subVectores(planetaAux,vec1,vec);
+
+			camlookX = posicoes[2][0] - vec[0]*(300+raioMercurio*scale*2);
+			camlookY = posicoes[2][1] - vec[1]*(300+raioMercurio*scale*2);
+			camlookZ = posicoes[2][2] - vec[2]*(300+raioMercurio*scale*2);
+
 			r = 2000;
-			camZ = camlookZ +( r * cos(beta*(PI/180)) * cos(alpha*(PI/180)));
-			camX = camlookX +( r * cos(beta*(PI/180)) * sin(alpha*(PI/180)));
-			camY = camlookY +( r * sin(beta*(PI/180)));
+			camZ = camlookZ - r*vec[2];
+			camX = camlookX - r*vec[0];
+			camY = camlookY - r*vec[1];
 			break;
 				 }
 	}
