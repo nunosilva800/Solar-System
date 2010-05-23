@@ -238,7 +238,7 @@ void desenharLua(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	
-	if(sphereInFrustum(posicoes[3],raios[3]))
+	//if(sphereInFrustum(posicoes[3],raios[3]))
 		gluSphere (Q,scale*raioLua,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -308,7 +308,7 @@ void desenharFobos(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(sphereInFrustum(posicoes[5],raios[5]))
+	//if(sphereInFrustum(posicoes[5],raios[5]))
 		gluSphere (Q,scale*raioFobos,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -340,7 +340,7 @@ void desenharDeimos(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(sphereInFrustum(posicoes[6],raios[6]))
+	//if(sphereInFrustum(posicoes[6],raios[6]))
 		gluSphere (Q,scale*raioDeimos,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -408,7 +408,7 @@ void desenharIO(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	
-	if(sphereInFrustum(posicoes[8],raios[8]))
+	//if(sphereInFrustum(posicoes[8],raios[8]))
 		gluSphere (Q,scale*raioIo,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -439,7 +439,7 @@ void desenharEuropa(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	
-	if(sphereInFrustum(posicoes[9],raios[9]))
+	//if(sphereInFrustum(posicoes[9],raios[9]))
 		gluSphere (Q,scale*raioEuropa,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -471,7 +471,7 @@ void desenharGanimedes(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(sphereInFrustum(posicoes[10],raios[10]))
+	//if(sphereInFrustum(posicoes[10],raios[10]))
 		gluSphere (Q,scale*raioGanymede,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -504,7 +504,7 @@ void desenharCalisto(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(sphereInFrustum(posicoes[11],raios[11]))
+	//if(sphereInFrustum(posicoes[11],raios[11]))
 		gluSphere (Q,scale*raioCalisto,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -580,7 +580,7 @@ void desenharRhea(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	
-	if(sphereInFrustum(posicoes[13],raios[13]))
+	//if(sphereInFrustum(posicoes[13],raios[13]))
 		gluSphere (Q,scale*raioRhea,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -611,7 +611,7 @@ void desenharTitan(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-	if(sphereInFrustum(posicoes[14],raios[14]))
+	//if(sphereInFrustum(posicoes[14],raios[14]))
 		gluSphere (Q,scale*raioTitan,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
@@ -642,7 +642,7 @@ void desenharIapetus(GLuint texture, GLUquadric * Q)
 	glEnable (GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, texture);
 	
-	if(sphereInFrustum(posicoes[15],raios[15]))
+	//if(sphereInFrustum(posicoes[15],raios[15]))
 		gluSphere (Q,scale*raioIapetus,32,32);
 	
 	glDisable(GL_TEXTURE_2D);
