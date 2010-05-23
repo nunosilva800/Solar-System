@@ -722,6 +722,12 @@ void menu(int id_op){
 			break;
 				 }
 	}
+	//update view frustum
+	double vecCam[]={(double)camX,(double)camY,(double)camZ};
+	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
+	double vec3[]={0.0,1.0,0.0};
+
+	setPlanes(vecCam,vec2,vec3);
 }
 
 void gerarMenu(){
