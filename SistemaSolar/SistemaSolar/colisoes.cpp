@@ -144,3 +144,13 @@ void afastaCamara(int planeta){
 
 	setPlanes(vec1,vec2,vec3);
 }
+
+
+bool haColisaoNave2(float camZ,float camX,float camY,float lookZ,float lookX,float lookY,int planeta){
+	if(haColisao(camZ,camX,camY,planeta)){
+		printf("colidou a camara\n");
+		return true;}
+	if(haColisao(lookZ,lookX,lookY,planeta))
+	printf("colidou a nave\n");
+	return haColisao(lookZ,lookX,lookY,planeta);
+}

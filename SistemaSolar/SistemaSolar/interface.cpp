@@ -37,32 +37,45 @@ char s[100];
 float navePos[3] = {10000.0, 1000.0, 0.0};
 
 
-float* unitVector(float a1,float a2,float a3,float b1,float b2,float b3){
+void unitVector(float a1,float a2,float a3,float b1,float b2,float b3,float* vec){
 	float magnitude = sqrt( pow((a1-b1),2) + pow((a2-b2),2) + pow((a3-b3),2) );
-	float vector[3] = { (a1-b1)/magnitude,
-						(a2-b2)/magnitude,
-						(a3-b3)/magnitude };
-	return vector;
+	vec[0] = (a1-b1)/magnitude;
+	vec[1] = (a2-b2)/magnitude;
+	vec[2] = (a3-b3)/magnitude;
 }
 
 void processKeysNave(unsigned char tecla, int x, int y){
 	float aux;
-	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
+	float vec[3];
+	unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ,vec);
 	float up[3] = { 0, 1, 0};
 	float res[3];
 	switch(tecla){
-		case 'w' :if(!haColisaoNave(
+		case 'w' :if(!haColisaoNave2(
+						(camZ-vec[2]*1000*distFactor*scale),	
+						(camX-vec[0]*1000*distFactor*scale),
+						(camY-vec[1]*1000*distFactor*scale),
 						(camlookZ-vec[2]*1000*distFactor*scale),
 						(camlookX-vec[0]*1000*distFactor*scale),
 						(camlookY-vec[1]*1000*distFactor*scale),
 						-1
 						)){
+							printf("pos camara antes %f %f %f\n",camX,camY,camZ);
+							printf("pos nave antes %f %f %f\n\n",camlookX,camlookY,camlookZ);
+
+							printf("sclae %f\n",scale);
+							printf("distfactor %f\n",distFactor);
+							printf("sovec :%f %f %f \n",vec[0],vec[1],vec[2]);
+							printf("vec :%f %f %f \n",vec[0]*1000*distFactor*scale,vec[1]*1000*distFactor*scale,vec[2]*1000*distFactor*scale);
+
 						camlookX = camlookX-vec[0]*1000*distFactor*scale;
 						camlookY = camlookY-vec[1]*1000*distFactor*scale;
 						camlookZ = camlookZ-vec[2]*1000*distFactor*scale;
 						camX = camX-vec[0]*1000*distFactor*scale;
 						camY = camY-vec[1]*1000*distFactor*scale;
 						camZ = camZ-vec[2]*1000*distFactor*scale;
+						printf("pos camara depois %f %f %f\n",camX,camY,camZ);
+						printf("pos nave depois %f %f %f\n\n",camlookX,camlookY,camlookZ);
 						}
 					return;
 		case 's' : if(!haColisaoNave(
@@ -128,7 +141,8 @@ void processKeysNave(unsigned char tecla, int x, int y){
 }
 void processKeysGlobal(unsigned char tecla, int x, int y){
 	float aux;
-	float* vec = unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ);
+	float vec[3];
+	unitVector(camX,camY,camZ,camlookX,camlookY,camlookZ,vec);
 	
 	switch(tecla){
 		case 'w' :  aux = r-500*distFactor*scale;

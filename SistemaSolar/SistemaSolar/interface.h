@@ -47,3 +47,4 @@ void fmouse(int button, int state, int xx, int yy);
 void fmotion(int xx, int yy);
 void menu(int id_op);
 void gerarMenu();
+void unitVector(float a1,float a2,float a3,float b1,float b2,float b3,float* vec);
