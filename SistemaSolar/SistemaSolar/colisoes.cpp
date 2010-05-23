@@ -125,7 +125,6 @@ void afastaCamara(int planeta){
 		camX = camX+dir[0]*500*scale;
 		camY = camY+dir[1]*500*scale;
 		camZ = camZ+dir[2]*500*scale;	
-		printf("LOL 1 planeta %d\n",planeta);
 	}else{
 		criaVector(camlookX,camlookY,camlookZ,cam);
 		normaliza(cam);
@@ -138,7 +137,6 @@ void afastaCamara(int planeta){
 		camX = camX+dir[0]*500*scale;
 		camY = camY+dir[1]*500*scale;
 		camZ = camZ+dir[2]*500*scale;
-		printf("LOL 2\n");
 	}
 	double vec1[]={(double)camX,(double)camY,(double)camZ};
 	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};

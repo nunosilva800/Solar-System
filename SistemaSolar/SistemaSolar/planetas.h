@@ -32,7 +32,7 @@
 //Distancia planeta<->luas		KM(x1000)
 #define distTerraLua			384.403
 	//Marte
-#define distMarteFobos			9.337
+#define distMarteFobos			9.378
 #define distMarteDeimos			23.460
 	//Jupiter
 #define distJupiterIo			422.000
