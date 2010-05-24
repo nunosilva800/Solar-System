@@ -429,7 +429,19 @@ void menu(int id_op){
 	double vec1 [3];
 	double camAux[3];
 	double planetaAux[3]={0,0,0};
-
+	if(cameraMode == 1){
+		switch (id_op){
+			case 2: id_op=22; break;
+			case 3: id_op=33; break;
+			case 4: id_op=44; break;
+			case 5: id_op=55; break;
+			case 6: id_op=66; break;
+			case 7: id_op=77; break;
+			case 8: id_op=88; break;
+			case 9: id_op=99; break;
+			case 10: id_op=1010; break;
+		}
+	}
 	switch (id_op){
 		case 1 : {
 			if(cameraMode == 0){
