@@ -416,6 +416,7 @@ void fmotion(int xx, int yy)
 			}
 	}
 	x=xx;y=yy;
+	glutSetCursor( GLUT_CURSOR_NONE );
 	//update view frustum
 	double vec1[]={(double)camX,(double)camY,(double)camZ};
 	double vec2[]={(double)camlookX,(double)camlookY,(double)camlookZ};
